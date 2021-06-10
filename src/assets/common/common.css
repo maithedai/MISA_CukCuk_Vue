@@ -1,0 +1,1005 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url('./Icon/font/GoogleSans-Medium.otf');
+ }
+ @font-face {
+    font-family: thinFont;
+    src: url('./Icon/font/GoogleSans-Thin.otf');
+ }
+ 
+ * {
+    font-family: myFirstFont;
+ }
+
+table tbody tr {
+    height: 30px;
+}
+ 
+body, html{
+    margin:0px;
+    height:100vh;
+}
+
+.Menu{
+    float:left;
+    border:0px solid #000000;
+    width: 250px;
+    height:100%;
+}
+.MenuVao{
+    transform: translateX(-200px);
+    transition: 0.3s;
+}
+.MenuRa{
+    transform: translateX(0);
+    transition: 0.3s;
+}
+#ThuNhoMenu:hover{
+    background-color:#2FBE8E;
+}
+.RightMenuExpand{
+    width:200px;
+    height:300px;
+    background-color:#ffffff;
+    position:absolute;
+    top:52px;
+    left:0px;
+    border:1px solid #000000;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+}
+.RightMenuExpand .RightMenuTitle{
+    text-align:center;
+    margin-bottom:10px;
+    border:1px solid #000000;
+}
+.RightMenuExpand .RightMenuText{
+    text-align:center;
+    margin-bottom:20px;
+    display:flex;
+}
+.RightMenuExpand .RightMenuText .RightMenuIcon{
+    width:10px;
+    height:100%;
+    margin-left:10px;
+    margin-right:40px;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat:no-repeat;
+    background-position:-118px -330px;
+}
+
+.Content{
+    border:0px solid #000000;
+    width:calc(100% - 253px);
+    height:100%;
+    margin-left:250px;
+}
+
+.HeadMenu{
+    width:100%;
+    height: 50px;
+    border:1px solid #b4b4b4;
+    background-color:#ffffff;
+    margin-top:0px;
+    color:#ffffff;
+    display:flex;
+}
+.HeadMenu .MenuText{
+    font-size:20px;
+    line-height:50px;
+    width:60%;
+    height:50px;
+    margin-left:0px;
+}
+.ContentMenu{
+    width:100%;
+    height: calc(100% - 50px);
+    border:1px solid #b4b4b4;
+    background-color:#ffffff;
+}
+.ContentMenu .TextMenu .MenuIcon{
+    width:20%;
+    margin-right:0px;
+}
+.InnerContent{
+    width:calc(100% - 0px);
+    height:calc(100% - 50px);
+    background-color:#f1f1f1;
+    margin-top:0px;
+    margin-left:0px;
+}
+.HeadContent{
+    width:100%;
+    height:50px;
+    border:1px solid #b4b4b4;
+    background-color:#ffffff;
+    display:flex;
+}
+.LeftHeadContent{
+    width:200px;
+    height:100%;
+    margin-left:10px;
+    margin-right:0px;
+    background-color:#ffffff;
+    line-height:50px;
+    font-weight:bold;
+}
+.LeftHeadContent .TextMenu{
+    width:100%;
+    height:100%;
+    display:flex;
+}
+.LeftHeadContent .TextMenu .MenuText{
+    width:80%;
+    height:100%;
+    line-height:48px;
+}
+.LeftHeadContent .TextMenu .MenuDd{
+    width:20%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat:no-repeat;
+    background-position:-55px -316px;
+}
+.RightHeadContent{
+    width:20%;
+    height:100%;
+    background-color:#ffffff;
+    margin-left:65%;
+    display:flex;
+}
+.RightHeadContent .TextMenu{
+    width:100%;
+    height:100%;
+    display:flex;
+}
+.RightHeadContent .TextMenu .MenuIcon{
+    width:20%;
+    height:100%;
+    background-image:url('./Icon/avatar-default.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:30px 30px;
+    border-radius:50%;
+}
+.RightHeadContent .TextMenu .MenuText{
+    width:60%;
+    height:100%;
+    line-height:50px;
+}
+.RightHeadContent .TextMenu .MenuDd{
+    width:20%;
+    height:100%;
+    background-image:url('./Icon/option.png');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:30px 30px;
+}
+.btnHeadContent{
+    width:10%;
+    height:50%;
+    background-color:#c6e0eb;
+}
+.BodyContent{
+    width:100%;
+    height:calc(100% - 50px);
+    border:1px solid #b4b4b4;
+    background-color:#f1f1f1;
+}
+
+.Menu .ContentMenu .TextMenu{
+    width:100%;
+    height:40px;
+    background-color:#ffffff;
+    color:#000000;
+    border:0px solid #b4b4b4;
+    border-radius:0px;
+    margin-left: 0px;
+    margin-bottom:10px;
+    text-align:center;
+    line-height:30px;
+    display:flex;
+}
+.Menu .ContentMenu .TextMenu:hover{
+    background-color:#2FBE8E;
+    color:#ffffff;
+}
+.Menu .ContentMenu .TextMenu .MenuText{
+    text-align:left;
+    line-height:40px;
+}
+.TongQuanIcon{
+    background-image:url('./Icon/dashboard.png');
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    background-position:center;
+}
+.TaiSanIcon{
+    background-image:url('./Icon/report.png');
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    background-position:center;
+}
+.TaiSanHTDBIcon{
+    background-image:url('./Icon/document-online.png');
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    background-position:center;
+}
+.CongCuDungCuIcon{
+    background-position:-143px -150px;
+}
+
+.TextMenu .NhanVienIcon{
+    background-image:url('./Icon/dic-employee.png');
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    background-position:center;
+}
+.TextMenu .ThietLapIcon{
+    background-image:url('./Icon/setting.png');
+    background-repeat:no-repeat;
+    background-size:30px 30px;
+    background-position:center;
+}
+.TextMenu1{
+    width:100%;
+    height:40px;
+    background-color:#ffffff;
+    color:#000000;
+    border:0px solid #b4b4b4;
+    border-radius:4px;
+    margin-left: 0px;
+    margin-bottom:5px;
+    text-align:left;
+    line-height:30px;
+    display:flex;
+}
+.TextMenu1 .MenuIcon{
+    width:20%;
+    height:40px;
+}
+.TextMenu1 .MenuText{
+    line-height:40px;
+}
+.TextMenu1 .MenuText:hover{
+    color:#ffffff;
+}
+.Menu .ContentMenu .TextMenu1:hover{
+    background-color:#2FBE8E;
+}
+.HeadMenu .MenuIcon{
+    width:20%;
+    background-image:url(./Icon/toggle.png);
+    background-repeat:no-repeat;
+    background-position:0px 0px;
+    background-size:30px 30px;
+    background-position:center;
+}
+.HeadMenu .MenuIcon:hover{
+    background-color:#2FBE8E;
+}
+.HeadMenu .MenuText{
+    width:80%;
+    background-image:url('./Icon/cukcuk-logo.png');
+    background-repeat:no-repeat;
+    background-size:150px 40px;
+    background-position:center;
+}
+.MenuText{
+    width:80%;
+    height:40px;
+    line-height:30px;
+    border-radius:5px;
+    font-size:15px;
+    font-style:normal;
+}
+
+.Content .BodyContent .CongCu{
+    background-color:#ffffff;
+}
+.Content .BodyContent .CongCu button{
+    background-color:#bdd7e3;
+}
+.Content .BodyContent .Grid{
+    width:calc(100% - 10px);
+    height:calc(100% - 100px);
+    background-color:#ffffff;
+    border:0px solid #b4b4b4;
+    margin-top:0px;
+    margin-left:0px;
+    overflow:auto;
+}
+table{
+    width:100%;
+    border:0px solid #b4b4b4;
+}
+table td{
+    margin:0px;
+    text-align:center;
+    border:1px solid #b4b4b4;
+    border-left:0px;
+    border-right:0px;
+    border-top:0px;
+}
+thead td, th{
+    background-color:#eeecec;
+    border:0px solid #b4b4b4;
+    position:sticky;
+    top:0px;
+}
+
+.CongCu{
+    width:calc(100% - 10px);
+    height:50px;
+    display:flex;
+}
+.Page{
+    width:100%;
+    height:50px;
+    background-color:#ffffff;
+    border-top:1px solid #b4b4b4;
+    display:flex;
+}
+
+.Page .page_content{
+    width:60%;
+    height:100%;
+    text-align:center;
+    display:flex;
+    margin-left:20%;
+}
+.Page .page_content .first_page{
+    height:100%;
+    width:5%;
+    background-image:url('./Icon/btn-firstpage.svg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.Page .page_content .previous_page{
+    height:100%;
+    width:5%;
+    background-image:url('./Icon/btn-prev-page.svg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.Page .page_content .next_page{
+    height:100%;
+    width:5%;
+    background-image:url('./Icon/btn-next-page.svg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.Page .page_content .last_page{
+    height:100%;
+    width:5%;
+    background-image:url('./Icon/btn-lastpage.svg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.Page .page_content .page_number{
+    height:100%;
+    width:50%;
+}
+.Page .page_content .page_content_inner{
+    margin-top:2%;
+    height:100%;
+    width:90%;
+}
+.page_content .page_number .active > a {   
+    z-index: 2;
+    color: #ffffff !important;
+    cursor: pointer;
+    background-color: #01B075;
+}
+
+.page_content .page_number .pagination > li > a{
+    color:#000000;
+    border-radius:50%;
+    margin-left:10px;
+    margin-right:10px;
+}
+.Page .number_employee{
+    width:20%;
+    height:100%;
+    line-height:50px;
+}
+.Page .employee_page{
+    width:20%;
+    height:100%;
+    line-height:50px;
+    text-align:right;
+}
+.TimKiem{
+    margin-left:20px;
+    margin-top:5px;
+    width:20%;
+    height:70%;
+    line-height:50px;
+    border:1px solid #b4b4b4;
+    border-radius:5px;
+    display:flex;
+}
+.TimKiem .CongCuTimKiemIcon{
+    width:10%;
+    height:100%;
+    margin-left:0px;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat:no-repeat;
+    background-position:-235px -14px;
+}
+
+.TimKiem .TimKiemInput{
+    width:90%;
+    height:100%;
+    line-height:35px;
+    opacity:50%;
+    margin-left:5px;
+}
+.TimKiem .TimKiemInput > input{
+    border:none;
+    width:100%;
+    height:100%;
+}
+.TimKiem .TimKiemInput > input:focus{
+    outline:none;
+}
+
+.TimKiem .TimKiem_DropDown{
+    width:20%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat:no-repeat;
+    background-position:-52px -323px;
+}
+.TitleBody{
+    height:50px;
+    line-height:50px;
+    display:flex;
+}
+.LeftTitleBody{
+    width:500px;
+    height:50px;
+    font-size:20px;
+    font-weight:bold;
+    margin-left:20px;
+    display:flex;
+}
+
+.LeftTitleBody .btn{
+    width:100%;
+    height:40px;
+    border-radius:4px;
+    color:#ffffff;
+    background-color:#019160;
+    line-height:5%;
+    font-size:15px;
+    font-weight:normal;
+    padding-left:24px;
+    padding-right:24px;
+    margin-right:5px;
+    font-family:thinFont;
+}
+.LeftTitleBody .btn:hover{
+    background-color:#2FBE8E;
+}
+.LeftTitleBody .btn:focus{
+    background-color:#01B075;
+}
+
+.RightTitleBody{
+    margin-left:45%;
+    width:300px;
+    display:flex;
+}
+.RightTitleBody .TextMenu{
+    width:100%;
+    height:75%;
+    background-color:#01B075;
+    border:0px solid #b4b4b4;
+    border-radius:5px;
+    display:flex;
+}
+.RightTitleBody .TextMenu .MenuIcon{
+    width:30%;
+    height:100%;
+    background-image:url('./Icon/add.png');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+.RightTitleBody .TextMenu .MenuText{
+    width:70%;
+    height:100%;
+    line-height:35px;
+    color:#ffffff;
+    margin-left:0px;
+    font-family:thinFont;
+}
+
+.InnerContent .CongCu .TimKiemIcon{
+    width:40%;
+    height:100%;
+    margin-left:50%;
+    display:flex;
+}
+.CongCu .TimKiemIcon .main-content__menu-icon{
+    width:100%;
+    height:100%;
+    text-align:center;
+    line-height:50px;   
+}
+.CongCu .TimKiemIcon .main-content__menu-icon .ExcelIcon{
+    width:60%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat: no-repeat;
+    background-position:-285px -95px;
+}
+
+.CongCu .TimKiemIcon .main-content__menu-icon .PrintIcon{
+    width:60%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat: no-repeat;
+    background-position:-319px -51px;
+}
+
+.CongCu .TimKiemIcon .main-content__menu-icon .MenuDd{
+    width:60%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat: no-repeat;
+    background-position:-148px -228px;
+}
+
+.CongCu .TimKiemIcon .main-content__menu-icon .MoRongIcon{
+    width:60%;
+    height:100%;
+    background-image:url('./Icon/qlts-icon.svg');
+    background-repeat: no-repeat;
+    background-position:-373px -8px;
+}
+
+.align-right{
+    text-align: right;
+}
+.align-left{
+    text-align: left;
+}
+.align-center{
+    text-align:center;
+}
+.hide-item{
+    display:none;
+}
+/* css cho form thêm mới */
+.DialogModal{
+    width:100%;
+    height:100%;
+    background-color:#9d9d9d;
+    position:absolute;
+    left:0px;
+    top:0px;
+    opacity:50%;
+}
+.DialogModal .DialogLoading{
+    width:200px;
+    height:200px;
+    background-image:url('./Icon/loading.svg');
+    background-repeat:no-repeat;
+    position:absolute;
+    left:42%;
+    top:32%;
+}
+.Dialog{
+    width:800px;
+    height:600px;
+    background-color:#ffffff;
+    color:#000000;
+    position:absolute;
+    left:25%;
+    top:5%;
+    border-radius:4px;
+}
+.DialogHead{
+    width:100%;
+    height:10%;
+    line-height:60px;
+    color:#000000;
+    text-align:center;
+    font-size:15px;
+    font-weight:bold;
+}
+.DialogBody{
+    width:100%;
+    height:80%;
+    background-color:#ffffff;
+    font-size:13px;
+    display:flex;
+}
+.DialogBody .DialogBodyIcon{
+    width:30%;
+    height:100%;
+}
+.DialogBody .DialogBodyIcon .DialogIconAva{
+    width:100%;
+    height:50%;
+    
+}
+.DialogBody .DialogBodyIcon .DialogIconAva .DialogAva_image{
+    width:70%;
+    height:70%;
+    background-image:url('./Icon/default-avatar.jpg');
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:168px 168px;
+    border:1px solid #b4b4b4;
+    border-radius:50%;
+    margin-left:15%;
+}
+.DialogBody .DialogBodyIcon .DialogIconAva .DialogAva_text{
+    width:70%;
+    height:30%;
+    margin-left:15%;
+    text-align:justify;
+}
+.DialogBody .DialogBodyContent{
+    width:70%;
+    height:100%;
+}
+.DialogBody .DialogBodyContent .row-item{
+    width: 100%;
+    height: 20%;
+}
+.d-flex{
+    display:flex;
+}
+.flex-1{
+    flex: 1;
+}
+.DialogBody .row-item .control-item{
+    height:100%;
+    width:100%;
+    background-color:#ffffff;
+    margin-left:20px;
+}
+.DialogBody .row-item .control-item input{
+    border-radius:3px;
+    border: 1px solid #BBBBBB; 
+    height:40%;
+    width:100%;
+}
+.DialogBody .row-item .control-item select{
+    border-radius:3px;
+    border: 1px solid #BBBBBB; 
+    height:40%;
+    width:100%;
+}
+.DialogBody .row-item .control-right{
+    margin-left: 10px;
+    margin-right:10px;
+}
+.Dialog .DialogCongCu{
+    width:100%;
+    height:10%;
+    background-color:#E9EBEE;
+    text-align:right;
+    border-radius:3px;
+}
+.Dialog .DialogCongCu > button{
+    font-family:thinFont;
+}
+
+.DialogCongCu button:hover{
+    background-color:#2FBE8E;
+}
+.DialogDelete{
+    width:300px;
+    height:250px;
+    background-color:#E9EBEE;
+    position:absolute;
+    left:40%;
+    top:30%;
+    border-radius:4px;
+}
+.DialogDeleteHead{
+    width:100%;
+    height:24%;
+    background-color:#ffffff;
+    color:#000000;
+    text-align:center;
+    border-radius:4px;
+    font-size:15px;
+    font-weight:bold;
+    line-height:60px;
+}
+.DialogDeleteBody{
+    width:100%;
+    height:52%;
+    background-color:#ffffff;
+    text-align:left;
+    display:flex;
+}
+.DialogDeleteBody .DialogDeleteIcon{
+    width:10%;
+}
+.DialogDeleteBody .DialogDeleteContent{
+    width:90%;
+    font-size:13px;
+}
+.DialogDelete .DialogCongCu{
+    width:100%;
+    height:24%;
+    background-color:#E9EBEE;
+    text-align:right;
+    border-radius:4px;
+}
+.DialogCongCu button{
+    width:auto;
+    height:40px;
+    margin:10px 10px 10px 0px;
+    color:#ffffff;
+    background-color:#019160;
+    border-radius:4px;
+    font-size:13px;
+        font-family:thinFont;
+    padding-left:24px;
+    padding-right:24px;
+}
+.hide{
+    display: none;
+}
+
+.notValidControl{
+    border-color: #FF4747 !important;
+}
+.selectedRow{
+    background: #EBF9F4;
+}
+/* Dành cho điện thoại */
+@media all and (max-width: 480px) {
+    .Menu{
+        float:left;
+        border:0px solid #b4b4b4;
+        width: 60px;
+        height:100%;
+    }
+    .Menu .HeadMenu .MenuIcon{
+        width:100%;
+    }
+    .Menu .HeadMenu .MenuText{
+        width:0%;
+    }
+    .Menu .HeadMenu .MenuDd{
+        width:0%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuText{
+        width:0%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuIcon{
+        width:100%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuDd{
+        width:0%;
+    }
+
+    .Content{
+        border:0px solid #b4b4b4;
+        width:100%;
+        height:100%;
+        margin-left:33.5%;
+    }
+    .Content .InnerContent{
+        width:100%;
+    }
+    .Page{
+    width:100%;
+    height:50px;
+    background-color:#ffffff;
+    border-top:1px solid #b4b4b4;
+    display:flex;
+    }
+
+    .Page .page_content{
+        width:60%;
+        height:100%;
+        text-align:center;
+        display:flex;
+        margin-left:20%;
+    }
+    .Page .page_content .first_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-firstpage.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .previous_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-prev-page.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .next_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-next-page.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .last_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-lastpage.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .page_number{
+        height:100%;
+        width:50%;
+    }
+    .Page .page_content .page_content_inner{
+        margin-top:2%;
+        height:100%;
+        width:90%;
+    }
+    .page_content .page_number .active > a {   
+        z-index: 2;
+        color: #ffffff !important;
+        cursor: pointer;
+        background-color: #01B075;
+    }
+
+    .page_content .page_number .pagination > li > a{
+        color:#000000;
+        border-radius:50%;
+        margin-left:10px;
+        margin-right:10px;
+    }
+    .Page .number_employee{
+        width:20%;
+        height:100%;
+        line-height:50px;
+        display:none;
+    }
+    .Page .employee_page{
+        width:20%;
+        height:100%;
+        line-height:50px;
+        text-align:right;
+        display:none;
+    }
+}
+
+
+/* Dành cho máy tính bảng */
+@media all and (max-width: 1024px) {
+
+    .Menu{
+        float:left;
+        border:0px solid #b4b4b4;
+        width: 8%;
+        height:100%;
+    }
+    .Menu .HeadMenu .MenuIcon{
+        width:100%;
+    }
+    .Menu .HeadMenu .MenuText{
+        width:0%;
+    }
+    .Menu .HeadMenu .MenuDd{
+        width:0%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuText{
+        width:0%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuIcon{
+        width:100%;
+    }
+    .Menu .ContentMenu .TextMenu .MenuDd{
+        width:0%;
+    }
+
+    .Content{
+        border:0px solid #b4b4b4;
+        width:100%;
+        height:100%;
+        margin-left:33.5%;
+    }
+    .LeftTitleBody{
+        width:400px;
+        height:50px;
+        font-size:20px;
+        font-weight:bold;
+        margin-left:20px;
+        display:flex;
+        display:none;
+    }
+    .LeftHeadContent .TextMenu .MenuText{
+        display:none;
+    }
+    .Content .InnerContent{
+        width:100%;
+    }
+    .Page{
+        width:100%;
+        height:50px;
+        background-color:#ffffff;
+        border-top:1px solid #b4b4b4;
+        display:flex;
+    }
+
+    .Page .page_content{
+        width:60%;
+        height:100%;
+        text-align:center;
+        display:flex;
+        margin-left:20%;
+        overflow-x:auto;
+    }
+    .Page .page_content .first_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-firstpage.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .previous_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-prev-page.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .next_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-next-page.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .last_page{
+        height:100%;
+        width:5%;
+        background-image:url('./Icon/btn-lastpage.svg');
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    .Page .page_content .page_number{
+        height:100%;
+        width:50%;
+    }
+    .Page .page_content .page_content_inner{
+        margin-top:2%;
+        height:100%;
+        width:90%;
+    }
+    .page_content .page_number .active > a {   
+        z-index: 2;
+        color: #ffffff !important;
+        cursor: pointer;
+        background-color: #01B075;
+    }
+
+    .page_content .page_number .pagination > li > a{
+        color:#000000;
+        border-radius:50%;
+        margin-left:10px;
+        margin-right:10px;
+    }
+    .Page .number_employee{
+        width:20%;
+        height:100%;
+        line-height:50px;
+        display:none;
+    }
+    .Page .employee_page{
+        width:20%;
+        height:100%;
+        line-height:50px;
+        text-align:right;
+        display:none;
+    }
+}
