@@ -15,7 +15,7 @@
       <div class="page-title">
         <div class="title-text">Danh sách nhân viên</div>
         <div id="toolBarEmployee">
-          <div class="button-add button" CommandType="Add">
+          <div class="button-add button" v-on:click="show()">
             <div class="button-icon"></div>
             <div class="button-text">Thêm nhân viên</div>
           </div>
@@ -501,11 +501,22 @@
         </div>
       </div>
     </div>
+    <FormDetail ref="FormDetail"/>
   </div>
 </template>
 <script>
+import FormDetail from './FormDetail.vue'
+
 export default {
   name: "Content",
+  components: {
+    FormDetail
+  },
+  methods: {
+    show() {
+      this.$refs.FormDetail.open();
+    }
+  }
 };
 </script>
 <style scoped>
