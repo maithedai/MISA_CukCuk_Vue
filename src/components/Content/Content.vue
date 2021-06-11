@@ -15,7 +15,7 @@
       <div class="page-title">
         <div class="title-text">Danh sách nhân viên</div>
         <div id="toolBarEmployee">
-          <div class="button-add button" v-on:click="show()">
+          <div class="button-add button" @click="showFormDetail">
             <div class="button-icon"></div>
             <div class="button-text">Thêm nhân viên</div>
           </div>
@@ -155,353 +155,9 @@
             </div>
           </div>
         </div>
-
-        <!-- Form thêm mới -->
-        <div id="formEmployeeDetail" class="formDetail">
-          <div class="formWrapp"></div>
-          <div class="formContent">
-            <div class="co-body">
-              <div class="formContent-close" Command="Cancel"></div>
-              <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
-              <div class="formContent-body">
-                <div class="avt-detail"></div>
-                <div class="form-detail">
-                  <div class="a-noti">
-                    <span>A. THÔNG TIN CHUNG:</span>
-                    <div class="line-noti"></div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Mã nhân viên (<span style="color: red">*</span
-                          >)</label
-                        >
-                        <br />
-                        <input
-                          type="text"
-                          FieldName="EmployeeCode"
-                          Require="true"
-                        />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Họ và tên (<span style="color: red">*</span>)</label
-                        >
-                        <br />
-                        <input
-                          type="text"
-                          FieldName="FullName"
-                          Require="true"
-                        />
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Ngày sinh (<span style="color: red">*</span>)</label
-                        >
-                        <br />
-                        <input
-                          type="date"
-                          FieldName="DateOfBirth"
-                          DataType="Date"
-                          Require="true"
-                        />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for="">Giới tính</label>
-                        <br />
-                        <div class="pn-gender">
-                          <div class="container content-control">
-                            <div class="input-field">
-                              <input
-                                type="text"
-                                id="cboDate"
-                                FieldName="Gender"
-                                DataType="Enum"
-                                EnumName="Gender"
-                              />
-                              <div class="h-line-form"></div>
-                              <div class="arrow-form" data-arrow="true">
-                                <i
-                                  class="fas fa-angle-down"
-                                  data-arrow="true"
-                                ></i>
-                              </div>
-                              <div class="btn-clear">
-                                <i class="far fa-times-circle"></i>
-                              </div>
-                            </div>
-                            <div class="drop-down">
-                              <div class="dr-item">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text" value="0">Nữ</div>
-                              </div>
-                              <div class="dr-item">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text" value="1">Nam</div>
-                              </div>
-                              <div class="dr-item">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text" value="2">Khác</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Số CMTND/ Căn cước (<span style="color: red">*</span
-                          >)</label
-                        >
-                        <br />
-                        <input type="text" FieldName="" />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for="">Ngày cấp</label>
-                        <br />
-                        <input
-                          type="date"
-                          FieldName="DateMade"
-                          DataType="Date"
-                        />
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for="">Nơi cấp</label>
-                        <br />
-                        <input type="text" FieldName="" />
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Email (<span style="color: red">*</span>)</label
-                        >
-                        <br />
-                        <input type="text" FieldName="Email" />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Số điện thoại (<span style="color: red">*</span
-                          >)</label
-                        >
-                        <br />
-                        <input
-                          type="text"
-                          FieldName="PhoneNumber"
-                          DataType="Number"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="b-noti">
-                    <span>B. THÔNG TIN CÔNG VIỆC:</span>
-                    <div class="line-noti"></div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for="">Vị trí</label>
-                        <br />
-                        <div class="pn-job">
-                          <div class="container content-control">
-                            <div class="input-field">
-                              <input
-                                type="text"
-                                id="cboDate"
-                                placeholder="Vị trí"
-                                FieldName="Job"
-                                DataType="Enum"
-                                EnumName="Job"
-                              />
-                              <div class="h-line-form"></div>
-                              <div class="arrow-form" data-arrow="true">
-                                <i
-                                  class="fas fa-angle-down"
-                                  data-arrow="true"
-                                ></i>
-                              </div>
-                              <div class="btn-clear">
-                                <i class="far fa-times-circle"></i>
-                              </div>
-                            </div>
-                            <div class="drop-down">
-                              <div class="dr-item" value="1">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Giám đốc</div>
-                              </div>
-                              <div class="dr-item" value="2">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Kế toán</div>
-                              </div>
-                              <div class="dr-item" value="3">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Lập trình viên</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="noti-item-item">
-                        <label for="">Phòng ban</label>
-                        <br />
-                        <div class="pn-department-form">
-                          <div class="container content-control">
-                            <div class="input-field">
-                              <input
-                                type="text"
-                                id="cboDate"
-                                placeholder="Phòng ban"
-                                FieldName="Department"
-                                DataType="Enum"
-                              />
-                              <div class="h-line-form"></div>
-                              <div class="arrow-form" data-arrow="true">
-                                <i
-                                  class="fas fa-angle-down"
-                                  data-arrow="true"
-                                ></i>
-                              </div>
-                              <div class="btn-clear">
-                                <i class="far fa-times-circle"></i>
-                              </div>
-                            </div>
-                            <div class="drop-down">
-                              <div class="dr-item" value="1">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Phòng kinh doan</div>
-                              </div>
-                              <div class="dr-item" value="2">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Phòng nhân sự</div>
-                              </div>
-                              <div class="dr-item" value="3">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text">Phòng tài chính</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for="">Mã số thuế cá nhân</label>
-                        <br />
-                        <input
-                          type="text"
-                          FieldName="TaxCode"
-                          DataType="Number"
-                        />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for=""
-                          >Lương cơ bản (<span style="color: red">*</span
-                          >)</label
-                        >
-                        <br />
-                        <input
-                          type="number"
-                          FieldName="Salary"
-                          DataType="Number"
-                          Require="true"
-                        />
-                      </div>
-                    </div>
-                    <div class="noti-item">
-                      <div class="noti-item-item">
-                        <label for="">Ngày gia nhập công ty</label>
-                        <br />
-                        <input
-                          type="date"
-                          FieldName="StartWork"
-                          DataType="Date"
-                        />
-                      </div>
-                      <div class="noti-item-item">
-                        <label for="">Tình trạng công việc</label>
-                        <br />
-                        <div class="pn-workstatus">
-                          <div class="container content-control">
-                            <div class="input-field">
-                              <input
-                                type="text"
-                                id="cboDate"
-                                placeholder="Tình trạng làm việc"
-                                FieldName="WorkStatus"
-                                DataType="Enum"
-                                EnumName="WorkStatus"
-                              />
-                              <div class="h-line-form"></div>
-                              <div class="arrow-form" data-arrow="true">
-                                <i
-                                  class="fas fa-angle-down"
-                                  data-arrow="true"
-                                ></i>
-                              </div>
-                              <div class="btn-clear">
-                                <i class="far fa-times-circle"></i>
-                              </div>
-                            </div>
-                            <div class="drop-down">
-                              <div class="dr-item">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text" value="1">Đang công tác</div>
-                              </div>
-                              <div class="dr-item">
-                                <div class="icon">
-                                  <i class="fas fa-check"></i>
-                                </div>
-                                <div class="text" value="2">Đã nghỉ việc</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="formContent-footer">
-              <div class="formBottom">
-                <div class="button-cancel button" Command="Cancel">
-                  <div class="button-text">Hủy</div>
-                </div>
-                <div class="button-save button" Command="Save">
-                  <div class="button-icon-save">
-                    <i class="far fa-save"></i>
-                  </div>
-                  <div class="button-text">Lưu</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-    <FormDetail ref="FormDetail"/>
+    <FormDetail v-if="isShow" @closeFormDetail="closeFormDetail"/>
   </div>
 </template>
 <script>
@@ -512,9 +168,17 @@ export default {
   components: {
     FormDetail
   },
+  data() {
+    return {
+      isShow: false,
+    }
+  },
   methods: {
-    show() {
-      this.$refs.FormDetail.open();
+    showFormDetail() {
+      this.isShow = true;
+    },
+    closeFormDetail(){
+      this.isShow = false;
     }
   }
 };
@@ -876,7 +540,7 @@ th {
     left: 0;
     right: 0;
     bottom: 0;
-    display: none;
+    /* display: none; */
 }
     .formDetail .wrapper,
     .formDetail .formWrapp {

@@ -1,9 +1,9 @@
 <template>
-  <div id="formEmployeeDetail" class="formDetail" v-show="open()">
+  <div id="formEmployeeDetail" class="formDetail">
     <div class="formWrapp"></div>
     <div class="formContent">
       <div class="co-body">
-        <div class="formContent-close" Command="Cancel"></div>
+        <div class="formContent-close" @click="closeFormDetail" Command="Cancel"></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
         <div class="formContent-body">
           <div class="avt-detail"></div>
@@ -285,11 +285,11 @@
       </div>
       <div class="formContent-footer">
         <div class="formBottom">
-          <div class="button-cancel button" Command="Cancel">
+          <div class="button-cancel button" @click="closeFormDetail" Command="Cancel">
             <div class="button-text">Hủy</div>
           </div>
           <div class="button-save button" Command="Save">
-            <div class="button-icon-save">
+            <div class="button-icon-save button">
               <i class="far fa-save"></i>
             </div>
             <div class="button-text">Lưu</div>
@@ -301,11 +301,12 @@
 </template>
 
 <script>
+
 export default {
     methods: {
-        open() {
-            v-show=;
-        },
+        closeFormDetail() {
+          this.$emit("closeFormDetail")
+        }
     },
 };
 </script>
@@ -320,7 +321,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    display: none;
+    /* display: none; */
 }
     .formDetail .wrapper,
     .formDetail .formWrapp {
@@ -348,8 +349,8 @@ div.formDetail select {
 .formContent {
     position: absolute;
     top: 32px;
-    left: 20%;
-    right: 20%;
+    left: 30%;
+    right: 30%;
     bottom: 32px;
     background-color: #fff;
     border-radius: 5px;
@@ -503,4 +504,51 @@ div.formDetail select {
     z-index: 2;
     background-color: #fff;
 }
+
+input {
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+    
+input:focus {
+    outline: none;
+    border-color: #019160;
+}
+
+.formContent .formContent-footer {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: rgb(236, 236, 236);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.button {
+    background-color: #019160;
+    border-radius: 4px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #fff;
+    display: flex;
+    line-height: 36px;
+    align-items: center;
+}
+
+.button-cancel {
+    background-color: #ccc;
+    padding: 10px 10px 10px 24px;
+    color: #000;
+}
+.button .button-text {
+        margin-right: 16px;
+    }
+
 </style>
