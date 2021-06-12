@@ -158,15 +158,18 @@
       </div>
     </div>
     <FormDetail v-if="isShow" @closeFormDetail="closeFormDetail"/>
+    <TableContent />
   </div>
 </template>
 <script>
 import FormDetail from './FormDetail.vue'
+import TableContent from './TableContent'
 
 export default {
   name: "Content",
   components: {
-    FormDetail
+    FormDetail,
+    TableContent
   },
   data() {
     return {
@@ -184,6 +187,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .menu-bar-small {
     --menu-bar-width: 52px;
 }
