@@ -118,47 +118,10 @@
         </div>
 
         <!-- Danh sách nhân viên -->
-        <div class="bo-content">
-          <div
-            id="gridEmployee"
-            Url="v1/employees"
-            Toolbar="toolBarEmployee"
-            ItemId="EmployeeId"
-          >
-            <div class="hide-item">
-              <div class="col" FieldName="EmployeeCode">Mã nhân viên</div>
-              <div class="col" FieldName="FullName">Họ và tên</div>
-              <div
-                class="col"
-                FieldName="Gender"
-                DataType="Enum"
-                EnumName="Gender"
-              >
-                Giới tính
-              </div>
-              <div class="col" FieldName="DateOfBirth" DataType="Date">
-                Ngày sinh
-              </div>
-              <div class="col" FieldName="PhoneNumber">Số điện thoại</div>
-              <div class="col" FieldName="Email">Email</div>
-              <div class="col" FieldName="Address">Địa chỉ</div>
-              <div class="col" FieldName="DepartmentName">Phòng ban</div>
-              <div class="col" FieldName="Salary" DataType="Number">Lương</div>
-              <div
-                class="col"
-                FieldName="WorkStatus"
-                DataType="Enum"
-                EnumName="WorkStatus"
-              >
-                Tình trạng công việc
-              </div>
-            </div>
-          </div>
-        </div>
+        <TableContent />
       </div>
     </div>
     <FormDetail v-if="isShow" @closeFormDetail="closeFormDetail"/>
-    <TableContent />
   </div>
 </template>
 <script>
