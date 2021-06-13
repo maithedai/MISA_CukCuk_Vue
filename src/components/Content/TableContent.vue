@@ -3,24 +3,50 @@
     <table>
       <thead>
         <tr>
-          <th>Mã nhân viên</th>
-          <th>Họ và tên</th>
-          <th>Giới tính</th>
-          <th>Ngày sinh</th>
-          <th>Số điện thoại</th>
-          <th>Email</th>
-          <th>Địa chỉ</th>
-          <th>Phòng ban</th>
-          <th>Lương</th>
-          <th>Tình trạng làm việc</th>
+          <th v-for="(item, index) in header" :key="index">
+            {{ item.text }}
+          </th>
         </tr>
       </thead>
+      <tbody>
+        <tr v-for="(items, index) in employeeData" :key="index" >
+          <td>{{ items.EmployeeCode }}</td>
+          <td>{{ items.FullName }}</td>
+          <td>{{ items.Gender }}</td>
+          <td>{{ items.DateOfBirth }}</td>
+          <td>{{ items.PhoneNumber }}</td>
+          <td>{{ items.Email }}</td>
+          <td>{{ items.PositionId }}</td>
+          <td>{{ items.DepartmentId }}</td>
+          <td>{{ items.Salary }}</td>
+          <td>{{ items.WorkStatus }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
 
 <script>
-export default {};
+import employeeData from "../js/EmployeeData.js"
+export default {
+  data() {
+    return  {
+      employeeData: employeeData,
+      header: [
+          {text: "Mã nhân viên"},
+          {text: "Họ tên"},
+          {text: "Giới tính"},
+          {text: "Ngày sinh"},
+          {text: "Số điện thoại"},
+          {text: "Email"},
+          {text: "Chức vụ"},
+          {text: "Phòng ban"},
+          {text: "Mức lương cơ bản"},
+          {text: "Tình trạng công việc"},
+      ],
+    }
+  }
+};
 </script>
 <style scoped>
 

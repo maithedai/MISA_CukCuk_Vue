@@ -3,7 +3,11 @@
     <div class="formWrapp"></div>
     <div class="formContent">
       <div class="co-body">
-        <div class="formContent-close" @click="closeFormDetail" Command="Cancel"></div>
+        <div
+          class="formContent-close"
+          @click="closeFormDetail"
+          Command="Cancel"
+        ></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
         <div class="formContent-body">
           <div class="avt-detail"></div>
@@ -18,7 +22,13 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" FieldName="EmployeeCode" Require="true" />
+                  <input
+                    v-model="code"
+                    name="code"
+                    type="text"
+                    FieldName="EmployeeCode"
+                    Require="true"
+                  />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -36,7 +46,12 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="date" FieldName="DateOfBirth" data-type="Date" Require="true" />
+                  <input
+                    type="date"
+                    FieldName="DateOfBirth"
+                    data-type="Date"
+                    Require="true"
+                  />
                 </div>
                 <div class="noti-item-item">
                   <label for>Giới tính</label>
@@ -120,7 +135,11 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" FieldName="PhoneNumber" data-type="Number" />
+                  <input
+                    type="text"
+                    FieldName="PhoneNumber"
+                    data-type="Number"
+                  />
                 </div>
               </div>
             </div>
@@ -230,7 +249,12 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="number" FieldName="Salary" data-type="Number" Require="true" />
+                  <input
+                    type="number"
+                    FieldName="Salary"
+                    data-type="Number"
+                    Require="true"
+                  />
                 </div>
               </div>
               <div class="noti-item">
@@ -285,10 +309,14 @@
       </div>
       <div class="formContent-footer">
         <div class="formBottom">
-          <div class="button-cancel button" @click="closeFormDetail" Command="Cancel">
+          <div
+            class="button-cancel button"
+            @click="closeFormDetail"
+            Command="Cancel"
+          >
             <div class="button-text">Hủy</div>
           </div>
-          <div class="button-save button" Command="Save">
+          <div class="button-save button" @click="CheckValidate" Command="Save">
             <div class="button-icon-save button">
               <i class="far fa-save"></i>
             </div>
@@ -301,12 +329,17 @@
 </template>
 
 <script>
-
 export default {
     methods: {
         closeFormDetail() {
-          this.$emit("closeFormDetail")
-        }
+            this.$emit("closeFormDetail");
+            },
+        CheckValidate() {
+            // Check validate mã nhân viên trống
+            if (!this.code) {
+                alert("Bạn chưa điền thông tin vào mục Mã nhân viên")
+            }
+        },
     },
 };
 </script>
@@ -316,239 +349,238 @@ export default {
   display: block;
 }
 .formDetail {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* display: none; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* display: none; */
 }
-    .formDetail .wrapper,
-    .formDetail .formWrapp {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgb(0, 0, 0);
-        opacity: 0.5;
-    }
+.formDetail .wrapper,
+.formDetail .formWrapp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
+}
 
 div.formDetail input,
 div.formDetail select {
-    height: 30px;
-    margin-top: 6px;
-    width: 100%;
+  height: 30px;
+  margin-top: 6px;
+  width: 100%;
 }
 
 div.formDetail select {
-    height: 34px;
-    width: 103%;
+  height: 34px;
+  width: 103%;
 }
 
 .formContent {
-    position: absolute;
-    top: 32px;
-    left: 30%;
-    right: 30%;
-    bottom: 32px;
-    background-color: #fff;
-    border-radius: 5px;
+  position: absolute;
+  top: 32px;
+  left: 30%;
+  right: 30%;
+  bottom: 32px;
+  background-color: #fff;
+  border-radius: 5px;
 }
-    .formContent .formContent-footer {
-        position: absolute;
-        width: 100%;
-        height: 70px;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        background-color: rgb(236, 236, 236);
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
+.formContent .formContent-footer {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: rgb(236, 236, 236);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 
 .co-body {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    right: 16px;
-    bottom: 40px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 40px;
 }
 
-    .co-body .formContent-close {
-        width: 100%;
-        height: 20px;
-        background-image: url("../../assets/Icon/x.svg");
-        background-repeat: no-repeat;
-        background-position: right;
-    }
+.co-body .formContent-close {
+  width: 100%;
+  height: 20px;
+  background-image: url("../../assets/Icon/x.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+}
 
-    .co-body .formContent-text {
-        width: 100%;
-        height: 20px;
-        font-size: 20px;
-    }
+.co-body .formContent-text {
+  width: 100%;
+  height: 20px;
+  font-size: 20px;
+}
 
-    .co-body .formContent-body {
-        position: absolute;
-        top: 70px;
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-    }
+.co-body .formContent-body {
+  position: absolute;
+  top: 70px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+}
 
 .avt-detail {
-    width: 200px;
-    height: 200px;
-    background-image: url("../../assets/Icon/default-avatar.jpg");
-    background-size: 200px 200px;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    border: 1px solid #ccc;
+  width: 200px;
+  height: 200px;
+  background-image: url("../../assets/Icon/default-avatar.jpg");
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: 1px solid #ccc;
 }
 
 .form-detail {
-    position: absolute;
-    top: 0;
-    left: 220px;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  left: 220px;
+  bottom: 0;
+  right: 0;
 }
 
 .line-noti {
-    width: 80px;
-    height: 5px;
-    background-color: #019160;
-    margin-top: 8px;
-    margin-bottom: 8px;
+  width: 80px;
+  height: 5px;
+  background-color: #019160;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .noti-item {
-    display: flex;
-    justify-content:space-between;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
-    .noti-item .noti-item-item {
-        width: 45%;
-        height: 40px;
-        border-radius: 4px;
-    }
+.noti-item .noti-item-item {
+  width: 45%;
+  height: 40px;
+  border-radius: 4px;
+}
 
 .formBottom {
-    height: 40px;
-    width: 200px;
-    display: flex;
-    justify-content: space-evenly;
+  height: 40px;
+  width: 200px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .button-icon-save {
-    width: auto;
-    margin-left: 16px;
-    margin-right: 8px;
+  width: auto;
+  margin-left: 16px;
+  margin-right: 8px;
 }
 
 .button-save:hover {
-    background-color: #2FBE8E;
+  background-color: #2fbe8e;
 }
 
 .button-cancel {
-    background-color: #ccc;
-    padding: 10px 10px 10px 24px;
-    color: #000;
+  background-color: #ccc;
+  padding: 10px 10px 10px 24px;
+  color: #000;
 }
 
 .button-cancel:hover {
-    background-color: rgb(248, 248, 248);
+  background-color: rgb(248, 248, 248);
 }
 
 .pn-gender {
-    width: 100%;
+  width: 100%;
 }
 
 .h-line-form {
-    border-left: 1px #bbbbbb solid;
-    position: absolute;
-    top: 7px;
-    right: 23px;
-    bottom: 1px;
-    width: 1px;
-    height: 33px;
+  border-left: 1px #bbbbbb solid;
+  position: absolute;
+  top: 7px;
+  right: 23px;
+  bottom: 1px;
+  width: 1px;
+  height: 33px;
 }
 
 .arrow-form {
-    position: absolute;
-    top: 6px;
-    right: -13px;
-    bottom: 0px;
-    width: 38px;
-    height: 33px;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: -13px;
+  bottom: 0px;
+  width: 38px;
+  height: 33px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.arrow-form:hover{
-    background-color: #e9ebee;
+.arrow-form:hover {
+  background-color: #e9ebee;
 }
 
 .drop-down {
-    position: absolute;
-    top: 45px;
-    width: 100%;
-    box-shadow: 0px 2px 16px -9px #000000;
-    display: none;
-    z-index: 2;
-    background-color: #fff;
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  box-shadow: 0px 2px 16px -9px #000000;
+  display: none;
+  z-index: 2;
+  background-color: #fff;
 }
 
 input {
-    padding-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-    
+
 input:focus {
-    outline: none;
-    border-color: #019160;
+  outline: none;
+  border-color: #019160;
 }
 
 .formContent .formContent-footer {
-    position: absolute;
-    width: 100%;
-    height: 70px;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    background-color: rgb(236, 236, 236);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: rgb(236, 236, 236);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .button {
-    background-color: #019160;
-    border-radius: 4px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    font-size: 13px;
-    color: #fff;
-    display: flex;
-    line-height: 36px;
-    align-items: center;
+  background-color: #019160;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #fff;
+  display: flex;
+  line-height: 36px;
+  align-items: center;
 }
 
 .button-cancel {
-    background-color: #ccc;
-    padding: 10px 10px 10px 24px;
-    color: #000;
+  background-color: #ccc;
+  padding: 10px 10px 10px 24px;
+  color: #000;
 }
 .button .button-text {
-        margin-right: 16px;
-    }
-
+  margin-right: 16px;
+}
 </style>
