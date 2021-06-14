@@ -24,10 +24,12 @@
                   <br />
                   <input
                     v-model="code"
+                    id="code"
                     name="code"
                     type="text"
                     FieldName="EmployeeCode"
                     Require="true"
+                    :v-tooltip="{content: 'Bạn cần điền thông tin', classes: ['custom-tooltip'], show: true}"
                   />
                 </div>
                 <div class="noti-item-item">
@@ -61,7 +63,7 @@
                       <div class="input-field">
                         <input
                           type="text"
-                          id="cboDate"
+                          
                           FieldName="Gender"
                           data-type="Enum"
                           EnumName="Gender"
@@ -155,7 +157,7 @@
                       <div class="input-field">
                         <input
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Vị trí"
                           FieldName="Job"
                           data-type="Enum"
@@ -200,7 +202,7 @@
                       <div class="input-field">
                         <input
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Phòng ban"
                           FieldName="Department"
                           data-type="Enum"
@@ -271,7 +273,7 @@
                       <div class="input-field">
                         <input
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Tình trạng làm việc"
                           FieldName="WorkStatus"
                           data-type="Enum"
@@ -330,14 +332,34 @@
 
 <script>
 export default {
+    data() {
+      return {
+        isShowTooltip: false
+      }      
+    },
     methods: {
         closeFormDetail() {
             this.$emit("closeFormDetail");
-            },
+        },
+
+        //hàm focus vào ô đầu tiên
+        focusInputfirst() {
+          let me = document.getElementById("code")
+          alert(me)
+          me.focus();
+        },
+
+        // Hàm check validate mã nhân viên
         CheckValidate() {
+
             // Check validate mã nhân viên trống
+            let me = document.getElementById("code");
             if (!this.code) {
-                alert("Bạn chưa điền thông tin vào mục Mã nhân viên")
+              me.classList.add("invalid");
+              this.isShowTooltip = true;
+              console.log(this.isShowTooltip)
+            }else {
+              me.classList.remove("invalid");
             }
         },
     },
@@ -345,6 +367,12 @@ export default {
 </script>
 
 <style scoped>
+.custom-tooltip {
+  color: red;
+}
+.invalid {
+  border: 1px solid red;
+}
 .show {
   display: block;
 }
