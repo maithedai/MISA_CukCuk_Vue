@@ -22,8 +22,8 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input
-                    v-model="code"
+                  <input 
+                    v-model="employee.EmployeeCode"
                     name="code"
                     type="text"
                     FieldName="EmployeeCode"
@@ -36,7 +36,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" FieldName="FullName" Require="true" />
+                  <input type="text" v-model="employee.Fullmane" FieldName="FullName" Require="true" />
                 </div>
               </div>
               <div class="noti-item">
@@ -47,6 +47,7 @@
                   </label>
                   <br />
                   <input
+                    v-model="employee.DateOfBirth"
                     type="date"
                     FieldName="DateOfBirth"
                     data-type="Date"
@@ -60,6 +61,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
+                          v-model="employee.Gender"
                           type="text"
                           id="cboDate"
                           FieldName="Gender"
@@ -105,19 +107,19 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" FieldName />
+                  <input v-model="employee.IdentityNumber" type="text" FieldName="IdentityNumber" />
                 </div>
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
                   <br />
-                  <input type="date" FieldName="DateMade" data-type="Date" />
+                  <input v-model="employee.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" />
                 </div>
               </div>
               <div class="noti-item">
                 <div class="noti-item-item">
                   <label for>Nơi cấp</label>
                   <br />
-                  <input type="text" FieldName />
+                  <input v-model="employee.IdentityPlace" type="text" FieldName="IdentityPlace"/>
                 </div>
               </div>
               <div class="noti-item">
@@ -127,7 +129,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" FieldName="Email" />
+                  <input v-model="employee.Email" type="text" FieldName="Email" />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -136,6 +138,7 @@
                   </label>
                   <br />
                   <input
+                    v-model="employee.PhoneNumber"
                     type="text"
                     FieldName="PhoneNumber"
                     data-type="Number"
@@ -154,6 +157,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
+                          v-model="employee.Job"
                           type="text"
                           id="cboDate"
                           placeholder="Vị trí"
@@ -199,6 +203,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
+                          v-model="employee.Department"
                           type="text"
                           id="cboDate"
                           placeholder="Phòng ban"
@@ -241,7 +246,7 @@
                 <div class="noti-item-item">
                   <label for>Mã số thuế cá nhân</label>
                   <br />
-                  <input type="text" FieldName="TaxCode" data-type="Number" />
+                  <input v-model="employee.TaxCode" type="text" FieldName="TaxCode" data-type="Number" />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -250,6 +255,7 @@
                   </label>
                   <br />
                   <input
+                    v-model="employee.Salary"
                     type="number"
                     FieldName="Salary"
                     data-type="Number"
@@ -270,6 +276,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
+                          v-model="employee.WorkStatus"
                           type="text"
                           id="cboDate"
                           placeholder="Tình trạng làm việc"
@@ -330,8 +337,14 @@
 
 <script>
 export default {
+    data() {
+      return {
+        employee: {}
+      }
+    },
     methods: {
         closeFormDetail() {
+            // debugger // eslint-disable-line
             this.$emit("closeFormDetail");
             },
         CheckValidate() {
@@ -339,7 +352,13 @@ export default {
             if (!this.code) {
                 alert("Bạn chưa điền thông tin vào mục Mã nhân viên")
             }
+            else {
+              this.save();
+            }
         },
+        save(){
+
+        }
     },
 };
 </script>
@@ -429,6 +448,7 @@ div.formDetail select {
   left: 16px;
   right: 16px;
   bottom: 16px;
+  overflow: auto;
 }
 
 .avt-detail {

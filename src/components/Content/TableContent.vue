@@ -45,6 +45,21 @@ export default {
           {text: "Tình trạng công việc"},
       ],
     }
+  },
+  created() {
+      this.getData();  
+  },
+  methods: {
+    /**
+     * hàm get data server
+    */
+    getData() {
+      var me = this;
+      this.axios.get('http://cukcuk.manhnv.net/v1/employees').then((response) => {
+        console.log(response.data)
+        me.employeeData = response.data
+      })
+    }
   }
 };
 </script>
