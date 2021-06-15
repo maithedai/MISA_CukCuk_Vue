@@ -34,7 +34,6 @@
                   <input
                     type="text"
                     class="m-cbo"
-                    id="cboDate"
                     placeholder="Tất cả phòng ban"
                   />
                   <div class="h-line"></div>
@@ -45,7 +44,7 @@
                     <i class="far fa-times-circle"></i>
                   </div>
                 </div>
-                <div class="drop-down">
+                <div class="drop-down" v-show="isShowDropdown">
                   <div class="dr-item">
                     <div class="icon"><i class="fas fa-check"></i></div>
                     <div class="text">Phòng ban 1</div>
@@ -67,7 +66,6 @@
                   <input
                     type="text"
                     class="m-cbo"
-                    id="cboDate"
                     placeholder="Tất cả vị trí"
                   />
                   <div class="h-line"></div>
@@ -121,7 +119,7 @@
         <TableContent />
       </div>
     </div>
-    <FormDetail v-if="isShow" @closeFormDetail="closeFormDetail"/>
+    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail"/>
   </div>
 </template>
 <script>
@@ -137,12 +135,22 @@ export default {
   data() {
     return {
       isShow: false,
+      isShowDropdown: false,
     }
   },
   methods: {
     showFormDetail() {
       this.isShow = true;
+
+      //focus vào ô đầu tiên
+      this.focusInputfirst();
     },
+
+    //hàm focus ô đầu tiên formdetail
+    focusInputfirst() { 
+        this.$refs.FormDetail.focusInputfirst();
+    },
+
     closeFormDetail(){
       this.isShow = false;
     }

@@ -28,6 +28,7 @@
                     type="text"
                     FieldName="EmployeeCode"
                     Require="true"
+                    :v-tooltip="{content: 'Bạn cần điền thông tin', classes: ['custom-tooltip'], show: true}"
                   />
                 </div>
                 <div class="noti-item-item">
@@ -63,7 +64,7 @@
                         <input
                           v-model="employee.Gender"
                           type="text"
-                          id="cboDate"
+                          
                           FieldName="Gender"
                           data-type="Enum"
                           EnumName="Gender"
@@ -159,7 +160,7 @@
                         <input
                           v-model="employee.Job"
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Vị trí"
                           FieldName="Job"
                           data-type="Enum"
@@ -205,7 +206,7 @@
                         <input
                           v-model="employee.Department"
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Phòng ban"
                           FieldName="Department"
                           data-type="Enum"
@@ -278,7 +279,7 @@
                         <input
                           v-model="employee.WorkStatus"
                           type="text"
-                          id="cboDate"
+                          
                           placeholder="Tình trạng làm việc"
                           FieldName="WorkStatus"
                           data-type="Enum"
@@ -346,11 +347,24 @@ export default {
         closeFormDetail() {
             // debugger // eslint-disable-line
             this.$emit("closeFormDetail");
-            },
+        },
+
+        //hàm focus vào ô đầu tiên
+        focusInputfirst() {
+          let me = document.getElementById("code")
+          alert(me)
+          me.focus();
+        },
+
+        // Hàm check validate mã nhân viên
         CheckValidate() {
+
             // Check validate mã nhân viên trống
+            let me = document.getElementById("code");
             if (!this.code) {
-                alert("Bạn chưa điền thông tin vào mục Mã nhân viên")
+              me.classList.add("invalid");
+              this.isShowTooltip = true;
+              console.log(this.isShowTooltip)
             }
             else {
               this.save();
@@ -364,6 +378,12 @@ export default {
 </script>
 
 <style scoped>
+.custom-tooltip {
+  color: red;
+}
+.invalid {
+  border: 1px solid red;
+}
 .show {
   display: block;
 }
