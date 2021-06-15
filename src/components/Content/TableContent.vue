@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(items, index) in employeeData" :key="index" >
+        <tr v-for="(items, index) in employeeData" :key="index" @dblclick="selectedItem(items)">
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
@@ -50,10 +50,23 @@ export default {
       this.getData();  
   },
   methods: {
+
+    /**
+    *Hàm khi click bản ghi
+    * MTDAI 13.06.2021
+     */
+    selectedItem(e) {
+      let employeeId = e.employeeId;
+      console.log(e.employeeId)
+      this.$emit("showFormDetailEdit", employeeId);
+    },
+
     /**
      * hàm get data server
+     * MTDAI 13.06.2021
     */
     getData() {
+      // debugger // eslint-disable-line
       var me = this;
       this.axios.get('http://cukcuk.manhnv.net/v1/employees').then((response) => {
         console.log(response.data)

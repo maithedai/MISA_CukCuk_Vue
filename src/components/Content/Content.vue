@@ -116,7 +116,7 @@
         </div>
 
         <!-- Danh sách nhân viên -->
-        <TableContent />
+        <TableContent @showFormDetailEdit="showFormDetailEdit" ref="tableContent"/>
       </div>
     </div>
     <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail"/>
@@ -136,6 +136,7 @@ export default {
     return {
       isShow: false,
       isShowDropdown: false,
+      employeeId: null
     }
   },
   methods: {
@@ -153,6 +154,14 @@ export default {
 
     closeFormDetail(){
       this.isShow = false;
+    },
+
+    /**
+     * Hàm mở form detail sửa
+     */
+    showFormDetailEdit(employeeId) {
+        this.isShow = true;
+        this.employeeId = employeeId;
     }
   }
 };
