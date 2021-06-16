@@ -13,7 +13,7 @@
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
-          <td>{{ items.DateOfBirth }}</td>
+          <td>{{ moment(items.DateOfBirth).format('DD/MM/YYYY') }}</td>
           <td>{{ items.PhoneNumber }}</td>
           <td>{{ items.Email }}</td>
           <td>{{ items.PositionId }}</td>
@@ -28,6 +28,7 @@
 
 <script>
 import employeeData from "../js/EmployeeData.js"
+import CommonFn from "../js/Common/common.js"
 export default {
   data() {
     return  {
@@ -46,19 +47,18 @@ export default {
       ],
     }
   },
+
   created() {
       this.getData();  
   },
   methods: {
-
     /**
     *Hàm khi click bản ghi
     * MTDAI 13.06.2021
      */
     selectedItem(e) {
-      let employeeId = e.employeeId;
-      console.log(e.employeeId)
-      this.$emit("showFormDetailEdit", employeeId);
+      let employeeId = e.EmployeeId;
+      this.$emit('showFormDetailEdit', employeeId);
     },
 
     /**
@@ -66,13 +66,18 @@ export default {
      * MTDAI 13.06.2021
     */
     getData() {
-      // debugger // eslint-disable-line
       var me = this;
       this.axios.get('http://cukcuk.manhnv.net/v1/employees').then((response) => {
-        console.log(response.data)
         me.employeeData = response.data
-      })
-    }
+        let employeeList = this.employeeData;
+        for(let index in employeeList){
+          employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
+          employeeList[index].DateOfBirth = CommonFn.getDataFormat(employeeList[index].DateOfBirth, 'Date','');
+          employeeList[index].Salary = CommonFn.getDataFormat(employeeList[index].Salary, 'Money','');
+          employeeList[index].WorkStatus = CommonFn.getDataFormat(employeeList[index].WorkStatus, 'Enum', 'WorkStatus');
+        }
+      });
+    },
   }
 };
 </script>
@@ -90,10 +95,32 @@ table {
   border-collapse: collapse;
 }
 
+tbody {
+  overflow: auto;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    color: #000;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
 td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
+
+tr:nth-child(even){background-color: #f2f2f2;}
 
 tr:hover {
   background-color: rgb(245, 245, 245);
@@ -101,6 +128,10 @@ tr:hover {
 
 .d-flex {
   display: flex;
+}
+
+.align-right {
+    text-align: right;
 }
 
 .flex-1 {

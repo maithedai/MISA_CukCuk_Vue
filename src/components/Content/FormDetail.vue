@@ -24,7 +24,6 @@
                   <br />
                   <input 
                     v-model="employee.EmployeeCode"
-                    name="code"
                     type="text"
                     FieldName="EmployeeCode"
                     Require="true"
@@ -37,7 +36,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" v-model="employee.Fullmane" FieldName="FullName" Require="true" />
+                  <input type="text" v-model="employee.FullName" FieldName="FullName" Require="true" />
                 </div>
               </div>
               <div class="noti-item">
@@ -64,7 +63,6 @@
                         <input
                           v-model="employee.Gender"
                           type="text"
-                          
                           FieldName="Gender"
                           data-type="Enum"
                           EnumName="Gender"
@@ -324,7 +322,7 @@
           >
             <div class="button-text">Hủy</div>
           </div>
-          <div class="button-save button" @click="CheckValidate" Command="Save">
+          <div class="button-save button" @click="save" Command="Save">
             <div class="button-icon-save button">
               <i class="far fa-save"></i>
             </div>
@@ -343,9 +341,15 @@ export default {
         employee: {}
       }
     },
+    props:
+    {
+      employeeId: String
+    },
+     created() {
+      this.getEmployeeById(this.employeeId)
+    },
     methods: {
         closeFormDetail() {
-            // debugger // eslint-disable-line
             this.$emit("closeFormDetail");
         },
 
@@ -357,22 +361,56 @@ export default {
         },
 
         // Hàm check validate mã nhân viên
-        CheckValidate() {
+        // CheckValidate() {
 
-            // Check validate mã nhân viên trống
-            let me = document.getElementById("code");
-            if (!this.code) {
-              me.classList.add("invalid");
-              this.isShowTooltip = true;
-              console.log(this.isShowTooltip)
-            }
-            else {
-              this.save();
-            }
-        },
+        //     // Check validate mã nhân viên trống
+        //     let me = document.getElementById("code");
+        //     if (!this.code) {
+        //       me.classList.add("invalid");
+        //       // me.isShowTooltip = true;
+        //     }
+        //     else {
+        //       this.save();
+        //     }
+        // },
+        /**
+         * Hàm cất dữ liệu lên serve
+         */
         save(){
+          debugger // eslint-disable-line
+          if(this.employeeId) {
+            this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+this.employeeId, this.employee).then((response) => {
+              console.log(response)
+            })
+          }else {
+            this.axios.post('http://cukcuk.manhnv.net/v1/employees', this.employee).then((response) => {
+              console.log(response)
+            })
+          }
+          //Hàm đóng form khi save xong
+          this.$emit("closeFormDetail");
 
+          //hàm reload dữ liệu sau khi save
+          this.$emit("reloadDataTable")
+        },
+        /**
+       * Hàm lấy dữ liệu theo id
+       */
+      getEmployeeById(employeeId){
+        if(employeeId) {
+          /**
+           * get by id
+           */
+          var me = this;
+          this.axios.get('http://cukcuk.manhnv.net/v1/employees/'+employeeId).then((response) => {
+            me.employee = response.data;
+
+          })
+
+        } else {
+          this.employee = {}
         }
+      },
     },
 };
 </script>
@@ -468,7 +506,6 @@ div.formDetail select {
   left: 16px;
   right: 16px;
   bottom: 16px;
-  overflow: auto;
 }
 
 .avt-detail {

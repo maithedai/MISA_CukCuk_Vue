@@ -116,10 +116,10 @@
         </div>
 
         <!-- Danh sách nhân viên -->
-        <TableContent @showFormDetailEdit="showFormDetailEdit" ref="tableContent"/>
+        <TableContent @showFormDetailEdit="showFormDetailEdit($event)" ref="tableContent"/>
       </div>
     </div>
-    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail"/>
+    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employeeId="employeeId"/>
   </div>
 </template>
 <script>
@@ -139,14 +139,8 @@ export default {
       employeeId: null
     }
   },
+
   methods: {
-    showFormDetail() {
-      this.isShow = true;
-
-      //focus vào ô đầu tiên
-      this.focusInputfirst();
-    },
-
     //hàm focus ô đầu tiên formdetail
     focusInputfirst() { 
         this.$refs.FormDetail.focusInputfirst();
@@ -155,14 +149,26 @@ export default {
     closeFormDetail(){
       this.isShow = false;
     },
-
+		reloadDataTable(){
+			debugger // eslint-disable-line
+      this.getData();
+    },
+		getData(){
+			debugger // eslint-disable-line
+			this.$refs.tableContent.getData();
+		},
     /**
      * Hàm mở form detail sửa
+     * MTDAI 15.06.2021
      */
     showFormDetailEdit(employeeId) {
         this.isShow = true;
         this.employeeId = employeeId;
-    }
+    },
+		showFormDetail() {
+			this.isShow = true;
+			this.employeeId = "";
+    },
   }
 };
 </script>
@@ -374,8 +380,7 @@ input:focus {
     width: 100%;
     top: 55px;
     bottom: 32px;
-    overflow-x: auto;
-    /* overflow-y: hidden; */
+    overflow: auto;
     border-bottom: 4px solid #ccc;
 }
 
@@ -448,13 +453,6 @@ input:focus {
 table {
     width: 100%;
     border-collapse: collapse;
-}
-
-thead th {
-    position: sticky;
-    top: 0;
-    background: #fff;
-    color: #000;
 }
 
 .selected-row {
