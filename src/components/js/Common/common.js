@@ -81,9 +81,9 @@ CommonFn.getDataFormat = (data, dataType, enumName) => {
         case "Number":
             data = parseInt(data);
             break;
-        // case "Date":
-        //     data = CommonFn.formatDate(data);
-        //     break;
+        case "Date":
+            data = CommonFn.convertDate(data);
+            break;
         case "Money":
             data = CommonFn.formatMoney(data);
             break;  

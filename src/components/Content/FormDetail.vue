@@ -23,7 +23,7 @@
                   </label>
                   <br />
                   <input 
-                    v-model="employee.EmployeeCode"
+                    v-model="employeeX.EmployeeCode"
                     type="text"
                     FieldName="EmployeeCode"
                     Require="true"
@@ -36,7 +36,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" v-model="employee.FullName" FieldName="FullName" Require="true" />
+                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="true" />
                 </div>
               </div>
               <div class="noti-item">
@@ -47,7 +47,7 @@
                   </label>
                   <br />
                   <input
-                    v-model="employee.DateOfBirth"
+                    v-model="employeeX.DateOfBirth"
                     type="date"
                     FieldName="DateOfBirth"
                     data-type="Date"
@@ -61,7 +61,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
-                          v-model="employee.Gender"
+                          v-model="employeeX.Gender"
                           type="text"
                           FieldName="Gender"
                           data-type="Enum"
@@ -106,19 +106,19 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employee.IdentityNumber" type="text" FieldName="IdentityNumber" />
+                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" />
                 </div>
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
                   <br />
-                  <input v-model="employee.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" />
+                  <input v-model="employeeX.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" />
                 </div>
               </div>
               <div class="noti-item">
                 <div class="noti-item-item">
                   <label for>Nơi cấp</label>
                   <br />
-                  <input v-model="employee.IdentityPlace" type="text" FieldName="IdentityPlace"/>
+                  <input v-model="employeeX.IdentityPlace" type="text" FieldName="IdentityPlace"/>
                 </div>
               </div>
               <div class="noti-item">
@@ -128,7 +128,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employee.Email" type="text" FieldName="Email" />
+                  <input v-model="employeeX.Email" type="text" FieldName="Email" />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -137,7 +137,7 @@
                   </label>
                   <br />
                   <input
-                    v-model="employee.PhoneNumber"
+                    v-model="employeeX.PhoneNumber"
                     type="text"
                     FieldName="PhoneNumber"
                     data-type="Number"
@@ -156,7 +156,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
-                          v-model="employee.Job"
+                          v-model="employeeX.Job"
                           type="text"
                           
                           placeholder="Vị trí"
@@ -202,7 +202,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
-                          v-model="employee.Department"
+                          v-model="employeeX.Department"
                           type="text"
                           
                           placeholder="Phòng ban"
@@ -245,7 +245,7 @@
                 <div class="noti-item-item">
                   <label for>Mã số thuế cá nhân</label>
                   <br />
-                  <input v-model="employee.TaxCode" type="text" FieldName="TaxCode" data-type="Number" />
+                  <input v-model="employeeX.TaxCode" type="text" FieldName="TaxCode" data-type="Number" />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -254,7 +254,7 @@
                   </label>
                   <br />
                   <input
-                    v-model="employee.Salary"
+                    v-model="employeeX.Salary"
                     type="number"
                     FieldName="Salary"
                     data-type="Number"
@@ -275,7 +275,7 @@
                     <div class="container content-control">
                       <div class="input-field">
                         <input
-                          v-model="employee.WorkStatus"
+                          v-model="employeeX.WorkStatus"
                           type="text"
                           
                           placeholder="Tình trạng làm việc"
@@ -335,18 +335,32 @@
 </template>
 
 <script>
+import CommonFn from "../js/Common/common.js"
+
 export default {
     data() {
       return {
-        employee: {}
+        employeeX: {}
       }
     },
     props:
     {
-      employeeId: String
+      employee: {
+        type: Object,
+        default: ()=> {}
+      }
     },
      created() {
-      this.getEmployeeById(this.employeeId)
+    },
+    watch:{
+      employee:{
+        immediate: true,
+        deep: true,
+        handler(val){
+          this.employeeX = {...val};
+          this.employeeX.DateOfBirth = CommonFn.getDataFormat(this.employeeX.DateOfBirth, 'Date','');
+        }
+      }
     },
     methods: {
         closeFormDetail() {
@@ -377,40 +391,10 @@ export default {
          * Hàm cất dữ liệu lên serve
          */
         save(){
-          debugger // eslint-disable-line
-          if(this.employeeId) {
-            this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+this.employeeId, this.employee).then((response) => {
-              console.log(response)
-            })
-          }else {
-            this.axios.post('http://cukcuk.manhnv.net/v1/employees', this.employee).then((response) => {
-              console.log(response)
-            })
-          }
           //Hàm đóng form khi save xong
           this.$emit("closeFormDetail");
-
-          //hàm reload dữ liệu sau khi save
-          this.$emit("reloadDataTable")
-        },
-        /**
-       * Hàm lấy dữ liệu theo id
-       */
-      getEmployeeById(employeeId){
-        if(employeeId) {
-          /**
-           * get by id
-           */
-          var me = this;
-          this.axios.get('http://cukcuk.manhnv.net/v1/employees/'+employeeId).then((response) => {
-            me.employee = response.data;
-
-          })
-
-        } else {
-          this.employee = {}
+          this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employee);
         }
-      },
     },
 };
 </script>
@@ -462,6 +446,7 @@ div.formDetail select {
   left: 30%;
   right: 30%;
   bottom: 32px;
+  min-width: 600px;
   background-color: #fff;
   border-radius: 5px;
 }
@@ -517,13 +502,30 @@ div.formDetail select {
   border-radius: 50%;
   border: 1px solid #ccc;
 }
-
 .form-detail {
   position: absolute;
   top: 0;
   left: 220px;
   bottom: 0;
   right: 0;
+}
+@media only screen and (max-width: 1400px) {
+  .avt-detail {
+    width: 150px;
+    height: 150px;
+    background-image: url("../../assets/Icon/default-avatar.jpg");
+    background-size: 150px 150px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  .form-detail {
+    position: absolute;
+    top: 0;
+    left: 170px;
+    bottom: 0;
+    right: 0;
+  }
 }
 
 .line-noti {

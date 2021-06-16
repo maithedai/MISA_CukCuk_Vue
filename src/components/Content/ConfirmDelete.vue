@@ -16,7 +16,7 @@
             </div>
             <div class="form-footer">
                 <div class="btn-cancel" @click="closeFormConfirm">Hủy</div>
-                <div class="btn-delete" @click="acceptDseleteEmployee">Xóa</div>
+                <div class="btn-delete" @click="acceptDeleteEmployee">Xóa</div>
             </div>
         </div>
     </div>
@@ -28,8 +28,8 @@ export default {
         closeFormConfirm() {
             this.$emit("closeFormConfirm")
         },
-        acceptDseleteEmployee() {
-            this.$emit("acceptDseleteEmployee")
+        acceptDeleteEmployee() {
+            this.$emit("acceptDeleteEmployee")
         }
     }
 }

@@ -62,7 +62,6 @@ export default {
      * Hàm mở form confirm khi xóa nhân viên
      */
     openFormConfirmDelete() {
-      debugger // eslint-disable-line
       this.isShowConfirm = true
     },
 
@@ -71,9 +70,7 @@ export default {
     * MTDAI 13.06.2021
      */
     selectedItem(e) {
-      let employeeId = e.EmployeeId;
-      console.log(employeeId)
-      this.$emit('showFormDetailEdit', employeeId);
+      this.$emit('showFormDetailEdit', e);
     },
 
     /**
@@ -82,15 +79,17 @@ export default {
      */
     selectedRow(e, index) {
       let employeeId = e.EmployeeId;
-      debugger // eslint-disable-line
       this.isClassSelect(index),
-      this.$emit('acceptDseleteEmployee', employeeId);
+      this.$emit('selectItem', employeeId);
     },
 
     isClassSelect(index) {
       this.isSelected = index
     },
-
+    onDeleteSuccess(id){
+      this.employeeData = this.employeeData.filter(x => x.EmployeeId != id);
+    },
+    
     /**
      * hàm get data server
      * MTDAI 13.06.2021
@@ -108,6 +107,15 @@ export default {
         }
       });
     },
+
+    onEditSuccess(id, employee) {
+      if(id) {
+        this.employeeData = this.employeeData.filter(x => x.EmployeeId != id);
+        this.employeeData.unshift(employee);
+      }else {
+        this.employeeData.unshift(employee);
+      }
+    }
   }
 };
 </script>

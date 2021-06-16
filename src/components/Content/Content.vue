@@ -122,11 +122,11 @@
         </div>
 
         <!-- Danh sách nhân viên -->
-        <TableContent @showFormDetailEdit="showFormDetailEdit($event)" @acceptDseleteEmployee="acceptDseleteEmployee($event)" ref="tableContent"/>
+        <TableContent @showFormDetailEdit="showFormDetailEdit" @selectItem="selectItem" ref="tableContent"/>
       </div>
     </div>
-    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employeeId="employeeId"/>
-		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDseleteEmployee="acceptDseleteEmployee"/>
+    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
+		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDeleteEmployee="acceptDeleteEmployee"/>
   </div>
 </template>
 <script>
@@ -146,7 +146,8 @@ export default {
       isShow: false,
       isShowDropdown: false,
       employeeId: null,
-			isShowConfirm: false
+			isShowConfirm: false,
+      employee: {}
     }
   },
 
@@ -160,24 +161,22 @@ export default {
       this.isShow = false;
     },
 		reloadDataTable(){
-			debugger // eslint-disable-line
       this.getData();
     },
 		getData(){
-			debugger // eslint-disable-line
 			this.$refs.tableContent.getData();
 		},
     /**
      * Hàm mở form detail sửa
      * MTDAI 15.06.2021
      */
-    showFormDetailEdit(employeeId) {
+    showFormDetailEdit(employee) {
         this.isShow = true;
-        this.employeeId = employeeId;
+        this.employee = employee;
     },
 		showFormDetail() {
 			this.isShow = true;
-			this.employeeId = "";
+			this.employee = {};
     },
 
 		/**
@@ -187,18 +186,23 @@ export default {
 		deleteEmployee() {
 			this.isShowConfirm = true;
 		},
-
+    /**
+     * 
+     */
+    selectItem(employeeId){
+      this.employeeId = employeeId;
+    },
 		/**
 		 * Hàm khi đã confirm xóa
 		 * MTDAI 16.06.2021
 		 */
-		acceptDseleteEmployee(employeeId) {
-			debugger // eslint-disable-line
-      this.employeeId = employeeId;
-			this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ employeeId).then((response) => {
-				console.log(response)
-			}),
-			this.isShowConfirm = false
+		acceptDeleteEmployee() {
+			this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ this.employeeId).then((response) => {
+        if(response){
+          this.$refs.tableContent.onDeleteSuccess(this.employeeId);
+          this.isShowConfirm = false;
+        }
+			})
 		},
 
 		/**
@@ -207,7 +211,26 @@ export default {
 		 */
 		closeFormConfirm() {
 			this.isShowConfirm = false;
-		}
+		},
+
+    /**
+     * 
+     */
+    saveEmployee(id, employee) {
+      if(id) {
+        this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+id, employee).then((response) => {
+          if(response) {
+            this.$refs.tableContent.onEditSuccess(id, employee);
+          }
+        })
+      }else {
+        this.axios.post('http://cukcuk.manhnv.net/v1/employees', employee).then((response) => {
+          if(response) {
+            this.$refs.tableContent.onEditSuccess(id, employee);
+          }
+        })
+      }
+    }
   }
 };
 </script>
