@@ -8,6 +8,7 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import moment from 'moment'
+import vuetify from './plugins/vuetify'
 Vue.prototype.moment = moment
 
 library.add(faUserSecret)
@@ -19,5 +20,6 @@ Vue.use(VueAxios, axios)
 
 new Vue({
     router,
+    vuetify,
     render: h => h(App)
 }).$mount('#app')

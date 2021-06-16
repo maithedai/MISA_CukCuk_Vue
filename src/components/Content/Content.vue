@@ -93,13 +93,13 @@
               </div>
             </div>
           </div>
-					<div class="bo-button">
-						<div class="bo-refresh"></div>
-						<div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
-							<i style="size: 20px" class="fas fa-user-minus"></i>
-							Xóa nhân viên
-						</div>
-					</div>
+          <div class="bo-button">
+              <div class="bo-refresh"></div>
+              <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
+                  <i style="size: 20px" class="fas fa-user-minus"></i>
+                  Xóa nhân viên
+              </div>
+          </div>
         </div>
         <div class="bo-content-footer">
           <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
@@ -393,7 +393,7 @@ input:focus {
 	line-height: 40px;
 	text-align: center;
 	width: 100px;
-	height: 40px;
+	height: 38px;
 	background-color: red	;
 	border-radius: 4px;
 }
