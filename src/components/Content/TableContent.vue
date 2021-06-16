@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(items, index) in employeeData" :key="index" @dblclick="selectedItem(items)">
+        <tr v-for="(items, index) in employeeData" :key="index" @click="selectedRow(items, index)" @dblclick="selectedItem(items)" :class="{'selected-row': isSelected === index}">
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
@@ -30,9 +30,14 @@
 import employeeData from "../js/EmployeeData.js"
 import CommonFn from "../js/Common/common.js"
 export default {
+  components: {
+    
+  },
   data() {
     return  {
       employeeData: employeeData,
+      isSelected: false,
+      isShowConfirm: false,
       header: [
           {text: "Mã nhân viên"},
           {text: "Họ tên"},
@@ -52,13 +57,38 @@ export default {
       this.getData();  
   },
   methods: {
+
     /**
-    *Hàm khi click bản ghi
+     * Hàm mở form confirm khi xóa nhân viên
+     */
+    openFormConfirmDelete() {
+      debugger // eslint-disable-line
+      this.isShowConfirm = true
+    },
+
+    /**
+    *Hàm khi double click bản ghi
     * MTDAI 13.06.2021
      */
     selectedItem(e) {
       let employeeId = e.EmployeeId;
+      console.log(employeeId)
       this.$emit('showFormDetailEdit', employeeId);
+    },
+
+    /**
+     * Hàm khi 1 click để chọn
+     * MTDAI 16.06.2021
+     */
+    selectedRow(e, index) {
+      let employeeId = e.EmployeeId;
+      debugger // eslint-disable-line
+      this.isClassSelect(index),
+      this.$emit('acceptDseleteEmployee', employeeId);
+    },
+
+    isClassSelect(index) {
+      this.isSelected = index
     },
 
     /**
@@ -97,6 +127,10 @@ table {
 
 tbody {
   overflow: auto;
+}
+
+.selected-row {
+  background-color: #abc4b8 !important;
 }
 
 thead th {

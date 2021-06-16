@@ -15,7 +15,7 @@
       <div class="page-title">
         <div class="title-text">Danh sách nhân viên</div>
         <div id="toolBarEmployee">
-          <div class="button-add button" @click="showFormDetail">
+          <div class="button-add button" @click="showFormDetail()">
             <div class="button-icon"></div>
             <div class="button-text">Thêm nhân viên</div>
           </div>
@@ -93,7 +93,13 @@
               </div>
             </div>
           </div>
-          <div class="bo-refresh"></div>
+					<div class="bo-button">
+						<div class="bo-refresh"></div>
+						<div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
+							<i style="size: 20px" class="fas fa-user-minus"></i>
+							Xóa nhân viên
+						</div>
+					</div>
         </div>
         <div class="bo-content-footer">
           <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
@@ -116,27 +122,31 @@
         </div>
 
         <!-- Danh sách nhân viên -->
-        <TableContent @showFormDetailEdit="showFormDetailEdit($event)" ref="tableContent"/>
+        <TableContent @showFormDetailEdit="showFormDetailEdit($event)" @acceptDseleteEmployee="acceptDseleteEmployee($event)" ref="tableContent"/>
       </div>
     </div>
     <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employeeId="employeeId"/>
+		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDseleteEmployee="acceptDseleteEmployee"/>
   </div>
 </template>
 <script>
 import FormDetail from './FormDetail.vue'
-import TableContent from './TableContent'
+import TableContent from './TableContent.vue'
+import ConfirmDelete from './ConfirmDelete.vue'
 
 export default {
   name: "Content",
   components: {
     FormDetail,
-    TableContent
+    TableContent,
+		ConfirmDelete
   },
   data() {
     return {
       isShow: false,
       isShowDropdown: false,
-      employeeId: null
+      employeeId: null,
+			isShowConfirm: false
     }
   },
 
@@ -169,10 +179,43 @@ export default {
 			this.isShow = true;
 			this.employeeId = "";
     },
+
+		/**
+		 * hàm ở form confirm xóa khi click button xóa nhân viên
+		 * MTDAI 16.06.2021
+		 */
+		deleteEmployee() {
+			this.isShowConfirm = true;
+		},
+
+		/**
+		 * Hàm khi đã confirm xóa
+		 * MTDAI 16.06.2021
+		 */
+		acceptDseleteEmployee(employeeId) {
+			debugger // eslint-disable-line
+      this.employeeId = employeeId;
+			this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ employeeId).then((response) => {
+				console.log(response)
+			}),
+			this.isShowConfirm = false
+		},
+
+		/**
+		 * Hàm khi click button Hủy form confirm
+		 * MTDAI 16.06.2021
+		 */
+		closeFormConfirm() {
+			this.isShowConfirm = false;
+		}
   }
 };
 </script>
 <style scoped>
+
+.ConfirmDelete {
+	margin-top: 200px;
+}
 
 .menu-bar-small {
     --menu-bar-width: 52px;
@@ -328,6 +371,13 @@ input:focus {
     height: 100%;
 }
 
+.bo-button {
+	width: 150px;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+
 .bo-refresh {
     width: 40px;
     height: 38px;
@@ -336,6 +386,21 @@ input:focus {
     background-image: url("../../assets/Icon/refresh.png");
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.bo-delete {
+	color: #fff;
+	line-height: 40px;
+	text-align: center;
+	width: 100px;
+	height: 40px;
+	background-color: red	;
+	border-radius: 4px;
+}
+
+.bo-delete:hover {
+	cursor: pointer;
+	background-color: rgb(177, 121, 121);
 }
 
 .bo-refresh:hover {
