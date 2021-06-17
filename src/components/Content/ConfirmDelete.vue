@@ -4,12 +4,11 @@
             <div class="form-header" @click="closeFormConfirm"></div>
             <div class="form-content">
                 <div class="content-content">
-                    <div class="content-header"><span>Xóa bản ghi</span></div>
+                    <div class="content-header text-title-2">Xóa bản ghi</div>
                     <div class="content-body">
                         <div class="icon-warning"></div>
                         <div class="text-confirm">
-                            Bạn có chắc muốn đóng form nhập <b>"Thông tin chung của
-                            thủ tục 603"</b> hay không?
+                            Bạn có chắc muốn xóa bản ghi này hay không?
                         </div>
                     </div>
                 </div>
@@ -102,13 +101,10 @@ export default {
         height: 24px;
         
     }
-    .content-content .content-header span {
-        font-size: 18px;
-    }
 
 .icon-warning {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: rgb(235, 235, 235);
     background-image: url("../../assets/Icon/icon-warning.jpg");
@@ -122,6 +118,8 @@ export default {
     left: 46px; 
     right: 0px;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .btn-delete {

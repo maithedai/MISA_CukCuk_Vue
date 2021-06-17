@@ -138,7 +138,7 @@ tbody {
 }
 
 .selected-row {
-  background-color: #abc4b8 !important;
+  background-color: #e3f3ee !important;
 }
 
 thead th {
