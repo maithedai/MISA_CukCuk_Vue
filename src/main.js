@@ -6,17 +6,18 @@ import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import moment from 'moment'
 import vuetify from './plugins/vuetify'
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 Vue.prototype.moment = moment
 
 library.add(faUserSecret)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.use(VueSweetalert2)
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
-
 
 new Vue({
     router,

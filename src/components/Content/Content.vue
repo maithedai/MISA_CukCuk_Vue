@@ -96,7 +96,7 @@
             <DropDown style="width: 200px;" :customData="locationDropdown"/>
           </div>
           <div class="bo-button">
-              <div class="bo-refresh"></div>
+              <div class="bo-refresh" @click="refreshData"></div>
               <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
                   <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
                   <div class="button-delete-text">Xóa</div>    
@@ -136,6 +136,7 @@ import FormDetail from './FormDetail.vue'
 import TableContent from './TableContent.vue'
 import ConfirmDelete from './ConfirmDelete.vue'
 import DropDown from './DropDown.vue'
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 export default {
   name: "Content",
@@ -166,6 +167,22 @@ export default {
   },
 
   methods: {
+    /**
+     * Hàm sử lý khi reload trang
+     * MTDAI 17.06.2021
+     */
+    refreshData(){
+      Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Your work has been refresh',
+              showConfirmButton: false,
+              timer: 1500
+            });
+      this.$swal.mixin({
+        toast: true,
+      }).bindClickHandler('data-swal-toast-template')
+    },
 
     closeFormDetail(){
       this.isShow = false;
