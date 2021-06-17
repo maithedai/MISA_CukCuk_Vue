@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <Menu></Menu>
-    <Content></Content>
+    <TheContent></TheContent>
   </div>
 </template>
 
 <script>
 import Menu from './components/Menu/Menu.vue'
-import Content from './components/Content/Content.vue'
+import TheContent from './components//TheContent.vue'
 
 export default {
   name: 'App',
   components: {
     Menu,
-    Content
+    TheContent
   }
 }
 </script>

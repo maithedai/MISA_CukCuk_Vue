@@ -90,6 +90,8 @@ export default {
     width: 100%;
     height: 44px;
     cursor: pointer;
+    text-decoration: none;
+    color: #000;
 }
 
 .menu-item:focus {
