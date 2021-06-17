@@ -1,0 +1,84 @@
+@font-face {
+    font-family: GoogleSans-Regular;
+    src: url('assets/font/GoogleSans-Regular.otf');
+}
+
+@font-face {
+    font-family: GoogleSans-Bold;
+    src: url('assets/font/GoogleSans-Bold.otf');
+}
+
+@font-face {
+    font-family: GoogleSans-Medium;
+    src: url('assets/font/GoogleSans-Medium.otf');
+}
+ 
+* {
+    font-family: GoogleSans-Regular;
+}
+body {
+    margin: 0;
+    font-family: 'GoogleSans';
+    font-size: 13px;
+}
+
+:root {
+    --menu-bar-width: 250px;
+}
+
+/* * {
+    transition: 0.3s;
+}
+     */
+
+.menu-bar-small {
+    --menu-bar-width: 52px;
+}
+
+.text-heading {
+    font-family: GoogleSans-Bold;
+    font-size: 24px;
+    color: #000000;
+}
+
+.text-title {
+    font-family: GoogleSans-Bold;
+    font-size: 20px;
+    color: #000000;
+}
+
+.text-title-2 {
+    font-family: GoogleSans-Bold;
+    font-size: 15px;
+    color: #000000;
+}
+
+.text-lable-field {
+    font-family: GoogleSans-Medium;
+    font-size: 13px;
+    color: #000000;
+}
+
+.text-lable {
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    color: #454545;
+}
+
+.text-content-details {
+    font-family: GoogleSans-Medium;
+    font-size: 13px;
+    color: #000000;
+}
+
+.text-body-content {
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    color: #454545;
+}
+
+.text-sub-text {
+    font-family: GoogleSans-Regular;
+    font-size: 11px;
+    color: #BBBBBB;
+}

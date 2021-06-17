@@ -2,18 +2,18 @@
   <div class="content">
     <div class="content-header">
       <div class="restaurent">
-        <div class="restaurent-text">Nhà hàng biển đông</div>
+        <div class="restaurent-text text-title-2">Nhà hàng biển đông</div>
         <div class="restaurent-drop"></div>
       </div>
       <div class="profile">
         <div class="icon-avt"></div>
-        <div class="user-name">Mai Thế Đại</div>
+        <div class="user-name text-lable-field">Mai Thế Đại</div>
         <div class="profile-option"></div>
       </div>
     </div>
     <div class="content-body">
       <div class="page-title">
-        <div class="title-text">Danh sách nhân viên</div>
+        <div class="title-text text-heading">Danh sách nhân viên</div>
         <div id="toolBarEmployee">
           <div class="button-add button" @click="showFormDetail()">
             <div class="button-icon"></div>
@@ -362,7 +362,6 @@ export default {
 
     .page-title .title-text {
         line-height: 40px;
-        font-size: 18px;
     }
 
 .button {
@@ -427,7 +426,7 @@ input:focus {
 }
 
 .bo-button {
-	width: 155px;
+	width: 152px;
 	height: 40px;
 	display: flex;
 	justify-content: space-between;

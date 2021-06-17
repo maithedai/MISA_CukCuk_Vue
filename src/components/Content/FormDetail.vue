@@ -10,7 +10,9 @@
         ></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
         <div class="formContent-body">
-          <div class="avt-detail"></div>
+          <div class="avt">
+            <div class="avt-detail"></div>
+          </div>
           <div class="form-detail">
             <div class="a-noti">
               <span>A. THÔNG TIN CHUNG:</span>
@@ -399,7 +401,7 @@ div.formDetail select {
   top: 70px;
   left: 16px;
   right: 16px;
-  bottom: 16px;
+  bottom: 30px;
 }
 
 .avt-detail {
@@ -417,6 +419,8 @@ div.formDetail select {
   left: 220px;
   bottom: 0;
   right: 0;
+  padding-right: 8px;
+  overflow: auto;
 }
 
 ::-webkit-scrollbar{

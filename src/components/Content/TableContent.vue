@@ -148,6 +148,10 @@ thead th {
     color: #000;
 }
 
+tr {
+  height: 48px;
+}
+
 ::-webkit-scrollbar{
     width: 5px;
 }
