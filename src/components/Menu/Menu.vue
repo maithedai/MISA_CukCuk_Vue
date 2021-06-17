@@ -17,10 +17,10 @@
         <div class="menu-item-icon icon-buy"></div>
         <div class="menu-item-text">Mua hàng</div>
       </div>
-      <div class="menu-item">
+      <router-link class="menu-item" to="/employees">
         <div class="menu-item-icon icon-employee"></div>
         <div class="menu-item-text">Danh mục nhân viên</div>
-      </div>
+      </router-link>
       <div class="menu-item">
         <div class="menu-item-icon icon-setting"></div>
         <div class="menu-item-text">Thiết lập hệ thống</div>
