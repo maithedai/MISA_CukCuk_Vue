@@ -14,7 +14,7 @@
             <div class="avt-detail"></div>
             <div class="text-avt">(Vui lòng chọn ảnh có định dạng .jpg, jpeg, .png, .gif.)</div>
           </div>
-          <div class="form-detail">
+          <div class="form-detail" ref="form">
             <div class="a-noti">
               <span>A. THÔNG TIN CHUNG:</span>
               <div class="line-noti"></div>
@@ -29,7 +29,7 @@
                     v-model="employeeX.EmployeeCode"
                     type="text"
                     FieldName="EmployeeCode"
-                    Require="true"
+                    Require="empty"
                     :v-tooltip="{content: 'Bạn cần điền thông tin', classes: ['custom-tooltip'], show: true}"
                   />
                 </div>
@@ -40,6 +40,7 @@
                   </label>
                   <br />
                   <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="true" />
+                  <span>{{messageError.FullName}}</span>
                 </div>
               </div>
               <div class="noti-item">
@@ -211,15 +212,19 @@
 
 <script>
 import CommonFn from "../js/Common/common.js"
-import DropDown from "./DropDown.vue"
+import DropDown from "./DropDown.vue";
+import Base from "./Base.vue";
 
 export default {
     components: {
       DropDown,
     },
-
+    extends: Base,
     data() {
       return {
+        messageError: {
+          FullName: ""
+        },
         employeeX: {},
         genderDropdown: {
           defaultValue: "",
@@ -257,8 +262,10 @@ export default {
         immediate: true,
         deep: true,
         handler(val){
+          debugger
           this.employeeX = {...val};
           this.employeeX.DateOfBirth = CommonFn.getDataFormat(this.employeeX.DateOfBirth, 'Date','');
+          this.genderDropdown.defaultValue = val.Gender;
         }
       }
     },
@@ -304,6 +311,12 @@ export default {
          */
         save(){
           //Hàm đóng form khi save xong
+          debugger
+          this.validate();
+          if(!this.employeeX.FullName || this.employeeX.FullName.length == 0){
+            this.messageError.FullName = "Bạn cần nhập họ và tên";
+            return;
+          }
           this.$emit("closeFormDetail");
           this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employee);
         }
@@ -459,6 +472,10 @@ div.formDetail select {
     left: 170px;
     bottom: 0;
     right: 0;
+  }
+  .avt {
+    width: 150px;
+    height: 200px;
   }
 }
 

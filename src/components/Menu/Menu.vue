@@ -1,7 +1,7 @@
 <template>
   <div class="menu-left">
     <div class="menu-header">
-      <div class="icon-bar"></div>
+      <div class="icon-bar" @click="zoomoutMenuBar"></div>
       <div class="logo"></div>
     </div>
     <div class="menu-body">
@@ -31,6 +31,12 @@
 <script>
 export default {
   name: "Menu",
+  methods: {
+    zoomoutMenuBar() {
+      let me = document.getElementsByName("menu-left")
+      console.log(me)
+    }
+  }
 };
 </script>
 

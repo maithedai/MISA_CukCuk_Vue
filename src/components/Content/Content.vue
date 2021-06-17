@@ -136,6 +136,7 @@ import FormDetail from './FormDetail.vue'
 import TableContent from './TableContent.vue'
 import ConfirmDelete from './ConfirmDelete.vue'
 import DropDown from './DropDown.vue'
+
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
 export default {
@@ -144,7 +145,7 @@ export default {
     FormDetail,
     TableContent,
 		ConfirmDelete,
-    DropDown
+    DropDown,
   },
   data() {
     return {
