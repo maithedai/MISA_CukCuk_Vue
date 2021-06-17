@@ -147,7 +147,7 @@ export default {
     background-color: #fff;
     border: 1px solid #bbb;
     border-radius: 4px;
-    height: 38px;
+    height: 40px;
     color: #000;
     font-size: 13px;
     font-family: 'GoogleSans-regular';

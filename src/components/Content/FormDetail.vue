@@ -12,6 +12,7 @@
         <div class="formContent-body">
           <div class="avt">
             <div class="avt-detail"></div>
+            <div class="text-avt">(Vui lòng chọn ảnh có định dạng .jpg, jpeg, .png, .gif.)</div>
           </div>
           <div class="form-detail">
             <div class="a-noti">
@@ -341,9 +342,9 @@ export default {
 
 div.formDetail input,
 div.formDetail select {
-  height: 38px;
   margin-top: 6px;
   width: 100%;
+  height: 40px;
 }
 
 div.formDetail select {
@@ -404,8 +405,13 @@ div.formDetail select {
   bottom: 30px;
 }
 
-.avt-detail {
+.avt {
   width: 200px;
+  height: 300px;
+}
+
+.avt-detail {
+  width: 100%;
   height: 200px;
   background-image: url("../../assets/Icon/default-avatar.jpg");
   background-size: 200px 200px;
@@ -413,6 +419,11 @@ div.formDetail select {
   border-radius: 50%;
   border: 1px solid #ccc;
 }
+
+.text-avt {
+  text-align: center;
+}
+
 .form-detail {
   position: absolute;
   top: 0;

@@ -99,7 +99,7 @@
               <div class="bo-refresh" @click="refreshData"></div>
               <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
                   <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
-                  <div class="button-delete-text">Xóa</div>    
+                  <div class="button button-delete-text">Xóa</div>    
               </div>
           </div>
         </div>
@@ -365,7 +365,6 @@ export default {
     }
 
 .button {
-    background-color: #019160;
     border-radius: 4px;
     border: none;
     font-size: 16px;
@@ -375,6 +374,10 @@ export default {
     display: flex;
     line-height: 36px;
     align-items: center;
+}
+
+.button-add {
+  background-color: #019160;
 }
 
 .button-add:hover {
@@ -434,7 +437,7 @@ input:focus {
 
 .bo-refresh {
     width: 40px;
-    height: 38px;
+    height: 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-image: url("../../assets/Icon/refresh.png");
@@ -477,7 +480,7 @@ input:focus {
 
 #input-name {
     width: 280px;
-    height: 38px;
+    height: 40px;
     border-radius: 4px;
     border: 1px solid #ccc;
     padding: 0px 30px 0px;
@@ -489,7 +492,7 @@ input:focus {
 
 #input-department {
     width: 150px;
-    height: 38px;
+    height: 40px;
     border-radius: 4px;
     border: 1px solid #ccc;
     padding: 0px 8px 0px;
@@ -498,7 +501,7 @@ input:focus {
 
 #input-location {
     width: 150px;
-    height: 38px;
+    height: 40px;
     border-radius: 4px;
     border: 1px solid #ccc;
     padding: 0px 8px 0px;
@@ -663,13 +666,6 @@ th {
         background-color: rgb(0, 0, 0);
         opacity: 0.5;
     }
-
-div.formDetail input,
-div.formDetail select {
-    height: 30px;
-    margin-top: 6px;
-    width: 100%;
-}
 
 div.formDetail select {
     height: 34px;

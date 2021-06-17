@@ -82,3 +82,11 @@ body {
     font-size: 11px;
     color: #BBBBBB;
 }
+
+.button {
+    height: 40px;
+}
+
+.input {
+    height: 40px;
+}
