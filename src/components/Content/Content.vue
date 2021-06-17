@@ -172,13 +172,14 @@ export default {
      * MTDAI 17.06.2021
      */
     refreshData(){
+      this.getData(),
       Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Your work has been refresh',
-              showConfirmButton: false,
-              timer: 1500
-            });
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been refresh',
+        showConfirmButton: false,
+        timer: 1500
+      });
       this.$swal.mixin({
         toast: true,
       }).bindClickHandler('data-swal-toast-template')
