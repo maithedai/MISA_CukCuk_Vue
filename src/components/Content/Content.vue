@@ -96,8 +96,8 @@
           <div class="bo-button">
               <div class="bo-refresh"></div>
               <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
-                  <i style="size: 20px" class="fas fa-user-minus"></i>
-                  Xóa nhân viên
+                  <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
+                  <div class="button-delete-text">Xóa</div>    
               </div>
           </div>
         </div>
@@ -152,10 +152,6 @@ export default {
   },
 
   methods: {
-    //hàm focus ô đầu tiên formdetail
-    focusInputfirst() { 
-        this.$refs.FormDetail.focusInputfirst();
-    },
 
     closeFormDetail(){
       this.isShow = false;
@@ -174,6 +170,10 @@ export default {
         this.isShow = true;
         this.employee = employee;
     },
+    /**
+     * Hàm mở form detail khi tạo
+     * MTDAI 15.06.2021
+     */
 		showFormDetail() {
 			this.isShow = true;
 			this.employee = {};
@@ -395,7 +395,7 @@ input:focus {
 }
 
 .bo-button {
-	width: 150px;
+	width: 155px;
 	height: 40px;
 	display: flex;
 	justify-content: space-between;
@@ -415,10 +415,20 @@ input:focus {
 	color: #fff;
 	line-height: 40px;
 	text-align: center;
-	width: 100px;
+	width: auto;
 	height: 38px;
 	background-color: red	;
 	border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-delete-text {
+  margin-left: 8px;
+  margin-right: 16px;
+  width: auto;
+  height: 100%;
 }
 
 .bo-delete:hover {
@@ -798,8 +808,8 @@ div.formDetail select {
     opacity: 0.2;
 }
 .container .m-cbo{
-    width: 170px;
-    height: 36px;
+    width: 100%;
+    height: 100%;
     border: 1px #bbbbbb solid;
     border-radius: 4px;
     font-size: 13px;
@@ -840,7 +850,7 @@ div.formDetail select {
 }
 .container .input-field .arrow{
     position: absolute;
-    top: 1px;
+    top: 0px;
     right: 0px;
     bottom: 0px;
     width: 38px;
@@ -856,7 +866,7 @@ div.formDetail select {
 .container .input-field .h-line{
     border-left: 1px #bbbbbb solid;
     position: absolute;
-    top: 1px;
+    top: 0px;
     right: 37px;
     bottom: 1px;
     width: 1px;

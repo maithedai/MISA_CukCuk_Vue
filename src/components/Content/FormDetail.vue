@@ -362,15 +362,27 @@ export default {
         }
       }
     },
+
+    /**
+     * Hàm dùng để gọi sự kiện focus ô input đầu tiên mỗi khi mở form
+     * MTDAI 17.06.2021
+     */
+    mounted() {
+      this.focusInputfirst();
+    },
+
     methods: {
         closeFormDetail() {
             this.$emit("closeFormDetail");
         },
 
-        //hàm focus vào ô đầu tiên
+        /**
+         * Hàm focus vào ô input đầu tiên
+         * MTDAI 16.06.2021
+         */
         focusInputfirst() {
-          let me = document.getElementById("code")
-          alert(me)
+          debugger // eslint-disable-line
+          let me = document.querySelector("[FieldName='EmployeeCode']");
           me.focus();
         },
 
@@ -387,6 +399,7 @@ export default {
         //       this.save();
         //     }
         // },
+        
         /**
          * Hàm cất dữ liệu lên serve
          */
