@@ -162,7 +162,7 @@ td {
   border-bottom: 1px solid #ccc;
 }
 
-tr:nth-child(even){background-color: #f2f2f2;}
+tr:nth-child(even){background-color: #fafafa;}
 
 tr:hover {
   background-color: rgb(245, 245, 245);

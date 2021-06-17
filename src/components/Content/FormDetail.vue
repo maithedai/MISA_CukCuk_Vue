@@ -418,6 +418,16 @@ div.formDetail select {
   bottom: 0;
   right: 0;
 }
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
 @media only screen and (max-width: 1400px) {
   .avt-detail {
     width: 150px;
