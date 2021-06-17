@@ -58,44 +58,13 @@
                   <label for>Giới tính</label>
                   <br />
                   <div class="pn-gender">
-                    <div class="container content-control">
-                      <div class="input-field">
-                        <input
-                          v-model="employeeX.Gender"
-                          type="text"
-                          FieldName="Gender"
-                          data-type="Enum"
-                          EnumName="Gender"
-                        />
-                        <div class="h-line-form"></div>
-                        <div class="arrow-form" data-arrow="true">
-                          <i class="fas fa-angle-down" data-arrow="true"></i>
-                        </div>
-                        <div class="btn-clear">
-                          <i class="far fa-times-circle"></i>
-                        </div>
-                      </div>
-                      <div class="drop-down">
-                        <div class="dr-item">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text" value="0">Nữ</div>
-                        </div>
-                        <div class="dr-item">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text" value="1">Nam</div>
-                        </div>
-                        <div class="dr-item">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text" value="2">Khác</div>
-                        </div>
-                      </div>
-                    </div>
+                    <DropDown v-model="employeeX.Gender"
+                        type="text"
+                        FieldName="Gender"
+                        data-type="Enum"
+                        EnumName="Gender" 
+                        style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="genderDropdown" 
+                    />                   
                   </div>
                 </div>
               </div>
@@ -153,91 +122,23 @@
                   <label for>Vị trí</label>
                   <br />
                   <div class="pn-job">
-                    <div class="container content-control">
-                      <div class="input-field">
-                        <input
-                          v-model="employeeX.Job"
-                          type="text"
-                          
-                          placeholder="Vị trí"
-                          FieldName="Job"
-                          data-type="Enum"
-                          EnumName="Job"
-                        />
-                        <div class="h-line-form"></div>
-                        <div class="arrow-form" data-arrow="true">
-                          <i class="fas fa-angle-down" data-arrow="true"></i>
-                        </div>
-                        <div class="btn-clear">
-                          <i class="far fa-times-circle"></i>
-                        </div>
-                      </div>
-                      <div class="drop-down">
-                        <div class="dr-item" value="1">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Giám đốc</div>
-                        </div>
-                        <div class="dr-item" value="2">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Kế toán</div>
-                        </div>
-                        <div class="dr-item" value="3">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Lập trình viên</div>
-                        </div>
-                      </div>
-                    </div>
+                    <DropDown v-model="employeeX.Position"
+                      type="text"
+                      FieldName="Posiotion"
+                      data-type="Enum"
+                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="jobDropdown" 
+                    />   
                   </div>
                 </div>
                 <div class="noti-item-item">
                   <label for>Phòng ban</label>
                   <br />
                   <div class="pn-department-form">
-                    <div class="container content-control">
-                      <div class="input-field">
-                        <input
-                          v-model="employeeX.Department"
-                          type="text"
-                          
-                          placeholder="Phòng ban"
-                          FieldName="Department"
-                          data-type="Enum"
-                        />
-                        <div class="h-line-form"></div>
-                        <div class="arrow-form" data-arrow="true">
-                          <i class="fas fa-angle-down" data-arrow="true"></i>
-                        </div>
-                        <div class="btn-clear">
-                          <i class="far fa-times-circle"></i>
-                        </div>
-                      </div>
-                      <div class="drop-down">
-                        <div class="dr-item" value="1">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Phòng kinh doan</div>
-                        </div>
-                        <div class="dr-item" value="2">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Phòng nhân sự</div>
-                        </div>
-                        <div class="dr-item" value="3">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text">Phòng tài chính</div>
-                        </div>
-                      </div>
-                    </div>
+                    <DropDown v-model="employeeX.Department"
+                      type="text"
+                      FieldName="Department"
+                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="departmentDropdown" 
+                    />
                   </div>
                 </div>
               </div>
@@ -272,40 +173,11 @@
                   <label for>Tình trạng công việc</label>
                   <br />
                   <div class="pn-workstatus">
-                    <div class="container content-control">
-                      <div class="input-field">
-                        <input
-                          v-model="employeeX.WorkStatus"
-                          type="text"
-                          
-                          placeholder="Tình trạng làm việc"
-                          FieldName="WorkStatus"
-                          data-type="Enum"
-                          EnumName="WorkStatus"
-                        />
-                        <div class="h-line-form"></div>
-                        <div class="arrow-form" data-arrow="true">
-                          <i class="fas fa-angle-down" data-arrow="true"></i>
-                        </div>
-                        <div class="btn-clear">
-                          <i class="far fa-times-circle"></i>
-                        </div>
-                      </div>
-                      <div class="drop-down">
-                        <div class="dr-item">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text" value="1">Đang công tác</div>
-                        </div>
-                        <div class="dr-item">
-                          <div class="icon">
-                            <i class="fas fa-check"></i>
-                          </div>
-                          <div class="text" value="2">Đã nghỉ việc</div>
-                        </div>
-                      </div>
-                    </div>
+                    <DropDown v-model="employeeX.WorkStatus"
+                      type="text"
+                      FieldName="WorkStatus"
+                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="workStatusDropdown" 
+                    />
                   </div>
                 </div>
               </div>
@@ -336,11 +208,36 @@
 
 <script>
 import CommonFn from "../js/Common/common.js"
+import DropDown from "./DropDown.vue"
 
 export default {
+    components: {
+      DropDown,
+    },
+
     data() {
       return {
-        employeeX: {}
+        employeeX: {},
+        genderDropdown: {
+          defaultValue: "",
+          items: ["Nữ", "Nam", "Khác"],
+          width: 2.8
+        },
+        jobDropdown: {
+          defaultValue: "",
+          items: ["Giám đốc", "Kế toán", "Khác"],
+          width: 2.8
+        },
+        departmentDropdown: {
+          defaultValue: "",
+          items: ["Phòng 1", "Phòng 2", "Phòng 2"],
+          width: 2.8
+        },
+        workStatusDropdown: {
+          defaultValue: "",
+          items: ["Đang công tác", "Đã nghỉ việc", "Đang tạm nghỉ"],
+          width: 2.8
+        }
       }
     },
     props:
@@ -381,7 +278,6 @@ export default {
          * MTDAI 16.06.2021
          */
         focusInputfirst() {
-          debugger // eslint-disable-line
           let me = document.querySelector("[FieldName='EmployeeCode']");
           me.focus();
         },
@@ -399,7 +295,7 @@ export default {
         //       this.save();
         //     }
         // },
-        
+
         /**
          * Hàm cất dữ liệu lên serve
          */
@@ -443,7 +339,7 @@ export default {
 
 div.formDetail input,
 div.formDetail select {
-  height: 30px;
+  height: 38px;
   margin-top: 6px;
   width: 100%;
 }
@@ -555,7 +451,7 @@ div.formDetail select {
   margin-bottom: 40px;
 }
 .noti-item .noti-item-item {
-  width: 45%;
+  width: 48%;
   height: 40px;
   border-radius: 4px;
 }
@@ -589,7 +485,11 @@ div.formDetail select {
 
 .pn-gender {
   width: 100%;
+  display: flex;
 }
+  .input-field {
+    display: flex;
+  }
 
 .h-line-form {
   border-left: 1px #bbbbbb solid;
@@ -601,7 +501,7 @@ div.formDetail select {
   height: 33px;
 }
 
-.arrow-form {
+.pn-gender.arrow-form {
   position: absolute;
   top: 6px;
   right: -13px;

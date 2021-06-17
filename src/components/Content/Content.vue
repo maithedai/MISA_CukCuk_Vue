@@ -28,7 +28,7 @@
               id="input-name"
               placeholder="Tìm kiếm theo mã, Tên hoặc Số điện thoại"
             />
-            <div class="pn-department">
+            <!-- <div class="pn-department">
               <div class="container content-control">
                 <div class="input-field">
                   <input
@@ -59,8 +59,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="pn-location">
+            </div> -->
+            <DropDown style="width: 200px; margin-right: 16px;" :customData="departmentDropdown"/>
+            <!-- <div class="pn-location">
               <div class="container content-control">
                 <div class="input-field">
                   <input
@@ -91,7 +92,8 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
+            <DropDown style="width: 200px;" :customData="locationDropdown"/>
           </div>
           <div class="bo-button">
               <div class="bo-refresh"></div>
@@ -133,13 +135,15 @@
 import FormDetail from './FormDetail.vue'
 import TableContent from './TableContent.vue'
 import ConfirmDelete from './ConfirmDelete.vue'
+import DropDown from './DropDown.vue'
 
 export default {
   name: "Content",
   components: {
     FormDetail,
     TableContent,
-		ConfirmDelete
+		ConfirmDelete,
+    DropDown
   },
   data() {
     return {
@@ -147,7 +151,17 @@ export default {
       isShowDropdown: false,
       employeeId: null,
 			isShowConfirm: false,
-      employee: {}
+      employee: {},
+      departmentDropdown: {
+        defaultValue: "Tất cả phòng ban",
+        items: ["Phòng nhân sự", "Phòng kế toán", "Phòng kinh doanh"],
+        width: 2.8
+      },
+      locationDropdown: {
+        defaultValue: "Tất cả vị trí",
+        items: ["Vị trí 1", "Vị trí 2", "Vị trí 3"],
+        width: 2.8
+      },
     }
   },
 
@@ -445,7 +459,7 @@ input:focus {
 }
 
 #input-name {
-    width: 250px;
+    width: 280px;
     height: 38px;
     border-radius: 4px;
     border: 1px solid #ccc;
