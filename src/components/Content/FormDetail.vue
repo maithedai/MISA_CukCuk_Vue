@@ -211,8 +211,8 @@
 
 <script>
 import CommonFn from "../js/Common/common.js"
-import DropDown from "./DropDown.vue";
-import Base from "./Base.vue";
+import DropDown from "./DropDown.vue"
+import Base from "./Base.vue"
 
 export default {
     components: {

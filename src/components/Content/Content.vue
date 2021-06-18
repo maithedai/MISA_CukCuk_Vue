@@ -27,6 +27,8 @@
             <input
               id="input-name"
               placeholder="Tìm kiếm theo mã, Tên hoặc Số điện thoại"
+              @keyup ="searchEmployee"
+              ref="tableContent"
             />
             <!-- <div class="pn-department">
               <div class="container content-control">
@@ -254,6 +256,14 @@ export default {
 		closeFormConfirm() {
 			this.isShowConfirm = false;
 		},
+
+    /**
+     * Hàm search nhân viên theo tên
+     */
+    searchEmployee(){
+      var fullName = document.getElementById('input-name').value;
+      this.$refs.tableContent.searchEmployee(fullName)
+    },
 
     /**
      * Hàm thêm, sửa dữ liệu trên api

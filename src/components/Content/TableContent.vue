@@ -108,6 +108,35 @@ export default {
       });
     },
 
+    /**
+     * Hàm search Employee theo tên
+     * MTDAI 18.06.2021
+     */
+    searchEmployee(name){
+      let pageSize = '5',
+          pageNumber = '1',
+          fullName = "";
+      var me = this
+      fullName = name;
+      if(fullName == "") {
+        debugger // eslint-disable-line
+        this.getData()
+      }
+      else {
+        this.axios.get('http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=' + pageSize + '&pageNumber=' + pageNumber +'&fullName=' +fullName).then((response) => {
+          me.employeeData = response.data.Data
+          let employeeList = this.employeeData
+          console.log(employeeList)
+          for(let index in employeeList){
+            employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
+            employeeList[index].DateOfBirth = CommonFn.getDataFormat(employeeList[index].DateOfBirth, 'Date','');
+            employeeList[index].Salary = CommonFn.getDataFormat(employeeList[index].Salary, 'Money','');
+            employeeList[index].WorkStatus = CommonFn.getDataFormat(employeeList[index].WorkStatus, 'Enum', 'WorkStatus');
+          }
+        })
+      }
+    },
+
     onEditSuccess(id, employee) {
       if(id) {
         this.employeeData = this.employeeData.filter(x => x.EmployeeId != id);
