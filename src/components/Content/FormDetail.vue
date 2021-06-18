@@ -211,14 +211,14 @@
 
 <script>
 import DropDown from "./DropDown.vue"
-import Base from "./Base.vue"
+import BaseValidate from "./BaseValidate.vue"
 import moment from 'moment'
 
 export default {
     components: {
       DropDown,
     },
-    extends: Base,
+    extends: BaseValidate,
     data() {
       return {
         isBlur: false,
