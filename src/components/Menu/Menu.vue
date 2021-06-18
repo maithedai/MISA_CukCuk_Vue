@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("../../common.css");
+@import url("../../css/common.css");
 .wrapper {
     width: 100%;
     height: 100vh;

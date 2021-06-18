@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-@import url("./common.css"); 
+@import url("./css/common.css"); 
 #app {
     width: 100%;
     height: 100vh;

@@ -137,7 +137,7 @@
 import FormDetail from './FormDetail.vue'
 import TableContent from './TableContent.vue'
 import ConfirmDelete from './ConfirmDelete.vue'
-import DropDown from './DropDown.vue'
+import DropDown from '../Base/DropDown.vue'
 
 export default {
   name: "Content",

@@ -210,8 +210,8 @@
 </template>
 
 <script>
-import DropDown from "./DropDown.vue"
-import BaseValidate from "./BaseValidate.vue"
+import DropDown from "../Base/DropDown.vue"
+import BaseValidate from "../Base/BaseValidate.vue"
 import moment from 'moment'
 
 export default {
