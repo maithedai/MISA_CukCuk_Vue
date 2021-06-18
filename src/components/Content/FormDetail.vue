@@ -245,16 +245,13 @@ export default {
         }
       }
     },
+
     props:
     {
       employee: {
         type: Object,
         default: ()=> {}
       }
-    },
-
-    created() {
-      this.newEmployeeCode()
     },
 
     watch:{
@@ -265,6 +262,7 @@ export default {
           this.employeeX = {...val};
           this.employeeX.DateOfBirth = CommonFn.getDataFormat(this.employeeX.DateOfBirth, 'Date','');
           this.genderDropdown.defaultValue = val.Gender;
+          console.log(this.employeeX)
         }
       }
     },
@@ -318,9 +316,10 @@ export default {
             console.log(response.data)
             employeeCode = response.data
           });
-          let me = document.querySelector("[FieldName='EmployeeCode']");
+          // let me = document.querySelector("[FieldName='EmployeeCode']");
           console.log(employeeCode)
-          me.value = employeeCode
+          this.employeeX.EmployeeCode = employeeCode
+          // me.value = employeeCode
         },
 
         /**

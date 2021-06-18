@@ -113,7 +113,7 @@ export default {
      * MTDAI 18.06.2021
      */
     searchEmployee(name){
-      let pageSize = '5',
+      let pageSize = '10',
           pageNumber = '1',
           fullName = "";
       var me = this
