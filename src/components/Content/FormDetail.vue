@@ -214,6 +214,8 @@ import CommonFn from "../js/Common/common.js"
 import DropDown from "./DropDown.vue";
 import Base from "./Base.vue";
 
+import Swal from 'sweetalert2/src/sweetalert2.js'
+
 export default {
     components: {
       DropDown,
@@ -319,20 +321,38 @@ export default {
          */
         save(){
           
-          debugger
           // console.log(this.employee.lengt)
           //Hàm check Validate khi save
-          this.validate();
+          debugger //eslint-disable-line
+          if (this.validate()) {
+            debugger //eslint-disable-line
+            console.log(this.employee)
+            //Hàm đóng form khi save xong
+            this.$emit("closeFormDetail");
 
-          var input = document.getElementsByClassName("error-empty")
-          if(input && input.length > 0){
-
-            return;
+            //Hiển thị thông báo thành công
+            this.alerSuccess();
+            this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employeeX);
           }
-          console.log(this.employee)
-          //Hàm đóng form khi save xong
-          this.$emit("closeFormDetail");
-          this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employee);
+        },
+
+        alerSuccess() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Thêm nhân viên thành công'
+          })
         }
     },
 };

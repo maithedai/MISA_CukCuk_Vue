@@ -128,7 +128,7 @@
       </div>
     </div>
     <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
-		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDeleteEmployee="acceptDeleteEmployee"/>
+		<confirm-delete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDeleteEmployee="acceptDeleteEmployee"/>
   </div>
 </template>
 <script>
@@ -247,13 +247,16 @@ export default {
 		},
 
     /**
-     * 
+     * Hàm thêm, sửa dữ liệu trên api
      */
     saveEmployee(id, employee) {
+      debugger //eslint-disable-line
       if(id) {
         this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+id, employee).then((response) => {
           if(response) {
             this.$refs.tableContent.onEditSuccess(id, employee);
+          }else {
+            this.alerFail();
           }
         })
       }else {
@@ -263,15 +266,30 @@ export default {
           }
         })
       }
+    },
+
+    alerFail() {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'error',
+        title: 'Thêm nhân viên thất bại'
+      })
     }
   }
 };
 </script>
 <style scoped>
-
-.ConfirmDelete {
-	margin-top: 200px;
-}
 
 .menu-bar-small {
     --menu-bar-width: 52px;

@@ -135,6 +135,7 @@ table {
 
 tbody {
   overflow: auto;
+
 }
 
 .selected-row {
@@ -146,6 +147,7 @@ thead th {
     top: 0;
     background: #fff;
     color: #000;
+    text-align: left;
 }
 
 tr {

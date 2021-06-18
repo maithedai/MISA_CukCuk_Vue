@@ -7,6 +7,7 @@
 export default {
     methods: {
         validate() {
+            var isValidate = true
             var form = this.$refs.form;
             var listInput = form.getElementsByTagName("input");
             if(listInput && listInput.length > 0){
@@ -15,10 +16,12 @@ export default {
                     if(require == "empty"){
                         if(input.value == null || input.value == ""){
                             input.parentElement.classList.add("error-empty");
+                            isValidate = false
                         }
                     }
                 });
             }
+            return isValidate
         },
 
         // validateBlur() {

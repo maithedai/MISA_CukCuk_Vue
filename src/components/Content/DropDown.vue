@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown" @blur="isShow = !isShow" :style="{ width: customWidth } " tabindex="0">
+  <div class="dropdown" @blur="isShow = false" :style="{ width: customWidth } " tabindex="0">
     <div
       class="dropdown__btn"
       :class="{ 'dropdown__btn-focus': isShow }"
