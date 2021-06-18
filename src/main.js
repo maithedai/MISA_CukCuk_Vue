@@ -13,6 +13,10 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
+import vueDebounce from 'vue-debounce'
+
+Vue.use(vueDebounce)
+
 Vue.prototype.moment = moment
 Vue.prototype.$alerFunction = function(icon, title) {
     const Toast = Swal.mixin({

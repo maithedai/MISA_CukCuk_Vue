@@ -28,7 +28,7 @@
               id="input-name"
               placeholder="Tìm kiếm theo mã, Tên hoặc Số điện thoại"
               ref="tableContent"
-              v-model="inputSearch"
+              v-debounce:200ms="searchEmployee"
             />
             <!-- <div class="pn-department">
               <div class="container content-control">
@@ -151,7 +151,6 @@ export default {
   },
   data() {
     return {
-      inputSearch: "",
       isShow: false,
       isShowDropdown: false,
       employeeId: null,
@@ -168,13 +167,6 @@ export default {
         width: 2.8
       },
     }
-  },
-
-  watch: {
-    inputSearch: function(val) {
-      this.$refs.tableContent.searchEmployee(val)
-      console.log(val)
-    },
   },
 
   methods: {
@@ -194,6 +186,14 @@ export default {
       this.$swal.mixin({
         toast: true,
       }).bindClickHandler('data-swal-toast-template')
+    },
+
+    /**
+     * Hàm search Employee
+     * MTDAI 18.06.2021
+     */
+    searchEmployee(val){
+      this.$refs.tableContent.searchEmployee(val)
     },
 
     closeFormDetail(){
