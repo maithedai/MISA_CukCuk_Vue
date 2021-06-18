@@ -214,8 +214,6 @@ import CommonFn from "../js/Common/common.js"
 import DropDown from "./DropDown.vue";
 import Base from "./Base.vue";
 
-import Swal from 'sweetalert2/src/sweetalert2.js'
-
 export default {
     components: {
       DropDown,
@@ -331,29 +329,9 @@ export default {
             this.$emit("closeFormDetail");
 
             //Hiển thị thông báo thành công
-            this.alerSuccess();
             this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employeeX);
           }
         },
-
-        alerSuccess() {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-
-          Toast.fire({
-            icon: 'success',
-            title: 'Thêm nhân viên thành công'
-          })
-        }
     },
 };
 </script>

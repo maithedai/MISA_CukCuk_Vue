@@ -234,8 +234,17 @@ export default {
         if(response){
           this.$refs.tableContent.onDeleteSuccess(this.employeeId);
           this.isShowConfirm = false;
+
+          /**
+           * Hàm hiển thị thông báo xóa thành công
+           * MTDAI 18.06.2021
+           */
+          this.$alerFunction('success', 'Xóa nhân viên thành công');
         }
-			})
+			}).catch((error) => {
+        console.log(error)
+        this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+      })
 		},
 
 		/**
@@ -255,37 +264,25 @@ export default {
         this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+id, employee).then((response) => {
           if(response) {
             this.$refs.tableContent.onEditSuccess(id, employee);
-          }else {
-            this.alerFail();
+            this.$alerFunction('success', 'Sửa nhân viên thành công')
           }
+        }).catch((error) => {
+          console.log(error)
+          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
         })
+
       }else {
         this.axios.post('http://cukcuk.manhnv.net/v1/employees', employee).then((response) => {
           if(response) {
+            this.$alerFunction('error', 'Thêm nhân viên thành công')
             this.$refs.tableContent.onEditSuccess(id, employee);
           }
+        }).catch((error) => {
+          console.log(error)
+          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
         })
       }
     },
-
-    alerFail() {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'bottom-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-
-      Toast.fire({
-        icon: 'error',
-        title: 'Thêm nhân viên thất bại'
-      })
-    }
   }
 };
 </script>
