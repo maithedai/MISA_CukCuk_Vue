@@ -26,14 +26,14 @@ body {
     --menu-bar-width: 250px;
 }
 
+.menu-bar-small {
+    --menu-bar-width: 52px;
+}
+
 /* * {
     transition: 0.3s;
 }
      */
-
-.menu-bar-small {
-    --menu-bar-width: 52px;
-}
 
 .text-heading {
     font-family: GoogleSans-Bold;

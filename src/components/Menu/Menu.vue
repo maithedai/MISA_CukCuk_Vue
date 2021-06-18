@@ -63,9 +63,7 @@ export default {
 </script>
 
 <style scoped>
-.menu-bar-small {
-    --menu-bar-width: 52px;
-}
+@import url("../../common.css");
 .wrapper {
     width: 100%;
     height: 100vh;
