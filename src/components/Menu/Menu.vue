@@ -38,11 +38,9 @@ export default {
      * MTDAI 18.06.2021
      */
     zoomoutMenuBar() {
-      debugger //eslint-disable-line
       //Kiểm tra menu có đang thu nhỏ không
-      var isExist = document.getElementsByClassName("menu-bar-small")
+      var isExist = document.querySelectorAll(".menu-bar-small")
       if(isExist && isExist.length > 0) {
-        debugger //eslint-disable-line
         isExist.forEach(index => {
           //Nếu thu nhỏ thì phóng to
           console.log(index)

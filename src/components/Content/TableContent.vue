@@ -3,9 +3,16 @@
     <table>
       <thead>
         <tr>
-          <th v-for="(item, index) in header" :key="index">
-            {{ item.text }}
-          </th>
+          <th class="left-thead">Mã nhân viên</th>
+          <th class="left-thead">Họ và tên</th>
+          <th class="left-thead">Giới tính</th>
+          <th>Ngày sinh</th>
+          <th class="left-thead">Số điện thoại</th>
+          <th class="left-thead">Email</th>
+          <th class="left-thead">Chức vụ</th>
+          <th class="left-thead">Phòng ban</th>
+          <th class="right-thead">Mức lương cơ bản</th>
+          <th class="left-thead">Tình trạng công việc</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +25,7 @@
           <td>{{ items.Email }}</td>
           <td>{{ items.PositionId }}</td>
           <td>{{ items.DepartmentId }}</td>
-          <td>{{ items.Salary }}</td>
+          <td class="right-thead">{{ items.Salary }}</td>
           <td>{{ items.WorkStatus }}</td>
         </tr>
       </tbody>
@@ -38,18 +45,6 @@ export default {
       employeeData: employeeData,
       isSelected: false,
       isShowConfirm: false,
-      header: [
-          {text: "Mã nhân viên"},
-          {text: "Họ tên"},
-          {text: "Giới tính"},
-          {text: "Ngày sinh"},
-          {text: "Số điện thoại"},
-          {text: "Email"},
-          {text: "Chức vụ"},
-          {text: "Phòng ban"},
-          {text: "Mức lương cơ bản"},
-          {text: "Tình trạng công việc"},
-      ],
     }
   },
 
@@ -155,6 +150,14 @@ export default {
   width: 100%;
   top: 55px;
   bottom: 16px;
+}
+
+.left-thead {
+  text-align: left;
+}
+
+.right-thead {
+  text-align: right;
 }
 
 table {

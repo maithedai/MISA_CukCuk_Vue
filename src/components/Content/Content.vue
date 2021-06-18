@@ -211,7 +211,15 @@ export default {
      */
     showFormDetailEdit(employee) {
         this.isShow = true;
-        this.employee = employee;
+        this.axios.get('http://cukcuk.manhnv.net/v1/employees/'+ employee.EmployeeId).then((response) => {
+        if(response){
+          this.employee = response.data;
+        }
+			}).catch((error) => {
+        console.log(error)
+        this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+      })
+       
     },
 
     /**
@@ -478,7 +486,7 @@ input:focus {
 	text-align: center;
 	width: auto;
 	height: 38px;
-	background-color: red	;
+	background-color: rgb(212, 61, 61)	;
 	border-radius: 4px;
   display: flex;
   justify-content: center;

@@ -210,9 +210,9 @@
 </template>
 
 <script>
-import CommonFn from "../js/Common/common.js"
 import DropDown from "./DropDown.vue"
 import Base from "./Base.vue"
+import moment from 'moment'
 
 export default {
     components: {
@@ -257,12 +257,15 @@ export default {
     watch:{
       employee:{
         immediate: true,
-        deep: true,
         handler(val){
-          this.employeeX = {...val};
-          this.employeeX.DateOfBirth = CommonFn.getDataFormat(this.employeeX.DateOfBirth, 'Date','');
-          this.genderDropdown.defaultValue = val.Gender;
-          console.log(this.employeeX)
+          if(val.EmployeeId){
+            this.employeeX = {...val};
+            this.employeeX.DateOfBirth = moment(this.employeeX.DateOfBirth).format('YYYY-MM-DD');
+            this.genderDropdown.defaultValue = val.Gender;
+          }
+          else{
+            this.newEmployeeCode();
+          }
         }
       }
     },
@@ -273,6 +276,7 @@ export default {
      */
     mounted() {
       this.focusInputfirst();
+
     },
 
     methods: {
@@ -316,10 +320,10 @@ export default {
             console.log(response.data)
             employeeCode = response.data
           });
-          // let me = document.querySelector("[FieldName='EmployeeCode']");
+          let me = document.querySelector("[FieldName='EmployeeCode']");
           console.log(employeeCode)
           this.employeeX.EmployeeCode = employeeCode
-          // me.value = employeeCode
+          me.value = employeeCode
         },
 
         /**
