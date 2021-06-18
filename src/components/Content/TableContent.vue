@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import employeeData from "../js/EmployeeData.js"
-import CommonFn from "../js/Common/common.js"
+import employeeData from "../../js/EmployeeData.js"
+import CommonFn from "../../js/Common/common.js"
 export default {
   components: {
     
