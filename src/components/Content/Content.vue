@@ -293,7 +293,7 @@ export default {
       }else {
         this.axios.post('http://cukcuk.manhnv.net/v1/employees', employee).then((response) => {
           if(response) {
-            this.$alerFunction('error', 'Thêm nhân viên thành công')
+            this.$alerFunction('success', 'Thêm nhân viên thành công')
             this.$refs.tableContent.onEditSuccess(id, employee);
           }
         }).catch((error) => {

@@ -43,7 +43,6 @@ export default {
       if(isExist && isExist.length > 0) {
         isExist.forEach(index => {
           //Nếu thu nhỏ thì phóng to
-          console.log(index)
           index.classList.remove("menu-bar-small")
           
         });
