@@ -139,8 +139,6 @@ import TableContent from './TableContent.vue'
 import ConfirmDelete from './ConfirmDelete.vue'
 import DropDown from './DropDown.vue'
 
-import Swal from 'sweetalert2/src/sweetalert2.js'
-
 export default {
   name: "Content",
   components: {
@@ -175,17 +173,8 @@ export default {
      * MTDAI 17.06.2021
      */
     refreshData(){
-      this.getData(),
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Your work has been refresh',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.$swal.mixin({
-        toast: true,
-      }).bindClickHandler('data-swal-toast-template')
+      this.getData()
+      
     },
 
     /**

@@ -317,11 +317,9 @@ export default {
         async newEmployeeCode() {
           var employeeCode = ""
           await this.axios.get('http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode').then((response) => {
-            console.log(response.data)
             employeeCode = response.data
           });
           let me = document.querySelector("[FieldName='EmployeeCode']");
-          console.log(employeeCode)
           this.employeeX.EmployeeCode = employeeCode
           me.value = employeeCode
         },
@@ -348,7 +346,6 @@ export default {
          */
         save(){
           
-          // console.log(this.employee.lengt)
           //Hàm check Validate khi save
           debugger //eslint-disable-line
           if (this.validate()) {
