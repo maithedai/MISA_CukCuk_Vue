@@ -252,8 +252,11 @@ export default {
         default: ()=> {}
       }
     },
-     created() {
+
+    created() {
+      this.newEmployeeCode()
     },
+
     watch:{
       employee:{
         immediate: true,
@@ -289,12 +292,35 @@ export default {
         },
 
         /**
+         * Hàm gán giá trị cho EmployeeCode
+         * MTDAI 18.08.2021
+         */
+        setValueEmployeeCode() {
+
+        },
+
+        /**
          * Hàm check validate khi blur
          * MTDAI 18.06.2021
          */
         setValueisBlur() {
           debugger // eslint-disable-line
           this.isBlur = true
+        },
+
+        /**
+         * Hàm tự động tạo mới EmployeeCode 
+         * MTDAI 18.06.2021
+         */
+        async newEmployeeCode() {
+          var employeeCode = ""
+          await this.axios.get('http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode').then((response) => {
+            console.log(response.data)
+            employeeCode = response.data
+          });
+          let me = document.querySelector("[FieldName='EmployeeCode']");
+          console.log(employeeCode)
+          me.value = employeeCode
         },
 
         /**

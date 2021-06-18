@@ -15,7 +15,7 @@
       <div class="page-title">
         <div class="title-text text-heading">Danh sách nhân viên</div>
         <div id="toolBarEmployee">
-          <div class="button-add button" @click="showFormDetail()">
+          <div class="button-add button" @click="showFormDetail">
             <div class="button-icon"></div>
             <div class="button-text">Thêm nhân viên</div>
           </div>
@@ -27,8 +27,8 @@
             <input
               id="input-name"
               placeholder="Tìm kiếm theo mã, Tên hoặc Số điện thoại"
-              @keyup ="searchEmployee"
               ref="tableContent"
+              v-model="inputSearch"
             />
             <!-- <div class="pn-department">
               <div class="container content-control">
@@ -151,6 +151,7 @@ export default {
   },
   data() {
     return {
+      inputSearch: "",
       isShow: false,
       isShowDropdown: false,
       employeeId: null,
@@ -167,6 +168,13 @@ export default {
         width: 2.8
       },
     }
+  },
+
+  watch: {
+    inputSearch: function(val) {
+      this.$refs.tableContent.searchEmployee(val)
+      console.log(val)
+    },
   },
 
   methods: {
@@ -205,6 +213,7 @@ export default {
         this.isShow = true;
         this.employee = employee;
     },
+
     /**
      * Hàm mở form detail khi tạo
      * MTDAI 15.06.2021
@@ -213,7 +222,7 @@ export default {
 			this.isShow = true;
 			this.employee = {};
     },
-
+    
 		/**
 		 * hàm ở form confirm xóa khi click button xóa nhân viên
 		 * MTDAI 16.06.2021
@@ -256,14 +265,6 @@ export default {
 		closeFormConfirm() {
 			this.isShowConfirm = false;
 		},
-
-    /**
-     * Hàm search nhân viên theo tên
-     */
-    searchEmployee(){
-      var fullName = document.getElementById('input-name').value;
-      this.$refs.tableContent.searchEmployee(fullName)
-    },
 
     /**
      * Hàm thêm, sửa dữ liệu trên api
