@@ -30,7 +30,6 @@
                     type="text"
                     FieldName="EmployeeCode"
                     Require="empty"
-                    :v-tooltip="{content: 'Bạn cần điền thông tin', classes: ['custom-tooltip'], show: true}"
                   />
                 </div>
                 <div class="noti-item-item">
@@ -39,8 +38,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="true" />
-                  <span>{{messageError.FullName}}</span>
+                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="empty" />
                 </div>
               </div>
               <div class="noti-item">
@@ -55,7 +53,7 @@
                     type="date"
                     FieldName="DateOfBirth"
                     data-type="Date"
-                    Require="true"
+                    Require="empty"
                   />
                 </div>
                 <div class="noti-item-item">
@@ -79,7 +77,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" />
+                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" Require="empty"/>
                 </div>
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
@@ -101,7 +99,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.Email" type="text" FieldName="Email" />
+                  <input v-model="employeeX.Email" type="text" FieldName="Email" Require="empty"/>
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -114,6 +112,7 @@
                     type="text"
                     FieldName="PhoneNumber"
                     data-type="Number"
+                    Require="empty"
                   />
                 </div>
               </div>
@@ -163,7 +162,7 @@
                     type="number"
                     FieldName="Salary"
                     data-type="Number"
-                    Require="true"
+                    Require="empty"
                   />
                 </div>
               </div>
@@ -199,7 +198,7 @@
             <div class="button-text">Hủy</div>
           </div>
           <div class="button-save button" @click="save" Command="Save">
-            <div class="button-icon-save button">
+            <div class="button-icon-save">
               <i class="far fa-save"></i>
             </div>
             <div class="button-text">Lưu</div>
@@ -222,9 +221,7 @@ export default {
     extends: Base,
     data() {
       return {
-        messageError: {
-          FullName: ""
-        },
+        isBlur: false,
         employeeX: {},
         genderDropdown: {
           defaultValue: "",
@@ -262,7 +259,6 @@ export default {
         immediate: true,
         deep: true,
         handler(val){
-          debugger
           this.employeeX = {...val};
           this.employeeX.DateOfBirth = CommonFn.getDataFormat(this.employeeX.DateOfBirth, 'Date','');
           this.genderDropdown.defaultValue = val.Gender;
@@ -292,31 +288,49 @@ export default {
           me.focus();
         },
 
-        // Hàm check validate mã nhân viên
-        // CheckValidate() {
-
-        //     // Check validate mã nhân viên trống
-        //     let me = document.getElementById("code");
-        //     if (!this.code) {
-        //       me.classList.add("invalid");
-        //       // me.isShowTooltip = true;
-        //     }
-        //     else {
-        //       this.save();
-        //     }
-        // },
+        /**
+         * Hàm check validate khi blur
+         * MTDAI 18.06.2021
+         */
+        setValueisBlur() {
+          debugger // eslint-disable-line
+          this.isBlur = true
+        },
 
         /**
+         * Gọi hàm validate bên Base.vue
+         * MTDAI 18.06.2021
+         */
+        callValidatBlur() {
+          this.validateBlur()
+        },
+
+        /**
+         * Hàm xử lý validate khi blur
+         */
+        checkValidateBlur() {
+          this.setValueisBlur()
+          this.callValidatBlur()
+        },
+        
+        /**
          * Hàm cất dữ liệu lên serve
+         * MTDAI 14.06.2021
          */
         save(){
-          //Hàm đóng form khi save xong
+          
           debugger
+          // console.log(this.employee.lengt)
+          //Hàm check Validate khi save
           this.validate();
-          if(!this.employeeX.FullName || this.employeeX.FullName.length == 0){
-            this.messageError.FullName = "Bạn cần nhập họ và tên";
+
+          var input = document.getElementsByClassName("error-empty")
+          if(input && input.length > 0){
+
             return;
           }
+          console.log(this.employee)
+          //Hàm đóng form khi save xong
           this.$emit("closeFormDetail");
           this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employee);
         }

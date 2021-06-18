@@ -6,7 +6,7 @@
 <script>
 export default {
     methods: {
-        validate(){
+        validate() {
             var form = this.$refs.form;
             var listInput = form.getElementsByTagName("input");
             if(listInput && listInput.length > 0){
@@ -19,15 +19,30 @@ export default {
                     }
                 });
             }
-        }
+        },
+
+        // validateBlur() {
+        //     debugger // eslint-disable-line
+        //     var form = this.$refs.form;
+        //     var listInput = form.getElementsByTagName("input");
+        //     if(listInput && listInput.length > 0) {
+        //         listInput.forEach(input => {
+        //             var blur = input.getAttribute('isBlur');
+        //             if(blur == "true") {
+        //                 input.parentElement.classList.add("error-empty")
+        //             }
+        //         })
+        //     }
+        // }
     }
 }
 </script>
 <style>
-/* .error-empty::after{
+.error-empty::after{
     content: "Bạn cần nhập thông tin này";
     color: red;
-} */
+}
+
 .error-empty input{
     border: 1px solid red !important;
 }

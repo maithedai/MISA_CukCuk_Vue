@@ -32,9 +32,31 @@
 export default {
   name: "Menu",
   methods: {
+
+    /**
+     * Hàm khi click thu nhỏ và phóng to menu
+     * MTDAI 18.06.2021
+     */
     zoomoutMenuBar() {
-      let me = document.getElementsByName("menu-left")
-      console.log(me)
+      debugger //eslint-disable-line
+      //Kiểm tra menu có đang thu nhỏ không
+      var isExist = document.getElementsByClassName("menu-bar-small")
+      if(isExist && isExist.length > 0) {
+        debugger //eslint-disable-line
+        isExist.forEach(index => {
+          //Nếu thu nhỏ thì phóng to
+          console.log(index)
+          index.classList.remove("menu-bar-small")
+          
+        });
+
+      }else {
+        //Nếu không thu nhỏ thì mở rộng
+        var menu = document.getElementsByClassName("menu-left")
+        var content = document.getElementsByClassName("content")
+        menu[0].classList.add("menu-bar-small")
+        content[0].classList.add("menu-bar-small")
+      }
     }
   }
 };
@@ -50,6 +72,7 @@ export default {
     display: flex;
 }
 .menu-left {
+    transition: 0.2s;
     width: var(--menu-bar-width);
     height: 100vh;
     border-right: 1px solid #ccc;
