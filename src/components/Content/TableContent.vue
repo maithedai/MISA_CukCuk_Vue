@@ -46,6 +46,7 @@ export default {
   },
   data() {
     return  {
+      multiSelectArray: [],
       employeeData: employeeData,
       isSelected: false,
       isShowConfirm: false,
@@ -87,6 +88,8 @@ export default {
      * MTDAI 19.06.2021
      */
     multiSelect(e, index) {
+      this.multiSelectArray = this.multiSelectArray.concat(e.EmployeeId)
+      console.log(this.multiSelectArray)
       let employeeId = e.EmployeeId;
       this.isClassSelect(index),
       this.$emit('selectItem', employeeId);
