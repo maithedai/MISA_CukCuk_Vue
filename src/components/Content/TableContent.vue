@@ -78,6 +78,7 @@ export default {
      * MTDAI 16.06.2021
      */
     selectedRow(e, index) {
+      this.multiSelectArray = []
       let employeeId = e.EmployeeId;
       this.isClassSelect(index),
       this.$emit('selectItem', employeeId);
