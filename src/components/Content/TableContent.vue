@@ -16,7 +16,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(items, index) in employeeData" :key="index" @click="selectedRow(items, index)" @dblclick="selectedItem(items)" :class="{'selected-row': isSelected === index}">
+        <tr v-for="(items, index) in employeeData" :key="index" @click.ctrl="multiSelect(items, index)" 
+          @dblclick="selectedItem(items)" :class="{'selected-row': isSelected === index}">
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
@@ -78,6 +79,16 @@ export default {
       this.$emit('selectItem', employeeId);
     },
 
+    /**
+     * Hàm crtl + click để chọn nhiều bản ghi
+     * MTDAI 19.06.2021
+     */
+    multiSelect(e, index) {
+      let employeeId = e.EmployeeId;
+      this.isClassSelect(index),
+      this.$emit('selectItem', employeeId);
+    },
+ 
     isClassSelect(index) {
       this.isSelected = index
     },
