@@ -16,8 +16,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(items, index) in employeeData" :key="index" @click.ctrl="multiSelect(items, index)" 
-          @dblclick="selectedItem(items)" :class="{'selected-row': isSelected === index}">
+        <tr v-for="(items, index) in employeeData" :key="index" 
+          @click.exact="selectedRow(items, index)"
+          @click.ctrl="multiSelect(items, index)" 
+          @dblclick="selectedItem(items)" 
+          :class="{'selected-row': isSelected === index}">
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
