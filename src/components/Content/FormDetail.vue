@@ -48,24 +48,34 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input
+                  <!-- <input
                     v-model="employeeX.DateOfBirth"
                     type="date"
                     FieldName="DateOfBirth"
                     data-type="Date"
                     Require="empty"
-                  />
+                  /> -->
+                  <div class="dx-field-value">
+                    <DxDateBox
+                      type="date"
+                      v-model="employeeX.DateOfBirth"
+                      FieldName="DateOfBirth"
+                      data-type="Date"
+                      displayFormat="dd/MM/yyyy"
+                    />
+                    <span> {{cloneModel}}</span>
+                  </div>
                 </div>
                 <div class="noti-item-item">
                   <label for>Giới tính</label>
                   <br />
                   <div class="pn-gender">
                     <DropDown v-model="employeeX.Gender"
-                        type="text"
-                        FieldName="Gender"
-                        data-type="Enum"
-                        EnumName="Gender" 
-                        style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="genderDropdown" 
+                      type="text"
+                      FieldName="Gender"
+                      data-type="Enum"
+                      EnumName="Gender" 
+                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="genderDropdown" 
                     />                   
                   </div>
                 </div>
@@ -82,7 +92,14 @@
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
                   <br />
-                  <input v-model="employeeX.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" />
+                  <!-- <input v-model="employeeX.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" /> -->
+                  <DateBox 
+                    :model="employeeX.IdentityDate"
+                    FieldName="IdentityDate"
+                    data-type="Date"
+                    Require="empty"
+                    @bindaDate="bindDatea"
+                  />
                 </div>
               </div>
               <div class="noti-item">
@@ -170,7 +187,13 @@
                 <div class="noti-item-item">
                   <label for>Ngày gia nhập công ty</label>
                   <br />
-                  <input type="date" FieldName="StartWork" data-type="Date" />
+                  <!-- <input type="date" FieldName="JoinDate" data-type="Date" /> -->
+                  <DateBox 
+                    :model="employeeX.JoinDate"
+                    FieldName="JoinDate"
+                    data-type="Date"
+                    Require="empty"
+                  />
                 </div>
                 <div class="noti-item-item">
                   <label for>Tình trạng công việc</label>
@@ -213,14 +236,19 @@
 import DropDown from "../Base/DropDown.vue"
 import BaseValidate from "../Base/BaseValidate.vue"
 import moment from 'moment'
+import DateBox from '../Base/DateBox.vue'
+import DxDateBox from 'devextreme-vue/date-box';
 
 export default {
     components: {
       DropDown,
+      DateBox,
+      DxDateBox
     },
     extends: BaseValidate,
     data() {
       return {
+        model: {},
         isBlur: false,
         employeeX: {},
         genderDropdown: {
@@ -267,7 +295,7 @@ export default {
             this.newEmployeeCode();
           }
         }
-      }
+      },
     },
 
     /**
@@ -306,7 +334,6 @@ export default {
          * MTDAI 18.06.2021
          */
         setValueisBlur() {
-          debugger // eslint-disable-line
           this.isBlur = true
         },
 
@@ -318,7 +345,11 @@ export default {
           var employeeCode = ""
           await this.axios.get('http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode').then((response) => {
             employeeCode = response.data
+          }).catch((error) => {
+            console.log(error)
+            this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
           });
+
           let me = document.querySelector("[FieldName='EmployeeCode']");
           this.employeeX.EmployeeCode = employeeCode
           me.value = employeeCode
@@ -347,10 +378,7 @@ export default {
         save(){
           
           //Hàm check Validate khi save
-          debugger //eslint-disable-line
           if (this.validate()) {
-            debugger //eslint-disable-line
-            console.log(this.employee)
             //Hàm đóng form khi save xong
             this.$emit("closeFormDetail");
 
@@ -358,6 +386,19 @@ export default {
             this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employeeX);
           }
         },
+
+        /**
+         * 
+         */
+        bindDate(val) {
+          this.employeeX.DateOfBirth = val
+          // this.employeeX.IdentityDate = val
+          // this.employeeX.JoinDate = val
+        },
+
+        bindDatea(val) {
+          this.employeeX.IdentityDate = val
+        }
     },
 };
 </script>
@@ -655,4 +696,30 @@ input:focus {
 .button .button-text {
   margin-right: 16px;
 }
+
+.dx-field-value.dx-widget, .dx-field-value:not(.dx-widget) > .dx-widget {
+  width: 100%;
+  height: 40px;
+  min-width: 100px;
+}
+
+.dx-field-value-static, .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button) {
+  width: 100%;
+  height: 40px;
+  margin-top: 6px;
+}
+
+.dx-field-value.dx-widget, .dx-field-value:not(.dx-widget) > .dx-widget:hover {
+  border-color: #019160;
+}
+
+.dx-field-value.dx-widget, .dx-field-value:not(.dx-widget) > .dx-widget:active {
+  border-color: #019160;
+}
+
+.dx-calendar-navigator .dx-calendar-caption-button.dx-button .dx-button-content {
+    /* padding: 2px 15px 4px; */
+    color: #019160 !important;
+}
+
 </style>

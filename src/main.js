@@ -10,6 +10,7 @@ import moment from 'moment'
 import vuetify from './plugins/vuetify'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import 'devextreme/dist/css/dx.light.css';
 
 import Swal from 'sweetalert2/src/sweetalert2.js'
 

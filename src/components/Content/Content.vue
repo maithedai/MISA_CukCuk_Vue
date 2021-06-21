@@ -110,12 +110,7 @@
           <div class="content-pages">
             <div class="first-page"></div>
             <div class="prev-page"></div>
-            <div
-              class="page-item"
-              style="background-color: #019160; color: #fff"
-            >
-              1
-            </div>
+            <div class="page-item">1</div>
             <div class="page-item">2</div>
             <div class="page-item">3</div>
             <div class="page-item">4</div>
@@ -130,7 +125,8 @@
       </div>
     </div>
     <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
-		<confirm-delete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" @acceptDeleteEmployee="acceptDeleteEmployee"/>
+		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" :employee="employee" @acceptDeleteEmployee="acceptDeleteEmployee"/>
+    <Loading v-show="isShowLoading"/>
   </div>
 </template>
 <script>
@@ -138,6 +134,7 @@ import FormDetail from './FormDetail.vue'
 import TableContent from './TableContent.vue'
 import ConfirmDelete from '../Dialog/ConfirmDelete.vue'
 import DropDown from '../Base/DropDown.vue'
+import Loading from '../Loading/Loading.vue'
 
 export default {
   name: "Content",
@@ -146,9 +143,12 @@ export default {
     TableContent,
 		ConfirmDelete,
     DropDown,
+    Loading
   },
   data() {
     return {
+      multiSelectArray: [],
+      isShowLoading: false,
       isShow: false,
       isShowDropdown: false,
       employeeId: null,
@@ -173,6 +173,7 @@ export default {
      * MTDAI 17.06.2021
      */
     refreshData(){
+      this.isShowLoading = true
       this.getData()
       
     },
@@ -199,10 +200,11 @@ export default {
      * MTDAI 15.06.2021
      */
     showFormDetailEdit(employee) {
-        this.isShow = true;
-        this.axios.get('http://cukcuk.manhnv.net/v1/employees/'+ employee.EmployeeId).then((response) => {
+      this.isShow = true; 
+      this.axios.get('http://cukcuk.manhnv.net/v1/employees/'+ employee.EmployeeId).then((response) => {
         if(response){
           this.employee = response.data;
+
         }
 			}).catch((error) => {
         console.log(error)
@@ -225,34 +227,44 @@ export default {
 		 * MTDAI 16.06.2021
 		 */
 		deleteEmployee() {
-			this.isShowConfirm = true;
+      let sel = document.querySelectorAll(".selected-row")
+      //Hàm kiểm tra xem có bản ghi nào được chọn chưa
+      if(sel.length > 0) {
+        this.isShowConfirm = true;
+      }
 		},
     /**
      * 
      */
-    selectItem(employeeId){
-      this.employeeId = employeeId;
+    selectItem(multiSelectArray){
+      this.multiSelectArray = multiSelectArray;
     },
 		/**
 		 * Hàm khi đã confirm xóa
 		 * MTDAI 16.06.2021
 		 */
-		acceptDeleteEmployee() {
-			this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ this.employeeId).then((response) => {
-        if(response){
-          this.$refs.tableContent.onDeleteSuccess(this.employeeId);
-          this.isShowConfirm = false;
+		async acceptDeleteEmployee() {
+      //Xóa những phần tử đã được chọn
+      for (let employeeId of this.multiSelectArray) {
+        console.log(employeeId);
+        await this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ employeeId).then((response) => {
+          if(response){
+            this.$refs.tableContent.onDeleteSuccess(employeeId);
+            this.isShowConfirm = false;
 
-          /**
-           * Hàm hiển thị thông báo xóa thành công
-           * MTDAI 18.06.2021
-           */
-          this.$alerFunction('success', 'Xóa nhân viên thành công');
-        }
-			}).catch((error) => {
-        console.log(error)
-        this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
-      })
+            /**
+             * Hàm hiển thị thông báo xóa thành công
+             * MTDAI 18.06.2021
+             */
+            this.$alerFunction('success', 'Xóa nhân viên thành công');
+          }
+          //Hàm bỏ select bản ghi khi đã xóa xong
+        }).catch((error) => {
+          console.log(error)
+          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+        })
+      }
+      this.$refs.tableContent.removeSelect()
 		},
 
 		/**
@@ -267,7 +279,6 @@ export default {
      * Hàm thêm, sửa dữ liệu trên api
      */
     saveEmployee(id, employee) {
-      debugger //eslint-disable-line
       if(id) {
         this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+id, employee).then((response) => {
           if(response) {
@@ -604,6 +615,11 @@ input:focus {
         line-height: 25px;
         text-align: center;
         margin-left: 8px;
+    }
+
+    .page-item:hover {
+      cursor: pointer;
+      background-color: #E9EBEE;
     }
 
 table {

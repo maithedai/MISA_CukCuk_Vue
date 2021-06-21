@@ -20,7 +20,7 @@
           @click.exact="selectedRow(items, index)"
           @click.ctrl="multiSelect(items, index)" 
           @dblclick="selectedItem(items)" 
-          :class="{'selected-row': isSelected === index}">
+          :class="{'selected-row': selected(index)}">
           <td>{{ items.EmployeeCode }}</td>
           <td>{{ items.FullName }}</td>
           <td>{{ items.Gender }}</td>
@@ -47,6 +47,7 @@ export default {
   data() {
     return  {
       multiSelectArray: [],
+      multiIndexArray: [],
       employeeData: employeeData,
       isSelected: false,
       isShowConfirm: false,
@@ -58,8 +59,13 @@ export default {
   },
   methods: {
 
+    selected(index) {
+      return this.multiIndexArray.includes(index);
+    },
+
     /**
      * Hàm mở form confirm khi xóa nhân viên
+     * MTDAI 13.06.2021
      */
     openFormConfirmDelete() {
       this.isShowConfirm = true
@@ -78,7 +84,8 @@ export default {
      * MTDAI 16.06.2021
      */
     selectedRow(e, index) {
-      this.multiSelectArray = []
+      this.multiIndexArray = [index]
+      this.multiSelectArray = [e.EmployeeId]
       let employeeId = e.EmployeeId;
       this.isClassSelect(index),
       this.$emit('selectItem', employeeId);
@@ -89,18 +96,32 @@ export default {
      * MTDAI 19.06.2021
      */
     multiSelect(e, index) {
+      this.multiIndexArray = this.multiIndexArray.concat(index);
       this.multiSelectArray = this.multiSelectArray.concat(e.EmployeeId)
-      console.log(this.multiSelectArray)
-      let employeeId = e.EmployeeId;
-      this.isClassSelect(index),
-      this.$emit('selectItem', employeeId);
+      // let employeeId = e.EmployeeId;
+      this.isClassSelect(this.multiIndexArray),
+      this.$emit('selectItem', this.multiSelectArray);
     },
  
-    isClassSelect(index) {
-      this.isSelected = index
+    isClassSelect(multiIndexArray) {
+      for (const index of multiIndexArray) {
+        this.isSelected = index
+      }    
     },
+    /**
+     * 
+     */
     onDeleteSuccess(id){
       this.employeeData = this.employeeData.filter(x => x.EmployeeId != id);
+    },
+
+    /**
+     * Hàm bỏ select các bản ghi
+     */
+    removeSelect() {
+      let a = document.querySelectorAll(".selected-row")
+      console.log(a)
+      // classList.remove("selected-row")
     },
     
     /**
@@ -115,6 +136,8 @@ export default {
         for(let index in employeeList){
           employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
           employeeList[index].DateOfBirth = CommonFn.getDataFormat(employeeList[index].DateOfBirth, 'Date','');
+          employeeList[index].IdentityDate = CommonFn.getDataFormat(employeeList[index].IdentityDate, 'Date','');
+          employeeList[index].JoinDate = CommonFn.getDataFormat(employeeList[index].JoinDate, 'Date','');
           employeeList[index].Salary = CommonFn.getDataFormat(employeeList[index].Salary, 'Money','');
           employeeList[index].WorkStatus = CommonFn.getDataFormat(employeeList[index].WorkStatus, 'Enum', 'WorkStatus');
         }
@@ -132,7 +155,6 @@ export default {
       var me = this
       fullName = name;
       if(fullName == "") {
-        debugger // eslint-disable-line
         this.getData()
       }
       else {
@@ -202,6 +224,8 @@ thead th {
 
 tr {
   height: 48px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ::-webkit-scrollbar{
