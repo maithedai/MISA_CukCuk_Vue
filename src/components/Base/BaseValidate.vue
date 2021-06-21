@@ -91,7 +91,7 @@ export default {
 <style>
 
 .error-data::after{
-    content: "Định dạng Email không hợp lệ";
+    /* content: "Định dạng Email không hợp lệ"; */
     color: red;
 }
 
@@ -100,7 +100,7 @@ export default {
 }
 
 .error-empty::after{
-    content: "Bạn cần nhập thông tin này";
+    /* content: "Bạn cần nhập thông tin này"; */
     color: red;
 }
 

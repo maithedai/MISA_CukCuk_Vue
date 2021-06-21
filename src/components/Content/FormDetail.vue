@@ -26,7 +26,11 @@
                   </label>
                   <br />
                   <input 
-                    v-tooltip="options"
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
                     v-model="employeeX.EmployeeCode"
                     type="text"
                     FieldName="EmployeeCode"
@@ -39,7 +43,13 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="empty" />
+                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="empty" 
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
+                  />
                 </div>
               </div>
               <div class="noti-item">
@@ -63,6 +73,11 @@
                       FieldName="DateOfBirth"
                       data-type="Date"
                       displayFormat="dd/MM/yyyy"
+                      v-tooltip="{
+                        content: 'Bạn không được bỏ trống thông tin này',
+                        trigger: 'manual',
+                        show: isShowTooltip,
+                      }" 
                     />
                     <span> {{cloneModel}}</span>
                   </div>
@@ -88,7 +103,13 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" Require="empty"/>
+                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" Require="empty"
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
+                  />
                 </div>
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
@@ -117,7 +138,13 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.Email" type="text" FieldName="Email" Require="empty"/>
+                  <input v-model="employeeX.Email" type="text" FieldName="Email" Require="empty"
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
+                  />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -131,6 +158,11 @@
                     FieldName="PhoneNumber"
                     data-type="Number"
                     Require="empty"
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
                   />
                 </div>
               </div>
@@ -181,6 +213,11 @@
                     FieldName="Salary"
                     data-type="Number"
                     Require="empty"
+                    v-tooltip="{
+                      content: 'Bạn không được bỏ trống thông tin này',
+                      trigger: 'manual',
+                      show: isShowTooltip,
+                    }" 
                   />
                 </div>
               </div>
@@ -249,11 +286,11 @@ export default {
     extends: BaseValidate,
     data() {
       return {
-        options: {
-          content: "Bạn không được bỏ trống thông tin này",
-          trigger: 'manual',
-          show: this.isShowTooltip,
-        },      
+        // options: {
+        //   content: 'Bạn không được bỏ trống thông tin này',
+        //   trigger: 'manual',
+        //   show: isShowTooltip,
+        // },      
         isShowTooltip: false,
         model: {},
         isBlur: false,
@@ -329,15 +366,6 @@ export default {
         },
 
         /**
-         * Hàm show tooltip khi người dùng không điền đủ thông tin vài trường required
-         * MTDAI 21.06.2021
-         */
-        showTooltip() {
-          debugger // eslint-disable-line
-          this.isShowTooltip = true
-        },
-
-        /**
          * Hàm gán giá trị cho EmployeeCode
          * MTDAI 18.08.2021
          */
@@ -375,7 +403,7 @@ export default {
          * Gọi hàm validate bên Base.vue
          * MTDAI 18.06.2021
          */
-        callValidatBlur() {
+        callValidateBlur() {
           this.validateBlur()
         },
 
@@ -384,7 +412,7 @@ export default {
          */
         checkValidateBlur() {
           this.setValueisBlur()
-          this.callValidatBlur()
+          this.callValidateBlur()
         },
         
         /**
@@ -400,6 +428,13 @@ export default {
 
             //Hiển thị thông báo thành công
             this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employeeX);
+          }
+          else {
+             /**
+             * Hàm show tooltip khi người dùng không điền đủ thông tin vài trường required
+             * MTDAI 21.06.2021
+             */
+            this.isShowTooltip = true
           }
         },
 
