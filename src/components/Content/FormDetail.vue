@@ -1,11 +1,11 @@
 <template>
-  <div id="formEmployeeDetail" class="formDetail">
+  <div id="formEmployeeDetail" class="formDetail" v-if="isShow">
     <div class="formWrapp"></div>
     <div class="formContent">
       <div class="co-body">
         <div
           class="formContent-close"
-          @click="closeFormDetail"
+          @click="openFormConfirmClose"
           Command="Cancel"
         ></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
@@ -253,7 +253,7 @@
         <div class="formBottom">
           <div
             class="button-cancel button"
-            @click="closeFormDetail"
+            @click="openFormConfirmClose"
             Command="Cancel"
           >
             <div class="button-text">Hủy</div>
@@ -267,6 +267,7 @@
         </div>
       </div>
     </div>
+    <ConfirmCloseForm v-if="isShowCofirmClose" @closeFormConFirmClose="closeFormConFirmClose"/>
   </div>
 </template>
 
@@ -276,12 +277,14 @@ import BaseValidate from "../Base/BaseValidate.vue"
 import moment from 'moment'
 import DateBox from '../Base/DateBox.vue'
 import DxDateBox from 'devextreme-vue/date-box';
+import ConfirmCloseForm from '../Dialog/ConfirmCloseForm.vue'
 
 export default {
     components: {
       DropDown,
       DateBox,
-      DxDateBox
+      DxDateBox,
+      ConfirmCloseForm
     },
     extends: BaseValidate,
     data() {
@@ -290,7 +293,9 @@ export default {
         //   content: 'Bạn không được bỏ trống thông tin này',
         //   trigger: 'manual',
         //   show: isShowTooltip,
-        // },      
+        // },
+        isShow: false,
+        isShowCofirmClose: false,      
         isShowTooltip: false,
         model: {},
         isBlur: false,
@@ -352,8 +357,35 @@ export default {
     },
 
     methods: {
+
+        openFormDetai() {
+          this.isShow = true
+        },
+
+        /**
+         * Hàm khi click button hủy form detai mở popup confirm hủy
+         * MTDAI 21.06.2021
+         */
+        openFormConfirmClose() {
+          this.isShowCofirmClose = true
+        },
+
+        /**
+         * Hàm khi accept đóng form confirm
+         * MTDAI 21.06.2021 
+         */
         closeFormDetail() {
-            this.$emit("closeFormDetail");
+          this.isShow = false
+          this.isShowCofirmClose = false
+        },
+
+        /**
+         * Hàm đóng form confirm tắt formdetail
+         * MTDAI 21.06.2021 
+         */
+        closeFormConFirmClose() {
+          debugger // eslint-disable-line
+          this.isShowCofirmClose = false
         },
 
         /**

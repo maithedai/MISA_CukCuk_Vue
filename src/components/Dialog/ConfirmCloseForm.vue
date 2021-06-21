@@ -1,21 +1,21 @@
 <template>
-    <div class="confirm-delete">
+    <div class="confirm-close">
         <div class="form-confirm">
             <div class="form-header" @click="closeFormConfirm"></div>
             <div class="form-content">
                 <div class="content-content">
-                    <div class="content-header text-title-2">Xóa bản ghi</div>
+                    <div class="content-header text-title-2">Đóng Form thông tin chung</div>
                     <div class="content-body">
                         <div class="icon-warning"></div>
                         <div class="text-confirm">
-                            Bạn có chắc muốn xóa bản ghi này hay không?
+                            Bạn có chắc muốn đóng Form nhập "Thông tin chi tiết của nhân viên" không?
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-footer">
                 <div class="btn-cancel" @click="closeFormConfirm">Hủy</div>
-                <div class="btn-delete" @click="acceptDeleteEmployee">Xóa</div>
+                <div class="btn-accept" @click="closeFormDetail">Đồng ý</div>
             </div>
         </div>
     </div>
@@ -25,18 +25,18 @@
 export default {
     methods: {
         closeFormConfirm() {
-            this.$emit("closeFormConfirm")
+            this.$emit("closeFormConFirmClose")
         },
-        acceptDeleteEmployee() {
-            this.$emit("acceptDeleteEmployee")
+        closeFormDetail() {
+            this.$emit("closeFormDetail")
         }
     }
 }
 </script>
 
 <style scoped>
-.confirm-delete {
-  position: fixed;
+.confirm-close {
+  /* position: fixed; */
   top: 0;
   left: 0;
   right: 0;
@@ -107,7 +107,7 @@ export default {
     height: 40px;
     border-radius: 50%;
     background-color: rgb(235, 235, 235);
-    background-image: url("../../assets/Icon/error.png");
+    background-image: url("../../assets/Icon/warning.png");
     background-repeat: no-repeat;
     background-size: 26px;
     background-position: center;
@@ -122,10 +122,10 @@ export default {
     align-items: center;
 }
 
-.btn-delete {
+.btn-accept {
     height: 40px;
     width: 80px;
-    background-color: #f65454;
+    background-color: #019160;
     border-radius: 4px;
     color: #fff;
     text-align: center;
@@ -133,8 +133,8 @@ export default {
     margin-right: 24px;
 }
 
-.btn-delete:hover {
-    background-color: #fa7e7e;
+.btn-accept:hover {
+    background-color: #2fbe8e;
     cursor: pointer;
 }
 

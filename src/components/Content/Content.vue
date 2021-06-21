@@ -124,7 +124,7 @@
         <TableContent @showFormDetailEdit="showFormDetailEdit" @selectItem="selectItem" ref="tableContent"/>
       </div>
     </div>
-    <FormDetail ref="FormDetail" v-if="isShow" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
+    <FormDetail ref="FormDetail" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
 		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" :employee="employee" @acceptDeleteEmployee="acceptDeleteEmployee"/>
     <Loading v-show="isShowLoading"/>
   </div>
@@ -218,7 +218,7 @@ export default {
      * MTDAI 15.06.2021
      */
 		showFormDetail() {
-			this.isShow = true;
+			this.$refs.FormDetail.openFormDetai();
 			this.employee = {};
     },
     
