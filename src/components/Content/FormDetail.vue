@@ -26,7 +26,7 @@
                   </label>
                   <br />
                   <input 
-                    v-tooltip.top="options"
+                    v-tooltip="options"
                     v-model="employeeX.EmployeeCode"
                     type="text"
                     FieldName="EmployeeCode"
@@ -250,9 +250,11 @@ export default {
     data() {
       return {
         options: {
-          content: "aaaaaaaaaaaaaaaaaa",
-        },
-
+          content: "Bạn không được bỏ trống thông tin này",
+          trigger: 'manual',
+          show: this.isShowTooltip,
+        },      
+        isShowTooltip: false,
         model: {},
         isBlur: false,
         employeeX: {},
@@ -324,6 +326,15 @@ export default {
         focusInputfirst() {
           let me = document.querySelector("[FieldName='EmployeeCode']");
           me.focus();
+        },
+
+        /**
+         * Hàm show tooltip khi người dùng không điền đủ thông tin vài trường required
+         * MTDAI 21.06.2021
+         */
+        showTooltip() {
+          debugger // eslint-disable-line
+          this.isShowTooltip = true
         },
 
         /**
@@ -724,88 +735,4 @@ input:focus {
     color: #019160 !important;
 }
 
-/* css cho v-tooltip */
-.tooltip {
-  display: block !important;
-  z-index: 10000;
-}
-.tooltip .tooltip-inner {
-  background: #FF4747;
-  color: white !important;
-  border-radius: 16px;
-  padding: 5px 10px 4px;
-  height:60px;
-  font-size: 13px;
-  text-align: center;
-}
-.tooltip .tooltip-arrow {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  position: absolute;
-  margin: 5px;
-  border-color: #FF4747;
-}
-.tooltip[x-placement^="top"] {
-  margin-bottom: 5px;
-}
-.tooltip[x-placement^="top"] .tooltip-arrow {
-  border-width: 5px 5px 0 5px;
-  border-left-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom-color: transparent !important;
-  bottom: -5px;
-  left: calc(50% - 5px);
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.tooltip[x-placement^="bottom"] {
-  margin-top: 5px;
-}
-.tooltip[x-placement^="bottom"] .tooltip-arrow {
-  border-width: 0 5px 5px 5px;
-  border-left-color: transparent !important;
-  border-right-color: transparent !important;
-  border-top-color: transparent !important;
-  top: -5px;
-  left: calc(50% - 5px);
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.tooltip[x-placement^="right"] {
-  margin-left: 5px;
-}
-.tooltip[x-placement^="right"] .tooltip-arrow {
-  border-width: 5px 5px 5px 0;
-  border-left-color: transparent !important;
-  border-top-color: transparent !important;
-  border-bottom-color: transparent !important;
-  left: -5px;
-  top: calc(50% - 5px);
-  margin-left: 0;
-  margin-right: 0;
-}
-.tooltip[x-placement^="left"] {
-  margin-right: 5px;
-}
-.tooltip[x-placement^="left"] .tooltip-arrow {
-  border-width: 5px 0 5px 5px;
-  border-top-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom-color: transparent !important;
-  right: -5px;
-  top: calc(50% - 5px);
-  margin-left: 0;
-  margin-right: 0;
-}
-.tooltip[aria-hidden='true'] {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity .15s, visibility .15s;
-}
-.tooltip[aria-hidden='false'] {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity .15s;
-}
 </style>

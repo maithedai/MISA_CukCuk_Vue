@@ -172,6 +172,28 @@ export default {
       }
     },
 
+    /**
+     * Phân trang cho danh sách nhân viên
+     * MTDAI 21.06.2021 
+     */
+    paggingEmployee() {
+      debugger  // eslint-disable-line
+      let pageSize = '2',
+          pageNumber = '1';
+      var me = this
+      this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=' + pageSize + '&pageNumber=' + pageNumber).then((response) => {
+        me.employeeData = response.data.Data
+        let employeeList = this.employeeData
+        console.log(employeeList)
+        for(let index in employeeList){
+          employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
+          employeeList[index].DateOfBirth = CommonFn.getDataFormat(employeeList[index].DateOfBirth, 'Date','');
+          employeeList[index].Salary = CommonFn.getDataFormat(employeeList[index].Salary, 'Money','');
+          employeeList[index].WorkStatus = CommonFn.getDataFormat(employeeList[index].WorkStatus, 'Enum', 'WorkStatus');
+        }
+      })
+    },
+
     onEditSuccess(id, employee) {
       if(id) {
         this.employeeData = this.employeeData.filter(x => x.EmployeeId != id);
