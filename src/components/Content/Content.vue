@@ -101,7 +101,7 @@
               <div class="bo-refresh" @click="refreshData"></div>
               <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
                   <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
-                  <div class="button button-delete-text">Xóa</div>    
+                  <div class="button-delete-text">Xóa</div>    
               </div>
           </div>
         </div>
