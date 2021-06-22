@@ -260,7 +260,7 @@ tr {
 }
 
 ::-webkit-scrollbar{
-    width: 5px;
+    width: px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -614,7 +614,6 @@ input:focus {
     top: 55px;
     bottom: 45px;
     overflow: auto;
-    border-bottom: 2px solid #ccc;
 }
 
 .bo-content-footer {
@@ -712,6 +711,7 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 ::-webkit-scrollbar{
     width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {

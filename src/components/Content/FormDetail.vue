@@ -5,7 +5,7 @@
       <div class="co-body">
         <div
           class="formContent-close"
-          @click="openFormConfirmClose"
+          @click="closeFormDetail"
           Command="Cancel"
         ></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>
@@ -284,7 +284,7 @@
         </div>
       </div>
     </div>
-    <ConfirmCloseForm v-if="isShowCofirmClose" @closeFormConFirmClose="closeFormConFirmClose"/>
+    <ConfirmCloseForm v-if="isShowCofirmClose" @closeFormDetail="closeFormDetail" @closeFormConFirmClose="closeFormConFirmClose"/>
   </div>
 </template>
 
@@ -392,8 +392,8 @@ export default {
          * MTDAI 21.06.2021 
          */
         closeFormDetail() {
-          this.$emit('closeFormDetail')
           this.isShowCofirmClose = false
+          this.$emit('closeFormDetail')
         },
 
         /**
@@ -502,7 +502,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .invalid {
   border: 1px solid red;
 }
