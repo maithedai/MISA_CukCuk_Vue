@@ -55,7 +55,7 @@ export default {
   },
 
   created() {
-      this.paggingEmployee(1);  
+    this.paggingEmployee(1);  
   },
   methods: {
 

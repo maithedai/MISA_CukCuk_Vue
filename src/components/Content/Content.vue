@@ -108,16 +108,16 @@
         <div class="bo-content-footer">
           <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
           <div class="content-pages">
-            <div class="first-page button-pagging"></div>
-            <div class="prev-page button-pagging"></div>
+            <div class="first-page button-pagging" @click="firstPage"></div>
+            <div class="prev-page button-pagging" @click="prevPage"></div>
             <!-- <div class="page-item" @click="page1" :class="{'page-active': isActive}">1</div>
             <div class="page-item" @click="page2" :class="{'page-active': isActive}">2</div>
             <div class="page-item">3</div> -->
             <div class="page-item" v-for="index in items" :key=index @click="paggingEmployee(index)" 
-              :class="{'page-active': (index === selectedId)}">{{ index }}
+              :class="{'page-active': (index === selectedIndex)}">{{ index }}
             </div>
-            <div class="next-page button-pagging"></div>
-            <div class="last-page button-pagging"></div>
+            <div class="next-page button-pagging" @click="nextPage"></div>
+            <div class="last-page button-pagging" @click="lastPage"></div>
           </div>
           <div class="footer-text-right">10 nhân viên/trang</div>
         </div>
@@ -150,7 +150,7 @@ export default {
   },
   data() {
     return {
-      selectedId: 1,
+      selectedIndex: 1,
       items: [1, 2, 3, 4],
       isActive: false,
       multiSelectArray: [],
@@ -189,9 +189,44 @@ export default {
      * MTDAI 22.06.2021
      */
     paggingEmployee(index) {
-      this.$refs.tableContent.paggingEmployee(index)
-      this.selectedId = index
-      // this.isActive = true
+      this.selectedIndex = index
+      this.$refs.tableContent.paggingEmployee(this.selectedIndex)
+    },
+
+    /**
+     * Hàm khi click button next page
+     * MTDAI 22.06.2021
+     */ 
+    nextPage() {
+      this.selectedIndex += 1
+      this.paggingEmployee(this.selectedIndex)
+    },
+
+    /**
+     * Hàm khi click button prev page
+     * MTDAI 22.06.2021
+     */
+    prevPage() {
+      this.selectedIndex -= 1
+      this.paggingEmployee(this.selectedIndex)
+    },
+
+    /**
+     * Hàm khi click quay về trang đầu tiên
+     * MTDAI 22.06.2021
+     */
+    firstPage() {
+      this.selectedIndex = 1
+      this.paggingEmployee(this.selectedIndex)
+    },
+
+    /**
+     * Hàm khi click quay về trang đầu tiên
+     * MTDAI 22.06.2021
+     */
+    lastPage() {
+      this.selectedIndex = 4
+      this.paggingEmployee(this.selectedIndex)
     },
 
     /**
