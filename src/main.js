@@ -12,13 +12,16 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'devextreme/dist/css/dx.light.css';
 import VTooltip from 'v-tooltip'
-
+import './globalComponents';
+import Toast from "./components/Base/Toast/index";
+import './css/var-icon.scss';
 import Swal from 'sweetalert2/src/sweetalert2.js'
 
 import vueDebounce from 'vue-debounce'
 
 Vue.use(vueDebounce)
 Vue.use(VTooltip)
+Vue.use(Toast);
 
 Vue.prototype.moment = moment
 Vue.prototype.$alerFunction = function(icon, title) {

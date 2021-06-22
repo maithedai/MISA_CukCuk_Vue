@@ -1,5 +1,5 @@
 <template>
-  <div id="formEmployeeDetail" class="formDetail" v-show="isShow">
+  <div id="formEmployeeDetail" class="formDetail">
     <div class="formWrapp"></div>
     <div class="formContent">
       <div class="co-body">
@@ -30,6 +30,7 @@
                       content: 'Bạn không được bỏ trống thông tin này',
                       trigger: 'manual',
                       show: isShowTooltip,
+                      autoHide: true
                     }" 
                     v-model="employeeX.EmployeeCode"
                     type="text"
@@ -311,7 +312,6 @@ export default {
         //   trigger: 'manual',
         //   show: isShowTooltip,
         // },
-        isShow: false,
         isShowCofirmClose: false,      
         isShowTooltip: false,
         model: {},
@@ -374,11 +374,6 @@ export default {
     },
 
     methods: {
-
-        openFormDetail() {
-          this.isShow = true
-        },
-
         /**
          * Hàm khi click button hủy form detai mở popup confirm hủy
          * MTDAI 21.06.2021

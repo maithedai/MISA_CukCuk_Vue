@@ -129,6 +129,7 @@
     <FormDetail v-show="isShow" ref="FormDetail" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
 		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" :employee="employee" @acceptDeleteEmployee="acceptDeleteEmployee"/>
     <Loading v-show="isShowLoading"/>
+    <Toast v-show="isShowToast"/>
   </div>
 </template>
 <script>
@@ -137,6 +138,7 @@ import TableContent from './TableContent.vue'
 import ConfirmDelete from '../Dialog/ConfirmDelete.vue'
 import DropDown from '../Base/DropDown.vue'
 import Loading from '../Loading/Loading.vue'
+import Toast from '../Dialog/ToastMessage.vue'
 // import EventBus from '../../EvenBus.js'
 
 export default {
@@ -146,10 +148,12 @@ export default {
     TableContent,
 		ConfirmDelete,
     DropDown,
-    Loading
+    Loading,
+    Toast
   },
   data() {
     return {
+      isShowToast: true,
       selectedIndex: 1,
       items: [1, 2, 3, 4],
       isActive: false,
@@ -275,8 +279,9 @@ export default {
      * MTDAI 15.06.2021
      */
 		showFormDetail() {
-			this.$refs.FormDetail.openFormDetail();
-			this.employee = {};
+      this.$toast.show("success","tesst thôi");
+      this.employee = {};
+			this.isShow = true;
     },
     
 		/**
