@@ -1,5 +1,5 @@
 <template>
-  <div id="formEmployeeDetail" class="formDetail" v-if="isShow">
+  <div id="formEmployeeDetail" class="formDetail" v-show="isShow">
     <div class="formWrapp"></div>
     <div class="formContent">
       <div class="co-body">
@@ -79,7 +79,6 @@
                         show: isShowTooltip,
                       }" 
                     />
-                    <span> {{cloneModel}}</span>
                   </div>
                 </div>
                 <div class="noti-item-item">
@@ -115,13 +114,22 @@
                   <label for>Ngày cấp</label>
                   <br />
                   <!-- <input v-model="employeeX.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" /> -->
-                  <DateBox 
+                  <!-- <DateBox 
                     :model="employeeX.IdentityDate"
                     FieldName="IdentityDate"
                     data-type="Date"
                     Require="empty"
                     @bindaDate="bindDatea"
-                  />
+                  /> -->
+                  <div class="dx-field-value">
+                    <DxDateBox
+                      type="date"
+                      v-model="employeeX.IdentityDate"
+                      FieldName="IdentityDate"
+                      data-type="Date"
+                      displayFormat="dd/MM/yyyy"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="noti-item">
@@ -226,12 +234,21 @@
                   <label for>Ngày gia nhập công ty</label>
                   <br />
                   <!-- <input type="date" FieldName="JoinDate" data-type="Date" /> -->
-                  <DateBox 
+                  <!-- <DateBox 
                     :model="employeeX.JoinDate"
                     FieldName="JoinDate"
                     data-type="Date"
                     Require="empty"
-                  />
+                  /> -->
+                  <div class="dx-field-value">
+                    <DxDateBox
+                      type="date"
+                      v-model="employeeX.JoinDate"
+                      FieldName="JoinDate"
+                      data-type="Date"
+                      displayFormat="dd/MM/yyyy"
+                      />
+                  </div>
                 </div>
                 <div class="noti-item-item">
                   <label for>Tình trạng công việc</label>
@@ -275,14 +292,14 @@
 import DropDown from "../Base/DropDown.vue"
 import BaseValidate from "../Base/BaseValidate.vue"
 import moment from 'moment'
-import DateBox from '../Base/DateBox.vue'
+// import DateBox from '../Base/DateBox.vue'
 import DxDateBox from 'devextreme-vue/date-box';
 import ConfirmCloseForm from '../Dialog/ConfirmCloseForm.vue'
 
 export default {
     components: {
       DropDown,
-      DateBox,
+      // DateBox,
       DxDateBox,
       ConfirmCloseForm
     },
@@ -358,7 +375,7 @@ export default {
 
     methods: {
 
-        openFormDetai() {
+        openFormDetail() {
           this.isShow = true
         },
 
@@ -375,7 +392,7 @@ export default {
          * MTDAI 21.06.2021 
          */
         closeFormDetail() {
-          this.isShow = false
+          this.$emit('closeFormDetail')
           this.isShowCofirmClose = false
         },
 
@@ -384,7 +401,6 @@ export default {
          * MTDAI 21.06.2021 
          */
         closeFormConFirmClose() {
-          debugger // eslint-disable-line
           this.isShowCofirmClose = false
         },
 

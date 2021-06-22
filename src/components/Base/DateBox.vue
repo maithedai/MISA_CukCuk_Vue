@@ -5,7 +5,6 @@
       v-model="cloneModel"
       displayFormat="dd/MM/yyyy"
     />
-    <span> {{cloneModel}}</span>
   </div>
 </template>
 <script>

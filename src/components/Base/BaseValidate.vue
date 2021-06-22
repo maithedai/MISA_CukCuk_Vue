@@ -44,7 +44,6 @@ export default {
         },
 
         // validateBlur() {
-        //     debugger // eslint-disable-line
         //     var form = this.$refs.form;
         //     var listInput = form.getElementsByTagName("input");
         //     if(listInput && listInput.length > 0) {

@@ -22,6 +22,9 @@
 </template>
 
 <script>
+
+// import EventBus from '../../EvenBus.js'
+
 export default {
     methods: {
         closeFormConfirm() {

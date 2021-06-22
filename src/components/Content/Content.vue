@@ -108,14 +108,16 @@
         <div class="bo-content-footer">
           <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
           <div class="content-pages">
-            <div class="first-page"></div>
-            <div class="prev-page"></div>
-            <div class="page-item">1</div>
-            <div class="page-item">2</div>
-            <div class="page-item">3</div>
-            <div class="page-item">4</div>
-            <div class="next-page"></div>
-            <div class="last-page"></div>
+            <div class="first-page button-pagging"></div>
+            <div class="prev-page button-pagging"></div>
+            <!-- <div class="page-item" @click="page1" :class="{'page-active': isActive}">1</div>
+            <div class="page-item" @click="page2" :class="{'page-active': isActive}">2</div>
+            <div class="page-item">3</div> -->
+            <div class="page-item" v-for="index in items" :key=index @click="paggingEmployee(index)" 
+              :class="{'page-active': (index === selectedId)}">{{ index }}
+            </div>
+            <div class="next-page button-pagging"></div>
+            <div class="last-page button-pagging"></div>
           </div>
           <div class="footer-text-right">10 nhân viên/trang</div>
         </div>
@@ -124,7 +126,7 @@
         <TableContent @showFormDetailEdit="showFormDetailEdit" @selectItem="selectItem" ref="tableContent"/>
       </div>
     </div>
-    <FormDetail ref="FormDetail" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
+    <FormDetail v-show="isShow" ref="FormDetail" @closeFormDetail="closeFormDetail" :employee="employee" @saveEmployee="saveEmployee"/>
 		<ConfirmDelete v-show="isShowConfirm" @closeFormConfirm="closeFormConfirm" :employee="employee" @acceptDeleteEmployee="acceptDeleteEmployee"/>
     <Loading v-show="isShowLoading"/>
   </div>
@@ -135,6 +137,7 @@ import TableContent from './TableContent.vue'
 import ConfirmDelete from '../Dialog/ConfirmDelete.vue'
 import DropDown from '../Base/DropDown.vue'
 import Loading from '../Loading/Loading.vue'
+// import EventBus from '../../EvenBus.js'
 
 export default {
   name: "Content",
@@ -147,6 +150,9 @@ export default {
   },
   data() {
     return {
+      selectedId: 1,
+      items: [1, 2, 3, 4],
+      isActive: false,
       multiSelectArray: [],
       isShowLoading: false,
       isShow: false,
@@ -179,19 +185,35 @@ export default {
     },
 
     /**
+     * Hàm click vào số trang trả về dữ liệu của trang
+     * MTDAI 22.06.2021
+     */
+    paggingEmployee(index) {
+      this.$refs.tableContent.paggingEmployee(index)
+      this.selectedId = index
+      // this.isActive = true
+    },
+
+    /**
      * Hàm search Employee
      * MTDAI 18.06.2021
      */
     searchEmployee(val){
       this.$refs.tableContent.searchEmployee(val)
     },
-
+    /**
+     * Hàm close formdetail
+     * MTDAI 22.06.2021
+     */
     closeFormDetail(){
+      debugger // eslint-disable-line
       this.isShow = false;
     },
+
 		reloadDataTable(){
       this.getData();
     },
+    
 		getData(){
 			this.$refs.tableContent.getData();
 		},
@@ -218,7 +240,7 @@ export default {
      * MTDAI 15.06.2021
      */
 		showFormDetail() {
-			this.$refs.FormDetail.openFormDetai();
+			this.$refs.FormDetail.openFormDetail();
 			this.employee = {};
     },
     
@@ -374,6 +396,15 @@ export default {
     width: auto;
     /* text-align: center; */
     line-height: 50px;
+}
+
+.page-active {
+  background-color: #019160 ;
+  color: #fff;
+}
+
+.page-active:hover {
+  background-color: #2FBE8E !important;
 }
 
 .profile .profile-option {
@@ -546,17 +577,18 @@ input:focus {
     position: absolute;
     width: 100%;
     top: 55px;
-    bottom: 32px;
+    bottom: 45px;
     overflow: auto;
-    border-bottom: 4px solid #ccc;
+    border-bottom: 2px solid #ccc;
 }
 
 .bo-content-footer {
     position: absolute;
     width: 100%;
     bottom: 0px;
-    height: 20px;
+    height: 40px;
     display: flex;
+    line-height: 40px;
     justify-content: space-evenly;
 }
 
@@ -575,44 +607,53 @@ input:focus {
     display: flex;
 }
 
+.button-pagging:hover {
+  background-color: #e9ebee;
+  border-radius: 4px;
+}
+
     .content-pages .first-page {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         margin-right: 8px;
         background-image: url("../../assets/Icon/btn-firstpage.svg");
+        background-position: center;
         background-repeat: no-repeat;
     }
 
     .content-pages .last-page {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         margin-left: 8px;
         background-image: url("../../assets/Icon/btn-lastpage.svg");
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     .content-pages .prev-page {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         margin-right: 8px;
         background-image: url("../../assets/Icon/btn-prev-page.svg");
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     .content-pages .next-page {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         margin-left: 8px;
         background-image: url("../../assets/Icon/btn-next-page.svg");
         background-repeat: no-repeat;
+        background-position: center;
     }
 
     .content-pages .page-item {
-        width: 25px;
-        height: 25px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         border: 1px solid #ccc;
-        line-height: 25px;
+        line-height: 40px;
         text-align: center;
         margin-left: 8px;
     }
@@ -620,6 +661,7 @@ input:focus {
     .page-item:hover {
       cursor: pointer;
       background-color: #E9EBEE;
+      color: #000;
     }
 
 table {

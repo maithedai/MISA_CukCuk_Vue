@@ -55,7 +55,7 @@ export default {
   },
 
   created() {
-      this.getData();  
+      this.paggingEmployee(1);  
   },
   methods: {
 
@@ -173,21 +173,30 @@ export default {
     },
 
     /**
+     * Hàm khi click button next page
+     * MTDAI 22.06.2021
+     */
+    nextPage() {
+
+    },
+
+    /**
      * Phân trang cho danh sách nhân viên
      * MTDAI 21.06.2021 
      */
-    paggingEmployee() {
-      debugger  // eslint-disable-line
-      let pageSize = '2',
-          pageNumber = '1';
+    paggingEmployee(Number) {
+      let pageSize = '5',
+          pageNumber = Number;
+      
       var me = this
-      this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=' + pageSize + '&pageNumber=' + pageNumber).then((response) => {
+      this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter/?pageSize='+ pageSize + '&pageNumber=' + pageNumber + '&employeeFilter=a' ).then((response) => {
         me.employeeData = response.data.Data
-        let employeeList = this.employeeData
-        console.log(employeeList)
+        let employeeList = this.employeeData;
         for(let index in employeeList){
           employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
           employeeList[index].DateOfBirth = CommonFn.getDataFormat(employeeList[index].DateOfBirth, 'Date','');
+          employeeList[index].IdentityDate = CommonFn.getDataFormat(employeeList[index].IdentityDate, 'Date','');
+          employeeList[index].JoinDate = CommonFn.getDataFormat(employeeList[index].JoinDate, 'Date','');
           employeeList[index].Salary = CommonFn.getDataFormat(employeeList[index].Salary, 'Money','');
           employeeList[index].WorkStatus = CommonFn.getDataFormat(employeeList[index].WorkStatus, 'Enum', 'WorkStatus');
         }
