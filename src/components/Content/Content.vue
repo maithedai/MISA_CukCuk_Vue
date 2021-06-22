@@ -895,16 +895,6 @@ div.formDetail select {
     background-color: #2FBE8E;
 }
 
-.button-cancel {
-    background-color: #ccc;
-    padding: 10px 10px 10px 24px;
-    color: #000;
-}
-
-.button-cancel:hover {
-    background-color: rgb(248, 248, 248);
-}
-
 .pn-gender {
     width: 100%;
 }

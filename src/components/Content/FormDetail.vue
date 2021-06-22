@@ -691,13 +691,13 @@ div.formDetail select {
 }
 
 .button-cancel {
-  background-color: #ccc;
+  background-color: #ececec !important;
   padding: 10px 10px 10px 24px;
-  color: #000;
+  color: #000 !important;
 }
 
 .button-cancel:hover {
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(205, 205, 205) !important;
 }
 
 .pn-gender {
@@ -784,11 +784,6 @@ input:focus {
   align-items: center;
 }
 
-.button-cancel {
-  background-color: #ccc;
-  padding: 10px 10px 10px 24px;
-  color: #000;
-}
 .button .button-text {
   margin-right: 16px;
 }
