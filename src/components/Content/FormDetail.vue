@@ -631,7 +631,7 @@ div.formDetail select {
     border-radius: 10px;
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1570px) {
   .avt-detail {
     width: 150px;
     height: 150px;
