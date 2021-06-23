@@ -49,8 +49,7 @@ export default {
         },
     },
     methods: {
-        // selectedValue(e){
-        // },
+        
     }
 };
 </script>
@@ -63,6 +62,11 @@ export default {
     background-color: #E9EBEE !important;
     border-radius: 0 4px 0 0;
 }
+
+.dx-overlay-content.dx-popup-normal.dx-resizable {
+    border-radius: 0px;
+}
+
 .dxCombobox .dx-dropdowneditor-icon {
     border: none ;
     width: 100%;
@@ -120,7 +124,7 @@ span.dx-clear-button-area {
     position: relative;
     top: 0;
     margin-top: 0;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 .dxCombobox span.dx-icon.dx-icon-clear:hover {
     opacity: 0.7;
@@ -140,7 +144,6 @@ span.dx-clear-button-area {
 .dx-selectbox-popup-wrapper .dx-overlay-content.dx-popup-normal.dx-resizable {
     border: none;
     transition: 0s !important;
-    padding: 3px 0;
 }
 .dx-selectbox-popup-wrapper div#dx-0197ce52-6971-19a9-7268-0c8e9a7dad7b {
     padding: 0;
@@ -169,8 +172,8 @@ span.dx-clear-button-area {
     color: #fff !important;
 }
 .dx-selectbox-popup-wrapper .dx-state-active {
-    background-color: #019160 !important;
-    color: #fff !important;
+    /* background-color: #9daca7 !important; */
+    color: #000 !important;
     height: 40px !important;
     width: 100% !important;
 }
