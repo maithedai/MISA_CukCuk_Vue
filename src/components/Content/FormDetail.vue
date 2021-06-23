@@ -26,6 +26,7 @@
                   </label>
                   <br />
                   <input 
+                    class="form-detail-input"
                     v-tooltip="{
                       content: 'Bạn không được bỏ trống thông tin này',
                       trigger: 'manual',
@@ -44,7 +45,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input type="text" v-model="employeeX.FullName" FieldName="FullName" Require="empty" 
+                  <input class="form-detail-input" type="text" v-model="employeeX.FullName" FieldName="FullName" Require="empty" 
                     v-tooltip="{
                       content: 'Bạn không được bỏ trống thông tin này',
                       trigger: 'manual',
@@ -103,7 +104,9 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" Require="empty"
+                  <input 
+                    class="form-detail-input"
+                    v-model="employeeX.IdentityNumber" type="text" FieldName="IdentityNumber" Require="empty"
                     v-tooltip="{
                       content: 'Bạn không được bỏ trống thông tin này',
                       trigger: 'manual',
@@ -124,6 +127,7 @@
                   /> -->
                   <div class="dx-field-value">
                     <DxDateBox
+                      class="form-detail-input"
                       type="date"
                       v-model="employeeX.IdentityDate"
                       FieldName="IdentityDate"
@@ -137,7 +141,7 @@
                 <div class="noti-item-item">
                   <label for>Nơi cấp</label>
                   <br />
-                  <input v-model="employeeX.IdentityPlace" type="text" FieldName="IdentityPlace"/>
+                  <input class="form-detail-input" v-model="employeeX.IdentityPlace" type="text" FieldName="IdentityPlace"/>
                 </div>
               </div>
               <div class="noti-item">
@@ -147,7 +151,7 @@
                     <span style="color: red;">*</span>)
                   </label>
                   <br />
-                  <input v-model="employeeX.Email" type="text" FieldName="Email" Require="empty"
+                  <input class="form-detail-input" v-model="employeeX.Email" type="text" FieldName="Email" Require="empty"
                     v-tooltip="{
                       content: 'Bạn không được bỏ trống thông tin này',
                       trigger: 'manual',
@@ -162,6 +166,7 @@
                   </label>
                   <br />
                   <input
+                    class="form-detail-input"
                     v-model="employeeX.PhoneNumber"
                     type="text"
                     FieldName="PhoneNumber"
@@ -208,7 +213,7 @@
                 <div class="noti-item-item">
                   <label for>Mã số thuế cá nhân</label>
                   <br />
-                  <input v-model="employeeX.TaxCode" type="text" FieldName="TaxCode" data-type="Number" />
+                  <input class="form-detail-input" v-model="employeeX.TaxCode" type="text" FieldName="TaxCode" data-type="Number" />
                 </div>
                 <div class="noti-item-item">
                   <label for>
@@ -217,6 +222,7 @@
                   </label>
                   <br />
                   <input
+                    class="form-detail-input"
                     v-model="employeeX.Salary"
                     type="number"
                     FieldName="Salary"
@@ -497,7 +503,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .invalid {
   border: 1px solid red;
 }
@@ -523,8 +529,7 @@ export default {
   opacity: 0.5;
 }
 
-div.formDetail input,
-div.formDetail select {
+.form-detail-input {
   margin-top: 6px;
   width: 100%;
   height: 40px;
@@ -804,8 +809,24 @@ input:focus {
 }
 
 .dx-calendar-navigator .dx-calendar-caption-button.dx-button .dx-button-content {
-    /* padding: 2px 15px 4px; */
+    padding: 2px 15px 4px;
     color: #019160 !important;
 }
 
+.dx-calendar-navigator-next-month.dx-button .dx-icon, .dx-calendar-navigator-next-view.dx-button .dx-icon {
+    color: #019160;
+}
+
+.dx-calendar-navigator-previous-month.dx-button .dx-icon, .dx-calendar-navigator-previous-view.dx-button .dx-icon {
+    color: #019160;
+}
+
+.dx-texteditor.dx-state-active.dx-editor-filled, .dx-texteditor.dx-state-active.dx-editor-outlined, .dx-texteditor.dx-state-active.dx-editor-underlined, .dx-texteditor.dx-state-focused.dx-editor-filled, .dx-texteditor.dx-state-focused.dx-editor-outlined, .dx-texteditor.dx-state-focused.dx-editor-underlined {
+  border-color: #019160;
+}
+
+.dx-calendar-cell.dx-calendar-selected-date.dx-calendar-contoured-date, .dx-calendar-cell.dx-calendar-selected-date.dx-calendar-today.dx-calendar-contoured-date {
+  -webkit-box-shadow: inset 0 0 0 1px #bebebe, inset 0 0 0 1000px #019160;
+  box-shadow: inset 0 0 0 1px #bebebe, inset 0 0 0 1000px #019160;
+}
 </style>
