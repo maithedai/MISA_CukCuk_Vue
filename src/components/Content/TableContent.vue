@@ -84,11 +84,12 @@ export default {
      * MTDAI 16.06.2021
      */
     selectedRow(e, index) {
-      this.multiIndexArray = [index]
-      this.multiSelectArray = [e.EmployeeId]
-      let employeeId = e.EmployeeId;
+      this.multiSelectArray = []
+      this.multiIndexArray = []
+      this.multiIndexArray = this.multiIndexArray.concat(index);
+      this.multiSelectArray = this.multiSelectArray.concat(e.EmployeeId)
       this.isClassSelect(index),
-      this.$emit('selectItem', employeeId);
+      this.$emit('selectItem', this.multiSelectArray);
     },
 
     /**
@@ -118,11 +119,11 @@ export default {
     /**
      * Hàm bỏ select các bản ghi
      */
-    removeSelect() {
-      let a = document.querySelectorAll(".selected-row")
-      console.log(a)
-      // classList.remove("selected-row")
-    },
+    // removeSelect() {
+    //   let a = document.querySelectorAll(".selected-row")
+    //   console.log(a)
+    //   a.classList.remove("selected-row")
+    // },
     
     /**
      * hàm get data server

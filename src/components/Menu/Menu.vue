@@ -39,7 +39,7 @@ export default {
      */
     zoomoutMenuBar() {
       //Kiểm tra menu có đang thu nhỏ không
-      var isExist = document.querySelectorAll(".menu-bar-small")
+      var isExist = document(".menu-bar-small")
       if(isExist && isExist.length > 0) {
         isExist.forEach(index => {
           //Nếu thu nhỏ thì phóng to

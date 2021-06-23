@@ -64,7 +64,8 @@ $link-icon1: url("../assets/Icon/Icon.svg");
 @include setIconWithDefaultColor('icon-edit',24px,24px,-192px,-48px,$link-icon1);
 
 //Hàng 4
-@include setIcon('icon-clear-success',24px,24px,#BAFFB7,-0px,-72px,$link-icon1);
+@include setIcon('icon-clear-success',24px,24px,#049967,-0px,-72px,$link-icon1);
+@include setIcon('icon-clear-warning',24px,24px,#e0c68a,-0px,-72px,$link-icon1);
 @include setIconWithDefaultColor('icon-delete',24px,24px,-240px,-72px,$link-icon1);
 
 @include setIconWithDefaultColor('icon-list-dote',24px,24px,-48px,-72px,$link-icon1);
@@ -109,3 +110,5 @@ $link-icon2: url("../assets/Icon/Icon.svg");
 @include setIconWithDefaultColor('icon-chocolate2',24px,24px,-192px,-48px,$link-icon2);
 
 @include setIconWithDefaultColor('icon-success',24px,24px,-0px,-336px,$link-icon1);
+
+@include setIconWithDefaultColor('icon-warning',24px,24px,-24px,-336px,$link-icon1);

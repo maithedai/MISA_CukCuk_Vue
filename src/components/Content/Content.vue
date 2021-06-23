@@ -245,7 +245,6 @@ export default {
      * MTDAI 22.06.2021
      */
     closeFormDetail(){
-      debugger // eslint-disable-line
       this.isShow = false;
     },
 
@@ -269,7 +268,7 @@ export default {
         }
 			}).catch((error) => {
         console.log(error)
-        this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+        this.$toast.show("warning","Có lỗi xảy ra! Vui lòng liên hệ MISA");
       })
        
     },
@@ -279,7 +278,6 @@ export default {
      * MTDAI 15.06.2021
      */
 		showFormDetail() {
-      this.$toast.show("success","tesst thôi");
       this.employee = {};
 			this.isShow = true;
     },
@@ -295,21 +293,24 @@ export default {
         this.isShowConfirm = true;
       }
 		},
+
     /**
      * 
      */
     selectItem(multiSelectArray){
+      debugger
       this.multiSelectArray = multiSelectArray;
     },
 		/**
 		 * Hàm khi đã confirm xóa
 		 * MTDAI 16.06.2021
 		 */
-		async acceptDeleteEmployee() {
+		acceptDeleteEmployee() {
+      debugger
       //Xóa những phần tử đã được chọn
       for (let employeeId of this.multiSelectArray) {
         console.log(employeeId);
-        await this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ employeeId).then((response) => {
+        this.axios.delete('http://cukcuk.manhnv.net/v1/employees/'+ employeeId).then((response) => {
           if(response){
             this.$refs.tableContent.onDeleteSuccess(employeeId);
             this.isShowConfirm = false;
@@ -318,15 +319,15 @@ export default {
              * Hàm hiển thị thông báo xóa thành công
              * MTDAI 18.06.2021
              */
-            this.$alerFunction('success', 'Xóa nhân viên thành công');
+            this.$toast.show("success","Xóa nhân viên thành công");
           }
           //Hàm bỏ select bản ghi khi đã xóa xong
         }).catch((error) => {
           console.log(error)
-          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+          this.$toast.show("warning","Có lỗi xảy ra! Vui lòng liên hệ MISA");
         })
       }
-      this.$refs.tableContent.removeSelect()
+      // this.$refs.tableContent.removeSelect()
 		},
 
 		/**
@@ -345,22 +346,22 @@ export default {
         this.axios.put('http://cukcuk.manhnv.net/v1/employees/'+id, employee).then((response) => {
           if(response) {
             this.$refs.tableContent.onEditSuccess(id, employee);
-            this.$alerFunction('success', 'Sửa nhân viên thành công')
+            this.$toast.show("success","Sửa nhân viên thành công");
           }
         }).catch((error) => {
           console.log(error)
-          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+          this.$toast.show("warning","Có lỗi xảy ra! Vui lòng liên hệ MISA");
         })
 
       }else {
         this.axios.post('http://cukcuk.manhnv.net/v1/employees', employee).then((response) => {
           if(response) {
-            this.$alerFunction('success', 'Thêm nhân viên thành công')
+            this.$toast.show("success","Thêm nhân viên thành công");
             this.$refs.tableContent.onEditSuccess(id, employee);
           }
         }).catch((error) => {
           console.log(error)
-          this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+          this.$toast.show("warning","Có lỗi xảy ra! Vui lòng liên hệ MISA");
         })
       }
     },

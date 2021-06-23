@@ -434,7 +434,7 @@ export default {
             employeeCode = response.data
           }).catch((error) => {
             console.log(error)
-            this.$alerFunction('error', 'Có lỗi xảy ra, vui lòng liên hệ MISA');
+            this.$toast.show("warning","Có lỗi xảy ra! Vui lòng liên hệ MISA");
           });
 
           let me = document.querySelector("[FieldName='EmployeeCode']");
