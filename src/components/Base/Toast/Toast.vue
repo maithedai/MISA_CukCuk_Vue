@@ -49,7 +49,6 @@ export default {
      * MTDAI 23.06.2021
      */
     hide() {
-      debugger
       this.isVisible = false;
     }
   },

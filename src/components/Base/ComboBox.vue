@@ -73,6 +73,7 @@ export default {
     border-radius: 0 4px 0 0;
     transition: .2s;
 }
+
 .dxCombobox .dx-button-normal.dx-button-mode-contained.dx-widget.dx-dropdowneditor-button {
     padding: 0 !important;
     width: 40px;
@@ -94,8 +95,10 @@ export default {
 /* input */
 .dxCombobox input.dx-texteditor-input {
     height: 38px;
+    /* width: 200px; */
     font-family: GoogleSans-Regular;
     font-size: 13px;
+    position: relative;
 }
 /* unselect button */
 span.dx-clear-button-area {
@@ -109,7 +112,7 @@ span.dx-clear-button-area {
     background: url('../../assets/Icon/x.svg') no-repeat;
     background-size: 12px;
     background-position: center;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #ccc;
     border-radius: 50%;
     padding: 0;
     width: 16px;
@@ -117,11 +120,19 @@ span.dx-clear-button-area {
     position: relative;
     top: 0;
     margin-top: 0;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 .dxCombobox span.dx-icon.dx-icon-clear:hover {
     opacity: 0.7;
 }
+
+.dx-show-clear-button .dx-clear-button-area {
+    position: absolute;
+    width: 34px;
+    min-width: 34px;
+    right: 40px;
+}
+
 .dxCombobox .dx-icon-clear::before  {
     content: "";
 }

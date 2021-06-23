@@ -87,13 +87,19 @@
                   <label for>Giới tính</label>
                   <br />
                   <div class="pn-gender">
-                    <DropDown v-model="employeeX.Gender"
+                    <!-- <DropDown v-model="employeeX.Gender"
                       type="text"
                       FieldName="Gender"
                       data-type="Enum"
                       EnumName="Gender" 
                       style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="genderDropdown" 
-                    />                   
+                    />                    -->
+                    <ComboBox
+                      v-bind:customDataDropDown="gender_dropdown"
+                      v-bind:currentDataInput="employeeX.GenderName"
+                      FieldName="Gender"
+                      style="width: 100%; margin-top: 6px">
+                    </ComboBox>
                   </div>
                 </div>
               </div>
@@ -117,14 +123,6 @@
                 <div class="noti-item-item">
                   <label for>Ngày cấp</label>
                   <br />
-                  <!-- <input v-model="employeeX.IdentityDate" type="date" FieldName="IdentityDate" data-type="Date" /> -->
-                  <!-- <DateBox 
-                    :model="employeeX.IdentityDate"
-                    FieldName="IdentityDate"
-                    data-type="Date"
-                    Require="empty"
-                    @bindaDate="bindDatea"
-                  /> -->
                   <div class="dx-field-value">
                     <DxDateBox
                       class="form-detail-input"
@@ -189,23 +187,30 @@
                   <label for>Vị trí</label>
                   <br />
                   <div class="pn-job">
-                    <DropDown v-model="employeeX.Position"
+                    <!-- <DropDown v-model="employeeX.Position"
                       type="text"
                       FieldName="Posiotion"
                       data-type="Enum"
                       style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="jobDropdown" 
-                    />   
+                    />    -->
+                    <ComboBox
+                      v-bind:customDataDropDown="job_dropdown"
+                      v-bind:currentDataInput="employeeX.Job"
+                      FieldName="Job"
+                      style="width: 100%; margin-top: 6px">
+                    </ComboBox>
                   </div>
                 </div>
                 <div class="noti-item-item">
                   <label for>Phòng ban</label>
                   <br />
                   <div class="pn-department-form">
-                    <DropDown v-model="employeeX.Department"
-                      type="text"
+                    <ComboBox
+                      v-bind:customDataDropDown="department_dropdown"
+                      v-bind:currentDataInput="employeeX.Department"
                       FieldName="Department"
-                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="departmentDropdown" 
-                    />
+                      style="width: 100%; margin-top: 6px">
+                    </ComboBox>
                   </div>
                 </div>
               </div>
@@ -261,11 +266,12 @@
                   <label for>Tình trạng công việc</label>
                   <br />
                   <div class="pn-workstatus">
-                    <DropDown v-model="employeeX.WorkStatus"
-                      type="text"
+                    <ComboBox
+                      v-bind:customDataDropDown="workstatus_dropdown"
+                      v-bind:currentDataInput="employeeX.WorkStatus"
                       FieldName="WorkStatus"
-                      style="height: 38px; width: 100%; margin: 6px 0px 0px;" :customData="workStatusDropdown" 
-                    />
+                      style="width: 100%; margin-top: 6px">
+                    </ComboBox>
                   </div>
                 </div>
               </div>
@@ -302,13 +308,14 @@ import moment from 'moment'
 // import DateBox from '../Base/DateBox.vue'
 import DxDateBox from 'devextreme-vue/date-box';
 import ConfirmCloseForm from '../Dialog/ConfirmCloseForm.vue'
+import ComboBox from '../Base/ComboBox.vue'
 
 export default {
     components: {
       DropDown,
-      // DateBox,
       DxDateBox,
-      ConfirmCloseForm
+      ConfirmCloseForm,
+      ComboBox
     },
     extends: BaseValidate,
     data() {
@@ -323,26 +330,66 @@ export default {
         model: {},
         isBlur: false,
         employeeX: {},
-        genderDropdown: {
-          defaultValue: "",
-          items: ["Nữ", "Nam", "Khác"],
-          width: 2.8
-        },
-        jobDropdown: {
-          defaultValue: "",
-          items: ["Giám đốc", "Kế toán", "Khác"],
-          width: 2.8
-        },
-        departmentDropdown: {
-          defaultValue: "",
-          items: ["Phòng 1", "Phòng 2", "Phòng 2"],
-          width: 2.8
-        },
-        workStatusDropdown: {
-          defaultValue: "",
-          items: ["Đang công tác", "Đã nghỉ việc", "Đang tạm nghỉ"],
-          width: 2.8
-        }
+        gender_dropdown_title:'Giới tính',
+        gender_dropdown:[
+          {
+            data_text:'Nữ',
+          },
+          {
+            data_text:'Nam',
+          },
+          {
+            data_text:'Khác',
+          }
+        ],
+        job_dropdown:[
+          {
+            data_text:'Nhân viên',
+          },
+          {
+            data_text:'Trưởng phòng',
+          },
+          {
+            data_text:'Kế toán',
+          }
+        ],
+        department_dropdown:[
+          {
+            data_text:'Phòng nhân sự',
+          },
+          {
+            data_text:'Phòng hành chính',
+          },
+          {
+            data_text:'Phòng nghiến cứu',
+          }
+        ],  
+        workstatus_dropdown:[
+          {
+            data_text:'Đang công tác',
+          },
+          {
+            data_text:'Dừng công tác',
+          },
+          {
+            data_text:'Đang thử việc',
+          }
+        ],  
+        // jobDropdown: {
+        //   defaultValue: "",
+        //   items: ["Giám đốc", "Kế toán", "Khác"],
+        //   width: 2.8
+        // },
+        // departmentDropdown: {
+        //   defaultValue: "",
+        //   items: ["Phòng 1", "Phòng 2", "Phòng 2"],
+        //   width: 2.8
+        // },
+        // workStatusDropdown: {
+        //   defaultValue: "",
+        //   items: ["Đang công tác", "Đã nghỉ việc", "Đang tạm nghỉ"],
+        //   width: 2.8
+        // }
       }
     },
 
@@ -361,7 +408,7 @@ export default {
           if(val.EmployeeId){
             this.employeeX = {...val};
             this.employeeX.DateOfBirth = moment(this.employeeX.DateOfBirth).format('YYYY-MM-DD');
-            this.genderDropdown.defaultValue = val.Gender;
+            // this.genderDropdown.defaultValue = val.Gender;
           }
           else{
             this.newEmployeeCode();

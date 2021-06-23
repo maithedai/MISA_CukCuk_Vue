@@ -11,7 +11,7 @@ export default {
     props: {
         option: {
             Type: Object,
-            default: null,
+            default: null
         }
     },
     data() {

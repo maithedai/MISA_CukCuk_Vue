@@ -34,78 +34,14 @@
                 ref="tableContent"
                 v-debounce:200ms="searchEmployee"
               />
-              <!-- <div class="pn-department">
-              <div class="container content-control">
-                <div class="input-field">
-                  <input
-                    type="text"
-                    class="m-cbo"
-                    placeholder="Tất cả phòng ban"
-                  />
-                  <div class="h-line"></div>
-                  <div class="arrow" data-arrow="true">
-                    <i class="fas fa-angle-down" data-arrow="true"></i>
-                  </div>
-                  <div class="btn-clear">
-                    <i class="far fa-times-circle"></i>
-                  </div>
-                </div>
-                <div class="drop-down" v-show="isShowDropdown">
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Phòng ban 1</div>
-                  </div>
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Phòng ban 2</div>
-                  </div>
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Phòng ban 3</div>
-                  </div>
-                </div>
-              </div>
-              </div>-->
-              <DropDown style="width: 200px; margin-right: 16px;" :customData="departmentDropdown" />
               <ComboBox
-                v-bind:customDataDropDown="gender_dropdown"
-                v-bind:currentDataInput="employee.GenderName"
-                v-on:setSelectValue="setSelectedGender" 
-                FieldName="Gender">
+                v-bind:customDataDropDown="department_dropdown"
+                FieldName="Department" style="margin-right: 16px">
               </ComboBox>
-              <!-- <div class="pn-location">
-              <div class="container content-control">
-                <div class="input-field">
-                  <input
-                    type="text"
-                    class="m-cbo"
-                    placeholder="Tất cả vị trí"
-                  />
-                  <div class="h-line"></div>
-                  <div class="arrow" data-arrow="true">
-                    <i class="fas fa-angle-down" data-arrow="true"></i>
-                  </div>
-                  <div class="btn-clear">
-                    <i class="far fa-times-circle"></i>
-                  </div>
-                </div>
-                <div class="drop-down">
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Trạng thái 1</div>
-                  </div>
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Trạng thái 2</div>
-                  </div>
-                  <div class="dr-item">
-                    <div class="icon"><i class="fas fa-check"></i></div>
-                    <div class="text">Trạng thái 3</div>
-                  </div>
-                </div>
-              </div>
-              </div>-->
-              <DropDown style="width: 200px;" :customData="locationDropdown" />
+              <ComboBox
+                v-bind:customDataDropDown="location_dropdown"
+                FieldName="Location">
+              </ComboBox>
             </div>
             <div class="bo-button">
               <div class="bo-refresh" @click="refreshData"></div>
@@ -167,7 +103,7 @@
 import FormDetail from "./FormDetail.vue";
 import TableContent from "./TableContent.vue";
 import ConfirmDelete from "../Dialog/ConfirmDelete.vue";
-import DropDown from "../Base/DropDown.vue";
+// import DropDown from "../Base/DropDown.vue";
 import Loading from "../Loading/Loading.vue";
 import Toast from "../Dialog/ToastMessage.vue";
 // import EventBus from '../../EvenBus.js'
@@ -179,7 +115,7 @@ export default {
     FormDetail,
     TableContent,
     ConfirmDelete,
-    DropDown,
+    // DropDown,
     Loading,
     Toast,
     ComboBox
@@ -198,28 +134,29 @@ export default {
       employeeId: null,
       isShowConfirm: false,
       employee: {},
-      departmentDropdown: {
-        defaultValue: "Tất cả phòng ban",
-        items: ["Phòng nhân sự", "Phòng kế toán", "Phòng kinh doanh"],
-        width: 2.8,
-      },
-      gender_dropdown_title:'Giới tính',
-      gender_dropdown:[
+      department_dropdown_title:'Tất cả phòng ban',
+      department_dropdown:[
         {
-          data_text:'Nam',
+          data_text:'Phòng ban 1',
         },
         {
-          data_text:'Nữ',
+          data_text:'Phòng ban 2',
         },
         {
-          data_text:'Không xác định',
+          data_text:'Phòng ban 3',
         }
       ],
-      locationDropdown: {
-        defaultValue: "Tất cả vị trí",
-        items: ["Vị trí 1", "Vị trí 2", "Vị trí 3"],
-        width: 2.8,
-      },
+      location_dropdown: [
+        {
+          data_text:'Vị trí 1',
+        },
+        {
+          data_text:'Vị trí 2',
+        },
+        {
+          data_text:'Vị trí 3',
+        }
+      ],
     };
   },
   
@@ -250,6 +187,29 @@ export default {
     paggingEmployee(index) {
       this.selectedIndex = index;
       this.$refs.tableContent.paggingEmployee(this.selectedIndex);
+    },
+
+    setSelectedGender(selectedVal){
+      //gán selectVal vào input trên giao diện
+      let e = this.getElementByFieldName('Gender');
+      if(e){
+          e.getElementsByTagName('input')[1].value = '';
+          e.getElementsByTagName('input')[1].value = selectedVal;
+      }
+    },
+
+    getSelectedGender(selectedVal){
+      switch(selectedVal){
+        case Resource.Gender.Male:
+            this.employee.Gender = Enum.Gender.Male;
+            break;
+        case Resource.Gender.Female:
+            this.employee.Gender = Enum.Gender.Female;
+            break;
+        case Resource.Gender.Other:
+            this.employee.Gender = Enum.Gender.Other;
+            break;
+      }
     },
 
     /**
@@ -292,19 +252,21 @@ export default {
     prevPage() {
       var minIndex = Math.min.apply(Math, this.items);
 
-      if(this.selectedIndex > minIndex) { 
-        this.selectedIndex -= 1;
-        this.paggingEmployee(this.selectedIndex);
-      }else {
+      if(this.selectedIndex > 1) {
 
-        this.items.unshift(minIndex - 1)
-        this.selectedIndex -= 1
-        this.paggingEmployee(this.selectedIndex);
-        console.log('aaaa' + this.items)
+        if(this.selectedIndex > minIndex) { 
+          this.selectedIndex -= 1;
+          this.paggingEmployee(this.selectedIndex);
+        }else {
+          this.items.unshift(minIndex - 1)
+          this.selectedIndex -= 1
+          this.paggingEmployee(this.selectedIndex);
+          console.log('aaaa' + this.items)
 
-        this.items.pop();
+          this.items.pop();
 
-        console.log(this.items)
+          console.log(this.items)
+        }
       }
     },
 
@@ -314,6 +276,7 @@ export default {
      */
     firstPage() {
       this.selectedIndex = 1;
+      this.items = [1, 2, 3, 4]
       this.paggingEmployee(this.selectedIndex);
     },
 
@@ -322,7 +285,8 @@ export default {
      * MTDAI 22.06.2021
      */
     lastPage() {
-      this.selectedIndex = 4;
+      this.selectedIndex = this.totalPage;
+      this.items = [this.totalPage - 3, this.totalPage - 2, this.totalPage - 1, this.totalPage]
       this.paggingEmployee(this.selectedIndex);
     },
 
@@ -353,6 +317,7 @@ export default {
      * MTDAI 15.06.2021
      */
     showFormDetailEdit(employee) {
+      console.log(employee)
       this.isShow = true;
       this.axios
         .get("http://cukcuk.manhnv.net/v1/employees/" + employee.EmployeeId)
@@ -392,7 +357,6 @@ export default {
      *
      */
     selectItem(multiSelectArray) {
-      debugger;
       this.multiSelectArray = multiSelectArray;
     },
     /**
@@ -400,7 +364,6 @@ export default {
      * MTDAI 16.06.2021
      */
     acceptDeleteEmployee() {
-      debugger;
       //Xóa những phần tử đã được chọn
       for (let employeeId of this.multiSelectArray) {
         console.log(employeeId);
