@@ -67,6 +67,12 @@
               </div>
               </div>-->
               <DropDown style="width: 200px; margin-right: 16px;" :customData="departmentDropdown" />
+              <ComboBox
+                v-bind:customDataDropDown="gender_dropdown"
+                v-bind:currentDataInput="employee.GenderName"
+                v-on:setSelectValue="setSelectedGender" 
+                FieldName="Gender">
+              </ComboBox>
               <!-- <div class="pn-location">
               <div class="container content-control">
                 <div class="input-field">
@@ -134,6 +140,7 @@
           <TableContent
             @showFormDetailEdit="showFormDetailEdit"
             @selectItem="selectItem"
+            @getTotalPage="getTotalPage"
             ref="tableContent"
           />
         </div>
@@ -164,6 +171,7 @@ import DropDown from "../Base/DropDown.vue";
 import Loading from "../Loading/Loading.vue";
 import Toast from "../Dialog/ToastMessage.vue";
 // import EventBus from '../../EvenBus.js'
+import ComboBox from '../Base/ComboBox.vue'
 
 export default {
   name: "Content",
@@ -174,12 +182,14 @@ export default {
     DropDown,
     Loading,
     Toast,
+    ComboBox
   },
   data() {
     return {
+      totalPage: 1,
       isShowToast: true,
       selectedIndex: 1,
-      items: [1, 2, 3, 4],
+      items: [],
       isActive: false,
       multiSelectArray: [],
       isShowLoading: false,
@@ -193,12 +203,32 @@ export default {
         items: ["Phòng nhân sự", "Phòng kế toán", "Phòng kinh doanh"],
         width: 2.8,
       },
+      gender_dropdown_title:'Giới tính',
+      gender_dropdown:[
+        {
+          data_text:'Nam',
+        },
+        {
+          data_text:'Nữ',
+        },
+        {
+          data_text:'Không xác định',
+        }
+      ],
       locationDropdown: {
         defaultValue: "Tất cả vị trí",
         items: ["Vị trí 1", "Vị trí 2", "Vị trí 3"],
         width: 2.8,
       },
     };
+  },
+  
+  watch: {
+    totalPage: function(val) {
+      if(val > 4) {
+        this.items = [1, 2, 3, 4]
+      }
+    }
   },
 
   methods: {
@@ -223,12 +253,36 @@ export default {
     },
 
     /**
+     * Hàm get giá trị tổng số trang
+     * MTDAI 23.06.2021
+     */
+    getTotalPage(totalPage) {
+      this.totalPage = totalPage
+      // var maxIndex = Math.max.apply(Math, this.items); 
+      // this.selectedIndex >= maxIndex
+      // console.log(this.items)
+      // if(this.totalPage > 4) {
+      //   this.items = [1, 2, 3, 4]
+    },
+
+    /**
      * Hàm khi click button next page
      * MTDAI 22.06.2021
      */
     nextPage() {
-      this.selectedIndex += 1;
-      this.paggingEmployee(this.selectedIndex);
+      // debugger
+      var maxIndex = Math.max.apply(Math, this.items);
+      if(maxIndex < this.totalPage) {
+        if(this.selectedIndex < maxIndex) {   
+          this.selectedIndex += 1;
+          this.paggingEmployee(this.selectedIndex);
+        } else {
+          this.items = this.items.concat(maxIndex + 1)
+          this.selectedIndex += 1
+          this.paggingEmployee(this.selectedIndex);
+          this.items.shift();
+        }
+      }
     },
 
     /**
@@ -236,10 +290,22 @@ export default {
      * MTDAI 22.06.2021
      */
     prevPage() {
-      if(this.selectedIndex > 1) {
+      var minIndex = Math.min.apply(Math, this.items);
+
+      if(this.selectedIndex > minIndex) { 
         this.selectedIndex -= 1;
         this.paggingEmployee(this.selectedIndex);
-      }    
+      }else {
+
+        this.items.unshift(minIndex - 1)
+        this.selectedIndex -= 1
+        this.paggingEmployee(this.selectedIndex);
+        console.log('aaaa' + this.items)
+
+        this.items.pop();
+
+        console.log(this.items)
+      }
     },
 
     /**
@@ -426,9 +492,12 @@ export default {
 }
 .content {
   width: calc(100% - var(--menu-bar-width));
+  /* width: 100%; */
   height: 100vh;
   position: relative;
-  /* margin-left: var(--menu-bar-width); */
+  /* z-index: 2000000000; */
+  /* background-color: #ffff; */
+  /* left: 0; */
 }
 .content-header {
   width: 100%;

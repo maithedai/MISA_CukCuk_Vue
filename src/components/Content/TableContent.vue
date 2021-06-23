@@ -189,12 +189,13 @@ export default {
      * MTDAI 21.06.2021 
      */
     paggingEmployee(Number) {
-      let pageSize = '5',
+      let pageSize = '2',
           pageNumber = Number-1;
-      
+
       var me = this
       this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter/?pageSize='+ pageSize + '&pageNumber=' + pageNumber + '&employeeFilter=a' ).then((response) => {
         me.employeeData = response.data.Data
+        this.$emit("getTotalPage", response.data.TotalPage)
         let employeeList = this.employeeData;
         for(let index in employeeList){
           employeeList[index].Gender = CommonFn.getDataFormat(employeeList[index].Gender, 'Enum', 'Gender');
