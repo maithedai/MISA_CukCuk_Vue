@@ -512,7 +512,7 @@ export default {
   bottom: 0;
   /* display: none; */
 }
-.formDetail .wrapper,
+
 .formDetail .formWrapp {
   position: fixed;
   top: 0;

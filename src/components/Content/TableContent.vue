@@ -84,11 +84,12 @@ export default {
      * MTDAI 16.06.2021
      */
     selectedRow(e, index) {
+      debugger
       this.multiSelectArray = []
       this.multiIndexArray = []
       this.multiIndexArray = this.multiIndexArray.concat(index);
       this.multiSelectArray = this.multiSelectArray.concat(e.EmployeeId)
-      this.isClassSelect(index),
+      this.isClassSelect(this.multiIndexArray),
       this.$emit('selectItem', this.multiSelectArray);
     },
 
@@ -97,10 +98,12 @@ export default {
      * MTDAI 19.06.2021
      */
     multiSelect(e, index) {
+      debugger
       this.multiIndexArray = this.multiIndexArray.concat(index);
       this.multiSelectArray = this.multiSelectArray.concat(e.EmployeeId)
       // let employeeId = e.EmployeeId;
       this.isClassSelect(this.multiIndexArray),
+      console.log(this.multiSelectArray)
       this.$emit('selectItem', this.multiSelectArray);
     },
  

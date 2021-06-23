@@ -43,7 +43,7 @@ export default {
 </script>
 <style>
 #product-list {
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 #product-list ul {
