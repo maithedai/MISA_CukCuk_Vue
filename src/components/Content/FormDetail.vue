@@ -5,7 +5,7 @@
       <div class="co-body">
         <div
           class="formContent-close"
-          @click="closeFormDetail"
+          @click="openFormConfirmClose"
           Command="Cancel"
         ></div>
         <div class="formContent-text">THÔNG TIN NHÂN VIÊN</div>

@@ -139,7 +139,7 @@
         </div>
       </div>
       <FormDetail
-        v-show="isShow"
+        v-if="isShow"
         ref="FormDetail"
         @closeFormDetail="closeFormDetail"
         :employee="employee"
@@ -209,7 +209,8 @@ export default {
     refreshData() {
       this.isShowLoading = true;
       setTimeout(() => this.isShowLoading = false, 1000);
-      this.getData();
+      this.paggingEmployee(1);
+      // this.getData();
     },
 
     /**
@@ -235,8 +236,10 @@ export default {
      * MTDAI 22.06.2021
      */
     prevPage() {
-      this.selectedIndex -= 1;
-      this.paggingEmployee(this.selectedIndex);
+      if(this.selectedIndex > 1) {
+        this.selectedIndex -= 1;
+        this.paggingEmployee(this.selectedIndex);
+      }    
     },
 
     /**

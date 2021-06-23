@@ -190,7 +190,7 @@ export default {
      */
     paggingEmployee(Number) {
       let pageSize = '5',
-          pageNumber = Number;
+          pageNumber = Number-1;
       
       var me = this
       this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter/?pageSize='+ pageSize + '&pageNumber=' + pageNumber + '&employeeFilter=a' ).then((response) => {

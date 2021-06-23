@@ -10,8 +10,8 @@
     <template>
         <div class="toast">
           <div :class="['icon-' + type ,'icon-before']"></div>
-          <div>{{message}}</div>
-          <div :class="['icon-clear-' + type ,'icon-after']"></div>
+          <div class="text-lable">{{message}}</div>
+          <div @click="hide" :class="['icon-clear-' + type ,'icon-after']"></div>
         </div>
     </template>
     </DxToast>
@@ -33,15 +33,30 @@ export default {
     };
   },
   methods: {
+
+    /**
+     * Hàm hiện toast message
+     * MTDAI 23.06.2021
+     */
     show(type, message) {
       this.type = type;
       this.message = message;
       this.isVisible = true;
     },
+
+    /**
+     * Hàm ẩn toast message
+     * MTDAI 23.06.2021
+     */
+    hide() {
+      debugger
+      this.isVisible = false;
+    }
   },
 };
 </script>
 <style>
+
 #product-list {
   /* padding: 10px; */
 }
@@ -75,7 +90,7 @@ div.dx-overlay-content .dx-toast-content .dx-toast-success .dx-resizable {
   margin-right: 8px !important;
   border-radius: 4px;
   color: #212121;
-  box-shadow: 0 4px 2px rgba(0,0,0,.175);
+  box-shadow: 0 3px 6px rgba(0,0,0,.16);
 }
 .dx-toast-icon{
   display: none;
@@ -96,6 +111,6 @@ div.dx-overlay-content .dx-toast-content .dx-toast-success .dx-resizable {
 }
 .icon-after{
   /* position: absolute; */
-  margin-left: 48px !important;
+  margin-left: 32px !important;
 }
 </style>
