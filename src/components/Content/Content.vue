@@ -95,7 +95,6 @@
         @acceptDeleteEmployee="acceptDeleteEmployee"
       />
       <Loading v-show="isShowLoading" />
-      <Toast v-show="isShowToast" />
     </div>
   <!-- </div> -->
 </template>
@@ -105,7 +104,6 @@ import TableContent from "./TableContent.vue";
 import ConfirmDelete from "../Dialog/ConfirmDelete.vue";
 // import DropDown from "../Base/DropDown.vue";
 import Loading from "../Loading/Loading.vue";
-import Toast from "../Dialog/ToastMessage.vue";
 // import EventBus from '../../EvenBus.js'
 import ComboBox from '../Base/ComboBox.vue'
 
@@ -117,13 +115,11 @@ export default {
     ConfirmDelete,
     // DropDown,
     Loading,
-    Toast,
     ComboBox
   },
   data() {
     return {
       totalPage: 1,
-      isShowToast: true,
       selectedIndex: 1,
       items: [],
       isActive: false,
@@ -335,7 +331,6 @@ export default {
      * MTDAI 15.06.2021
      */
     showFormDetailEdit(employee) {
-      console.log(employee)
       this.isShow = true;
       this.axios
         .get("http://cukcuk.manhnv.net/v1/employees/" + employee.EmployeeId)

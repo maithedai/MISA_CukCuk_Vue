@@ -97,6 +97,7 @@
                     <ComboBox
                       v-bind:customDataDropDown="gender_dropdown"
                       v-bind:currentDataInput="employeeX.GenderName"
+                      @setSelectValue="setSelectValue"
                       FieldName="Gender"
                       style="width: 100%; margin-top: 6px">
                     </ComboBox>
@@ -195,7 +196,6 @@
                     />    -->
                     <ComboBox
                       v-bind:customDataDropDown="job_dropdown"
-                      v-bind:currentDataInput="employeeX.Job"
                       FieldName="Job"
                       style="width: 100%; margin-top: 6px">
                     </ComboBox>
@@ -207,7 +207,6 @@
                   <div class="pn-department-form">
                     <ComboBox
                       v-bind:customDataDropDown="department_dropdown"
-                      v-bind:currentDataInput="employeeX.Department"
                       FieldName="Department"
                       style="width: 100%; margin-top: 6px">
                     </ComboBox>
@@ -268,7 +267,6 @@
                   <div class="pn-workstatus">
                     <ComboBox
                       v-bind:customDataDropDown="workstatus_dropdown"
-                      v-bind:currentDataInput="employeeX.WorkStatus"
                       FieldName="WorkStatus"
                       style="width: 100%; margin-top: 6px">
                     </ComboBox>
@@ -309,6 +307,8 @@ import moment from 'moment'
 import DxDateBox from 'devextreme-vue/date-box';
 import ConfirmCloseForm from '../Dialog/ConfirmCloseForm.vue'
 import ComboBox from '../Base/ComboBox.vue'
+import Resource from '../../js/Common/Resource.js'
+import Enumeration from '../../js/Common/Enumeration.js'
 
 export default {
     components: {
@@ -369,7 +369,7 @@ export default {
             data_text:'Đang công tác',
           },
           {
-            data_text:'Dừng công tác',
+            data_text:'Đã nghỉ việc',
           },
           {
             data_text:'Đang thử việc',
@@ -408,7 +408,10 @@ export default {
           if(val.EmployeeId){
             this.employeeX = {...val};
             this.employeeX.DateOfBirth = moment(this.employeeX.DateOfBirth).format('YYYY-MM-DD');
-            // this.genderDropdown.defaultValue = val.Gender;
+
+            //Hàm lấy giá trị tình trạng công việc bind lên form
+            // let inputWorkStatus = document.querySelectorAll('[FieldName="WorkStatus"]');
+            // inputWorkStatus[0].getElementsByTagName("input")[1].value = val.WorkStatus;
           }
           else{
             this.newEmployeeCode();
@@ -510,6 +513,33 @@ export default {
           this.setValueisBlur()
           this.callValidateBlur()
         },
+
+        /**
+         * Hàm ra fieldname
+         * MTDAI 24.06.2021
+         */
+        getElementByFieldName(fieldname){
+            return document.querySelectorAll('[FieldName="'+fieldname+'"]')[0];
+        },
+
+        /**
+         * Hàm trả data về dạng dữ liêu thô
+         * MTDAI 24.06.2021
+         */
+        getSelectedGender(selectedVal){
+          switch(selectedVal){
+            case Resource.Gender.Male:
+                this.employeeX.Gender = Enumeration.Gender.Male;
+                break;
+            case Resource.Gender.Female:
+                this.employeeX.Gender = Enumeration.Gender.Female;
+                break;
+            case Resource.Gender.Other:
+                this.employeeX.Gender = Enumeration.Gender.Other;
+                break;
+          }
+          this.employeeX.GenderName = selectedVal
+        },
         
         /**
          * Hàm cất dữ liệu lên serve
@@ -519,6 +549,10 @@ export default {
           
           //Hàm check Validate khi save
           if (this.validate()) {
+            
+            let e = this.getElementByFieldName('Gender');
+            this.getSelectedGender(e.getElementsByTagName('input')[1].value);
+
             //Hàm đóng form khi save xong
             this.$emit("closeFormDetail");
 
@@ -545,8 +579,17 @@ export default {
 
         bindDatea(val) {
           this.employeeX.IdentityDate = val
-        }
-    },
+        },
+
+        /**
+         * Hàm bind dữ liệu giới tính lên form
+         * MTDAI 24.06.2021
+         */
+        setSelectValue(gender){
+          let inputGender = document.querySelectorAll('[FieldName="Gender"]');
+          inputGender[0].getElementsByTagName("input")[1].value = gender;
+        },
+    }
 };
 </script>
 
