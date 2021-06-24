@@ -632,13 +632,17 @@ div.formDetail select {
 
 .formContent {
   position: absolute;
-  top: 32px;
-  left: 30%;
-  right: 30%;
-  bottom: 32px;
-  min-width: 600px;
   background-color: #fff;
   border-radius: 5px;
+  top: 32px;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  width: 700px;
+  /* height: 900px; */
+  min-width: 600px;
+  /* min-height: 800px; */
+  margin: auto;
 }
 .formContent .formContent-footer {
   position: absolute;

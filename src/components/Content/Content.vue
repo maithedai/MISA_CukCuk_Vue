@@ -235,7 +235,8 @@ export default {
         if(this.selectedIndex < maxIndex) { 
           this.selectedIndex += 1;
         } else {
-          this.items.concat(maxIndex + 1)
+          this.items.push(maxIndex+1)
+          console.log(this.items)
           this.selectedIndex += 1
           this.items.shift();
         }
@@ -260,11 +261,9 @@ export default {
         }else {
           this.items.unshift(minIndex - 1)
           this.selectedIndex -= 1
-          console.log('aaaa' + this.items)
 
           this.items.pop();
 
-          console.log(this.items)
         }
       }
     },
@@ -302,6 +301,7 @@ export default {
 
         }
       }
+      this.isOpacity = true
     },
 
     /**
@@ -1173,4 +1173,5 @@ input::placeholder {
   font-size: 11px !important;
   color: #bbbbbb;
 }
+
 </style>

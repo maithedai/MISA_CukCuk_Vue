@@ -175,19 +175,11 @@ export default {
     },
 
     /**
-     * Hàm khi click button next page
-     * MTDAI 22.06.2021
-     */
-    nextPage() {
-
-    },
-
-    /**
      * Phân trang cho danh sách nhân viên
      * MTDAI 21.06.2021 
      */
     paggingEmployee(Number) {
-      let pageSize = '5',
+      let pageSize = '2',
           pageNumber = Number-1;
 
       var me = this
