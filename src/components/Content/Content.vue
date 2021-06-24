@@ -165,6 +165,14 @@ export default {
       if(val > 4) {
         this.items = [1, 2, 3, 4]
       }
+      else {
+        for (let i = 1; i < val + 1 ; i++) {
+          this.items.push(i)
+        }
+      }
+    },
+    selectedIndex: function(val) {
+      this.paggingEmployee(val)
     }
   },
 
@@ -218,11 +226,6 @@ export default {
      */
     getTotalPage(totalPage) {
       this.totalPage = totalPage
-      // var maxIndex = Math.max.apply(Math, this.items); 
-      // this.selectedIndex >= maxIndex
-      // console.log(this.items)
-      // if(this.totalPage > 4) {
-      //   this.items = [1, 2, 3, 4]
     },
 
     /**
@@ -230,17 +233,19 @@ export default {
      * MTDAI 22.06.2021
      */
     nextPage() {
-      // debugger
+      debugger
       var maxIndex = Math.max.apply(Math, this.items);
-      if(maxIndex < this.totalPage) {
-        if(this.selectedIndex < maxIndex) {   
+      if(maxIndex < this.totalPage ) {
+        if(this.selectedIndex < maxIndex) { 
           this.selectedIndex += 1;
-          this.paggingEmployee(this.selectedIndex);
         } else {
-          this.items = this.items.concat(maxIndex + 1)
+          this.items.concat(maxIndex + 1)
           this.selectedIndex += 1
-          this.paggingEmployee(this.selectedIndex);
           this.items.shift();
+        }
+      }else {
+         if(this.selectedIndex < maxIndex) { 
+          this.selectedIndex += 1;
         }
       }
     },
@@ -256,11 +261,9 @@ export default {
 
         if(this.selectedIndex > minIndex) { 
           this.selectedIndex -= 1;
-          this.paggingEmployee(this.selectedIndex);
         }else {
           this.items.unshift(minIndex - 1)
           this.selectedIndex -= 1
-          this.paggingEmployee(this.selectedIndex);
           console.log('aaaa' + this.items)
 
           this.items.pop();
@@ -276,8 +279,15 @@ export default {
      */
     firstPage() {
       this.selectedIndex = 1;
-      this.items = [1, 2, 3, 4]
-      this.paggingEmployee(this.selectedIndex);
+      if(this.totalPage < 4) {
+        for(let i=this.totalPage; i>0;i--){
+          this.items.pop()
+          this.items.unshift(i)
+        }
+      }
+      else {
+        this.items = [1, 2, 3, 4]
+      }
     },
 
     /**
@@ -286,8 +296,16 @@ export default {
      */
     lastPage() {
       this.selectedIndex = this.totalPage;
-      this.items = [this.totalPage - 3, this.totalPage - 2, this.totalPage - 1, this.totalPage]
-      this.paggingEmployee(this.selectedIndex);
+      if(this.totalPage > 4) {
+        for(let i=this.totalPage; i > (this.totalPage - 4); i--) {
+          this.items.pop()
+          this.items.unshift(i)
+        }
+      }else {
+        for(let i=1; i < this.totalPage; i++) {
+
+        }
+      }
     },
 
     /**

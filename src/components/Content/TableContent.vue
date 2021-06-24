@@ -187,7 +187,7 @@ export default {
      * MTDAI 21.06.2021 
      */
     paggingEmployee(Number) {
-      let pageSize = '2',
+      let pageSize = '5',
           pageNumber = Number-1;
 
       var me = this
