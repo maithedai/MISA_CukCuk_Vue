@@ -50,7 +50,7 @@
             <div class="bo-refresh" @click="refreshData"></div>
           </div>
           <div class="bo-content-footer">
-            <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
+            <div class="footer-text-left">Hiển thị <b>{{fromRec}}-{{toRec}}/{{totalRecord}}</b> nhân viên</div>
             <div class="content-pages">
               <div class="first-page button-pagging" @click="firstPage"></div>
               <div class="prev-page button-pagging" @click="prevPage"></div>
@@ -67,7 +67,7 @@
               <div class="next-page button-pagging" @click="nextPage"></div>
               <div class="last-page button-pagging" @click="lastPage"></div>
             </div>
-            <div class="footer-text-right">10 nhân viên/trang</div>
+            <div class="footer-text-right"><b>{{ pageSize }}</b> nhân viên/trang</div>
           </div>
 
           <!-- Danh sách nhân viên -->
@@ -117,7 +117,11 @@ export default {
   },
   data() {
     return {
+      pageSize:0,
+      fromRec:0,
+      toRec:0,
       totalPage: 1,
+      totalRecord: 0,
       selectedIndex: 1,
       items: [],
       isActive: false,
@@ -153,8 +157,17 @@ export default {
       ],
     };
   },
-  
+
+  created() {
+    // this.selectedIndex = 1
+    console.log("1")
+  },
+
   watch: {
+    /**
+     * Hàm gán sự kiện khi số tổng số trang thay đổi
+     * MTDAI 23.04.2021
+     */
     totalPage: function(val) {
       if(val > 4) {
         this.items = [1, 2, 3, 4]
@@ -165,8 +178,23 @@ export default {
         }
       }
     },
+
+    /**
+     * Hàm gán sự kiện khi số trang thay đổi
+     * MTDAI 24.04.2021
+     */
     selectedIndex: function(val) {
+      var num = (val - 1)*2
       this.paggingEmployee(val)
+      if(val < this.totalPage) {
+        this.fromRec = num + 1
+        this.toRec = num + this.pageSize
+        console.log(this.toRec)
+      }
+      else {
+        this.fromRec = num + 1
+        this.toRec = this.totalRecord
+      }
     }
   },
 
@@ -183,7 +211,7 @@ export default {
     },
 
     /**
-     * Hàm click vào số trang trả về dữ liệu của trang
+     * Hàm click vào số trang (trang hiện tại) trả về dữ liệu của trang
      * MTDAI 22.06.2021
      */
     paggingEmployee(index) {
@@ -215,11 +243,13 @@ export default {
     },
 
     /**
-     * Hàm get giá trị tổng số trang
+     * Hàm get giá trị tổng số trang, pageSize và số bản ghi nhân viên
      * MTDAI 23.06.2021
      */
-    getTotalPage(totalPage) {
-      this.totalPage = totalPage
+    getTotalPage(totalPage, totalRecord, pageSize) {
+      this.totalPage = totalPage;
+      this.totalRecord = totalRecord;
+      this.pageSize = pageSize      
     },
 
     /**
@@ -227,7 +257,6 @@ export default {
      * MTDAI 22.06.2021
      */
     nextPage() {
-      debugger
       var maxIndex = Math.max.apply(Math, this.items);
       if(maxIndex < this.totalPage ) {
         if(this.selectedIndex < maxIndex) { 
