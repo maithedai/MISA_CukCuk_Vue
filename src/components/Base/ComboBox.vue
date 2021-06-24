@@ -31,9 +31,9 @@ export default {
         }
     },
     /**
-     * gán những dữ liệu tĩnh từ bên ngoài
+     * gán những dữ liệu tĩnh từ bên ngoài\
+     * MTDAI 24.06.2021
      */
-    //gán props customData vào clone_custom ngay khi khởi tạo
     created(){
         this.clone_custom_dropdown = JSON.parse(JSON.stringify(this.customDataDropDown));
         this.$emit('getSelectValue', this.clone_current_input);

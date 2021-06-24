@@ -1157,7 +1157,6 @@ div.formDetail select {
   background-color: #019160;
   color: #ffffff;
 }
-
 .container .drop-down .dr-item .icon {
   padding: 12px 15px;
   color: transparent;
