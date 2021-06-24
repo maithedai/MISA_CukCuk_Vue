@@ -19,10 +19,14 @@
         <div class="page-title">
           <div class="title-text text-heading">Danh sách nhân viên</div>
           <div id="toolBarEmployee">
+            <div class="bo-delete" @click="deleteEmployee" :employeeId="employeeId">
+              <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
+              <div class="button-delete-text">Xóa nhân viên</div>
+            </div>
             <div class="button-add button" @click="showFormDetail">
               <div class="button-icon"></div>
               <div class="button-text">Thêm nhân viên</div>
-            </div>
+            </div> 
           </div>
         </div>
         <div class="content-content">
@@ -43,13 +47,7 @@
                 FieldName="Location">
               </ComboBox>
             </div>
-            <div class="bo-button">
-              <div class="bo-refresh" @click="refreshData"></div>
-              <div class="bo-delete" @click="deleteEmployee()" :employeeId="employeeId">
-                <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
-                <div class="button-delete-text">Xóa</div>
-              </div>
-            </div>
+            <div class="bo-refresh" @click="refreshData"></div>
           </div>
           <div class="bo-content-footer">
             <div class="footer-text-left">Hiển thị 1-10/1000 nhân viên</div>
@@ -601,6 +599,11 @@ export default {
   margin-right: 16px;
 }
 
+#toolBarEmployee {
+  display: flex;
+  width: auto;
+}
+
 .content-content {
   position: absolute;
   top: 60px;
@@ -632,13 +635,6 @@ input:focus {
   height: 100%;
 }
 
-.bo-button {
-  width: 152px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-}
-
 .bo-refresh {
   width: 40px;
   height: 40px;
@@ -654,12 +650,13 @@ input:focus {
   line-height: 40px;
   text-align: center;
   width: auto;
-  height: 38px;
+  height: 40px;
   background-color: rgb(212, 61, 61);
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 16px;
 }
 
 .button-delete-text {
