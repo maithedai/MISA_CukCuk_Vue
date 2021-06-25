@@ -401,7 +401,7 @@ export default {
     },
 
     created() {
-      // this.setSelectValue(this.employeeX.GenderName)
+      this.newEmployeeCode();
     },
 
     watch:{
@@ -493,6 +493,7 @@ export default {
          */
         async newEmployeeCode() {
           var employeeCode = ""
+          debugger
           await this.axios.get('http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode').then((response) => {
             employeeCode = response.data
           }).catch((error) => {

@@ -184,7 +184,6 @@ export default {
       var me = this
       this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter/?pageSize='+ pageSize + '&pageNumber=' + pageNumber + '&employeeFilter=a' ).then((response) => {
         me.employeeData = response.data.Data
-        console.log('con')
         this.$emit("getTotalPage", response.data.TotalPage, response.data.TotalRecord, pageSize)     
         let employeeList = this.employeeData;
         for(let index in employeeList){
