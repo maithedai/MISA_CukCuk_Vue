@@ -178,6 +178,8 @@ export default {
      * MTDAI 21.06.2021 
      */
     paggingEmployee(Number) {
+
+      debugger
       let pageSize = 5,
           pageNumber = Number-1;
       var me = this

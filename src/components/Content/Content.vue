@@ -118,8 +118,8 @@ export default {
   data() {
     return {
       pageSize:0,
-      fromRec:0,
-      toRec:0,
+      // fromRec:0,
+      // toRec:0,
       totalPage: 1,
       totalRecord: 0,
       selectedIndex: 0,
@@ -159,8 +159,13 @@ export default {
   },
 
   mounted() {
+    // this.$refs.tableContent.paggingEmployee();
     this.paggingEmployee(1)
   },
+
+//   updated(){
+// this.paggingEmployee(1)
+//   },
 
   watch: {
     /**
@@ -185,14 +190,28 @@ export default {
     selectedIndex: function(val) {
       var num = (val - 1)*this.pageSize
       this.paggingEmployee(val)
-      if(val < this.totalPage) {
-        this.fromRec = num + 1
-        this.toRec = num + this.pageSize
-      }
-      else {
-        this.fromRec = num + 1
-        this.toRec = this.totalRecord
-      }
+      // if(val < this.totalPage) {
+      //   this.fromRec = num + 1
+      //   this.toRec = num + this.pageSize
+      // }
+      // else {
+      //   this.fromRec = num + 1
+      //   this.toRec = this.totalRecord
+      // }
+    }
+  },
+
+  /**
+   * Hàm get giá trị cho toRec và fromRec
+   * MTDAI 25.06.2021
+   * 
+   */
+  computed: {
+    fromRec() {
+      return (this.selectedIndex - 1)*this.pageSize + 1
+    },
+    toRec() {
+      return (this.selectedIndex)*this.pageSize
     }
   },
 
@@ -244,10 +263,19 @@ export default {
      * Hàm get giá trị tổng số trang, pageSize và số bản ghi nhân viên
      * MTDAI 23.06.2021
      */
-    getTotalPage(totalPage, totalRecord, pageSize) {
+    async getTotalPage(totalPage, totalRecord, pageSize) {
       this.totalPage = totalPage;
       this.totalRecord = totalRecord;
-      this.pageSize = pageSize      
+      await this.getPageSize(pageSize);
+      // this.paggingEmployee(1);
+    },
+
+    /**
+     * Hàm gán giá trị cho Pagesize. Mục đích tạo ra hàm để sử dụng async / await để giá trị pageSize có trước khi hiển thị trang 1
+     * MTDAI 25.06.2021
+     */
+    getPageSize(pageSize) {
+      this.pageSize = pageSize     
     },
 
     /**
