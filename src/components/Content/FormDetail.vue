@@ -421,6 +421,7 @@ export default {
             // inputWorkStatus[0].getElementsByTagName("input")[1].value = val.WorkStatus;
           }
           else{
+            console.log(val.EmployeeId)
             this.newEmployeeCode();
           }
         }
@@ -493,7 +494,6 @@ export default {
          */
         async newEmployeeCode() {
           var employeeCode = ""
-          debugger
           await this.axios.get('http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode').then((response) => {
             employeeCode = response.data
           }).catch((error) => {
@@ -586,7 +586,8 @@ export default {
             this.$emit("closeFormDetail");
 
             //Hiển thị thông báo thành công
-            this.$emit("saveEmployee",this.employeeId ? this.employeeId : null, this.employeeX);
+            console.log(this.employeeX)
+            this.$emit("saveEmployee",this.employeeX.EmployeeId ? this.employeeX.EmployeeId : null, this.employeeX);
           }
           else {
              /**

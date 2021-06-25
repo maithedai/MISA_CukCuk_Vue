@@ -122,7 +122,6 @@ export default {
      */
     // removeSelect() {
     //   let a = document.querySelectorAll(".selected-row")
-    //   console.log(a)
     //   a.classList.remove("selected-row")
     // },
     
@@ -179,7 +178,7 @@ export default {
      * MTDAI 21.06.2021 
      */
     paggingEmployee(Number) {
-      let pageSize = 2,
+      let pageSize = 5,
           pageNumber = Number-1;
       var me = this
       this.axios.get('http://cukcuk.manhnv.net/v1/Employees/employeeFilter/?pageSize='+ pageSize + '&pageNumber=' + pageNumber + '&employeeFilter=a' ).then((response) => {

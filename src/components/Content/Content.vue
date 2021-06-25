@@ -188,7 +188,6 @@ export default {
       if(val < this.totalPage) {
         this.fromRec = num + 1
         this.toRec = num + this.pageSize
-        console.log(this.toRec)
       }
       else {
         this.fromRec = num + 1
@@ -249,7 +248,6 @@ export default {
       this.totalPage = totalPage;
       this.totalRecord = totalRecord;
       this.pageSize = pageSize      
-      console.log("da"+this.pageSize)
     },
 
     /**
@@ -263,7 +261,6 @@ export default {
           this.selectedIndex += 1;
         } else {
           this.items.push(maxIndex+1)
-          console.log(this.items)
           this.selectedIndex += 1
           this.items.shift();
         }
@@ -408,7 +405,6 @@ export default {
     acceptDeleteEmployee() {
       //Xóa những phần tử đã được chọn
       for (let employeeId of this.multiSelectArray) {
-        console.log(employeeId);
         this.axios
           .delete("http://cukcuk.manhnv.net/v1/employees/" + employeeId)
           .then((response) => {
@@ -444,7 +440,9 @@ export default {
      * Hàm thêm, sửa dữ liệu trên api
      */
     saveEmployee(id, employee) {
+      console.log(id)
       if (id) {
+        debugger
         this.axios
           .put("http://cukcuk.manhnv.net/v1/employees/" + id, employee)
           .then((response) => {
@@ -458,6 +456,7 @@ export default {
             this.$toast.show("warning", "Có lỗi xảy ra! Vui lòng liên hệ MISA");
           });
       } else {
+        debugger
         this.axios
           .post("http://cukcuk.manhnv.net/v1/employees", employee)
           .then((response) => {
