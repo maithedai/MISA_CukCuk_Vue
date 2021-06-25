@@ -313,22 +313,23 @@ export default {
     },
 
     /**
-     * Hàm khi click quay về trang đầu tiên
+     * Hàm khi click quay về trang cuối cùng
      * MTDAI 22.06.2021
      */
     lastPage() {
-      this.selectedIndex = this.totalPage;
-      if(this.totalPage > 4) {
-        for(let i=this.totalPage; i > (this.totalPage - 4); i--) {
-          this.items.pop()
-          this.items.unshift(i)
-        }
-      }else {
-        for(let i=1; i < this.totalPage; i++) {
-
+      if(this.totalPage) {
+        this.selectedIndex = this.totalPage;
+        if(this.totalPage > 4) {
+          for(let i=this.totalPage; i > (this.totalPage - 4); i--) {
+            this.items.pop()
+            this.items.unshift(i)
+          }
+        }else {
+          for(let i=1; i < this.totalPage; i++) {
+            this.items.push(i)
+          }
         }
       }
-      this.isOpacity = true
     },
 
     /**
