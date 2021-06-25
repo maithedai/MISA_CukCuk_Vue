@@ -97,7 +97,6 @@
                     <ComboBox
                       v-bind:customDataDropDown="gender_dropdown"
                       v-bind:currentDataInput="employeeX.GenderName"
-                      @setSelectValue="setSelectValue"
                       FieldName="Gender"
                       style="width: 100%; margin-top: 6px">
                     </ComboBox>
@@ -401,13 +400,21 @@ export default {
       }
     },
 
+    created() {
+      // this.setSelectValue(this.employeeX.GenderName)
+    },
+
     watch:{
       employee:{
-        immediate: true,
+        // immediate: true,
         handler(val){
           if(val.EmployeeId){
             this.employeeX = {...val};
             this.employeeX.DateOfBirth = moment(this.employeeX.DateOfBirth).format('YYYY-MM-DD');
+
+            //Hàm lấy giá trị giới tính công việc bind lên form
+            let inputGender = document.querySelectorAll('[FieldName="Gender"]');
+            inputGender[0].getElementsByTagName("input")[1].value = this.getGenderToString(val.Gender);
 
             //Hàm lấy giá trị tình trạng công việc bind lên form
             // let inputWorkStatus = document.querySelectorAll('[FieldName="WorkStatus"]');
@@ -540,6 +547,27 @@ export default {
           }
           this.employeeX.GenderName = selectedVal
         },
+
+        /**
+         * Hàm trả dữ liệu dạng thô sang đã fomat (string)
+         * MTDAI 25.06.2021
+         */
+        getGenderToString(val) {
+          let gender
+          switch(val){
+            
+            case 0:
+                gender = "Nữ";
+                break;
+            case 1:
+                gender = "Nam";
+                break;
+            case 2:
+                gender = "Khác";
+                break;
+          }
+          return gender
+        },
         
         /**
          * Hàm cất dữ liệu lên serve
@@ -585,10 +613,11 @@ export default {
          * Hàm bind dữ liệu giới tính lên form
          * MTDAI 24.06.2021
          */
-        setSelectValue(gender){
-          let inputGender = document.querySelectorAll('[FieldName="Gender"]');
-          inputGender[0].getElementsByTagName("input")[1].value = gender;
-        },
+        // setSelectValue(gender){
+        //   debugger
+        //   let inputGender = document.querySelectorAll('[FieldName="Gender"]');
+        //   inputGender[0].getElementsByTagName("input")[1].value = gender;
+        // },
     }
 };
 </script>

@@ -81,7 +81,7 @@
       </div>
       <FormDetail
         v-if="isShow"
-        ref="FormDetail"
+        ref="formDetail"
         @closeFormDetail="closeFormDetail"
         :employee="employee"
         @saveEmployee="saveEmployee"
@@ -122,7 +122,7 @@ export default {
       toRec:0,
       totalPage: 1,
       totalRecord: 0,
-      selectedIndex: 1,
+      selectedIndex: 0,
       items: [],
       isActive: false,
       multiSelectArray: [],
@@ -158,9 +158,8 @@ export default {
     };
   },
 
-  created() {
-    // this.selectedIndex = 1
-    console.log("1")
+  mounted() {
+    this.paggingEmployee(1)
   },
 
   watch: {
@@ -250,6 +249,7 @@ export default {
       this.totalPage = totalPage;
       this.totalRecord = totalRecord;
       this.pageSize = pageSize      
+      console.log("da"+this.pageSize)
     },
 
     /**
@@ -358,6 +358,7 @@ export default {
      * MTDAI 15.06.2021
      */
     showFormDetailEdit(employee) {
+      // console.log(employee)
       this.isShow = true;
       this.axios
         .get("http://cukcuk.manhnv.net/v1/employees/" + employee.EmployeeId)
