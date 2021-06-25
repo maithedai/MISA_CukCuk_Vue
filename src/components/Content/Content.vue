@@ -23,7 +23,7 @@
               <i style="size: 20px; margin-left: 16px" class="fas fa-user-minus"></i>
               <div class="button-delete-text">Xóa nhân viên</div>
             </div>
-            <div class="button-add button" @click="showFormDetail">
+            <div class="button-add button" @click="eventCreateEmployee">
               <div class="button-icon"></div>
               <div class="button-text">Thêm nhân viên</div>
             </div> 
@@ -183,7 +183,7 @@ export default {
      * MTDAI 24.04.2021
      */
     selectedIndex: function(val) {
-      var num = (val - 1)*2
+      var num = (val - 1)*this.pageSize
       this.paggingEmployee(val)
       if(val < this.totalPage) {
         this.fromRec = num + 1
@@ -378,6 +378,17 @@ export default {
     showFormDetail() {
       this.employee = {};
       this.isShow = true;
+      
+    },
+
+    /**
+     * Hàm xử lý xự kiện khi click button thêm nhân viên xử lý 2 sự kiện: mở form và tự sinh mã nhân viên
+     * MTDAI 25.06.2021
+     * 
+     */
+    async eventCreateEmployee() {
+      await this.showFormDetail();
+      this.$refs.formDetail.newEmployeeCode();
     },
 
     /**

@@ -374,21 +374,6 @@ export default {
             data_text:'Đang thử việc',
           }
         ],  
-        // jobDropdown: {
-        //   defaultValue: "",
-        //   items: ["Giám đốc", "Kế toán", "Khác"],
-        //   width: 2.8
-        // },
-        // departmentDropdown: {
-        //   defaultValue: "",
-        //   items: ["Phòng 1", "Phòng 2", "Phòng 2"],
-        //   width: 2.8
-        // },
-        // workStatusDropdown: {
-        //   defaultValue: "",
-        //   items: ["Đang công tác", "Đã nghỉ việc", "Đang tạm nghỉ"],
-        //   width: 2.8
-        // }
       }
     },
 
@@ -401,12 +386,12 @@ export default {
     },
 
     created() {
-      this.newEmployeeCode();
+      // this.newEmployeeCode();
     },
 
     watch:{
       employee:{
-        // immediate: true,
+        immediate: true,
         handler(val){
           if(val.EmployeeId){
             this.employeeX = {...val};
@@ -417,12 +402,9 @@ export default {
             inputGender[0].getElementsByTagName("input")[1].value = this.getGenderToString(val.Gender);
 
             //Hàm lấy giá trị tình trạng công việc bind lên form
+
             // let inputWorkStatus = document.querySelectorAll('[FieldName="WorkStatus"]');
             // inputWorkStatus[0].getElementsByTagName("input")[1].value = val.WorkStatus;
-          }
-          else{
-            console.log(val.EmployeeId)
-            this.newEmployeeCode();
           }
         }
       },
@@ -579,8 +561,12 @@ export default {
           //Hàm check Validate khi save
           if (this.validate()) {
             
+            /**
+             * Gán giá trị từ combobox lên dữ liệu trên serve
+             * MTDAI 25.06.2021
+             */
             let e = this.getElementByFieldName('Gender');
-            this.getSelectedGender(e.getElementsByTagName('input')[1].value);
+            this.employeeX.Gender = e.getElementsByTagName('input')[1].value
 
             //Hàm đóng form khi save xong
             this.$emit("closeFormDetail");
