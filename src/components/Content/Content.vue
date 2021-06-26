@@ -349,6 +349,9 @@ export default {
             this.items.pop()
             this.items.unshift(i)
           }
+        }
+        if(this.totalPage == 4) {
+          this.selectedIndex = 4
         }else {
           for(let i=1; i < this.totalPage; i++) {
             this.items.push(i)
