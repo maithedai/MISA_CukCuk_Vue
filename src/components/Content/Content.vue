@@ -1,20 +1,8 @@
 <template>
   <!-- <div class="wapper">
     <div class="form-wapper">
-    
     </div> -->
     <div class="content">
-      <div class="content-header">
-        <div class="restaurent">
-          <div class="restaurent-text text-title-2">Nhà hàng biển đông</div>
-          <div class="restaurent-drop"></div>
-        </div>
-        <div class="profile">
-          <div class="icon-avt"></div>
-          <div class="user-name text-lable-field">Mai Thế Đại</div>
-          <div class="profile-option"></div>
-        </div>
-      </div>
       <div class="content-body">
         <div class="page-title">
           <div class="title-text text-heading">Danh sách nhân viên</div>
@@ -304,6 +292,7 @@ export default {
      * MTDAI 22.06.2021
      */
     prevPage() {
+      debugger
       var minIndex = Math.min.apply(Math, this.items);
 
       if(this.selectedIndex > 1) {
@@ -349,13 +338,12 @@ export default {
             this.items.pop()
             this.items.unshift(i)
           }
-        }
-        if(this.totalPage == 4) {
-          this.selectedIndex = 4
         }else {
-          for(let i=1; i < this.totalPage; i++) {
-            this.items.push(i)
-          }
+          this.selectedIndex = this.totalPage
+        // }else {
+        //   for(let i=1; i < this.totalPage; i++) {
+        //     this.items.push(i)
+        //   }
         }
       }
     },
@@ -539,71 +527,18 @@ export default {
 .content {
   width: calc(100% - var(--menu-bar-width));
   /* width: 100%; */
-  height: 100vh;
+  height: calc(100vh - 50px);
   position: relative;
+  margin-top: 50px;
   /* z-index: 2000000000; */
   /* background-color: #ffff; */
   /* left: 0; */
-}
-.content-header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgb(224, 224, 224);
-  position: absolute;
-  top: 0;
 }
 
 .content-body {
   width: 100%;
   height: calc(100vh - 50px);
   position: absolute;
-  top: 50px;
-}
-
-.content-header .restaurent {
-  width: 200px;
-  height: 100%;
-  display: flex;
-}
-
-.content-header .profile {
-  height: 100%;
-  display: flex;
-}
-.restaurent-text {
-  width: auto;
-  height: 100%;
-  line-height: 50px;
-  text-align: center;
-  margin-right: 10px;
-  margin-left: 16px;
-}
-
-.restaurent-drop {
-  width: 16px;
-  height: 100%;
-  background-image: url("../../assets/Icon/btn-next-page.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  transform: rotate(90deg);
-}
-
-.profile .icon-avt {
-  width: 30px;
-  height: 100%;
-  margin-right: 16px;
-  background-image: url("../../assets/Icon/avatar-default.png");
-  background-repeat: no-repeat;
-  background-size: 30px;
-  background-position: center;
-}
-
-.profile .user-name {
-  width: auto;
-  /* text-align: center; */
-  line-height: 50px;
 }
 
 .page-active {

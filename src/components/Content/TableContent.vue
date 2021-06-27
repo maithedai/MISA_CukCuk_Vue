@@ -179,7 +179,6 @@ export default {
      */
     paggingEmployee(Number) {
 
-      debugger
       let pageSize = 5,
           pageNumber = Number-1;
       var me = this

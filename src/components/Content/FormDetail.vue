@@ -408,6 +408,10 @@ export default {
           }
         }
       },
+      'employeeX.Salary'(val) {
+        val.toLocaleString();
+        console.log(val)
+      }
     },
 
     /**
@@ -617,6 +621,7 @@ export default {
 .show {
   display: block;
 }
+
 .formDetail {
   position: fixed;
   top: 0;
